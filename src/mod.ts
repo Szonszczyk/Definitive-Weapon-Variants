@@ -40,7 +40,18 @@ implements IPreSptLoadMod, IPostDBLoadMod
         const vfs = container.resolve<VFS>("VFS");
 
         // EVERYTHING AFTER HERE MUST USE THE INSTANCE
-        this.config = jsonc.parse(vfs.readFile(path.resolve(__dirname, "../config/config.jsonc")))
+
+        const configPath = path.resolve(__dirname, "../config/config.jsonc");
+        const defaultConfigPath = path.resolve(__dirname, "../config/defaultConfig.jsonc");
+        if (fs.existsSync(configPath)) {
+            this.config = jsonc.parse(vfs.readFile(configPath));
+        } else {
+            this.Instance.logger.log(
+                `[${this.modName}] Warning: config.jsonc not found at ${configPath}, loading defaultConfig.jsonc instead. Please consider configuring this mod for better experience`,
+                LogTextColor.RED
+            );
+            this.config = jsonc.parse(vfs.readFile(defaultConfigPath));
+        }
         this.hashUtil = hashUtil;
         this.getVersionFromJson();
         this.displayCreditBanner();
