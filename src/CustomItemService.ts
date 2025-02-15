@@ -16,9 +16,7 @@ import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import * as fs from "fs";
 import * as path from "path";
 import { WTTInstanceManager } from "./WTTInstanceManager";
-import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ILocation } from "@spt/models/eft/common/ILocation";
-import { IPreset } from "@spt/models/eft/common/IGlobals";
 
 interface WeaponClones {
   [key: string]: string[];
