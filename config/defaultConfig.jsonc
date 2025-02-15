@@ -44,20 +44,20 @@
  },
 
  // ### 4. Using mod by AcidPhantasm - Progressive Bot System (APBS)
- // tl;dr Copy lines from APBS-blacklist settings.txt marked as "progressive" and replace them in (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.jsonc), change apbsBlacklist.progressive in below config to true.
+ // tl;dr Copy lines from APBS-blacklist settings.txt marked as "progressive" and replace them in (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.json), change apbsBlacklist.progressive in below config to true.
 
  // If you want to have your enemies to spawn with Weapon Variants you can use this mod.
  // Link: https://hub.sp-tarkov.com/files/file/2180-apbs-acid-s-progressive-bot-system/#overview
- // You need only to change a few things in a config (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.jsonc):
+ // You need only to change a few things in a config (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.json):
 
  // Enable setting to add modded weapons to bots.
  // To this to work, APBS should be loaded AFTER Weapon Variants (Note: APBS is loading only weapons from mods that are already loaded)
  // "enableModdedWeapons": true,
 
- // Lower modded weapon weight. I use 5% of the original (below values) and still get them quite usually:
- // "pmcWeaponWeights": 0.5,
- // "scavWeaponWeights": 0.05,
- // "followerWeaponWeights": 0.35,
+ // Lower modded weapon weight. I use 10% of the original (below values) and still get them quite usually:
+ // "pmcWeaponWeights": 0.8,
+ // "scavWeaponWeights": 0.1,
+ // "followerWeaponWeights": 0.6,
 
  // Add some Meta/OP weapons to Weapon Blacklist. You can just replace "tierXWeaponBlacklist" using provided ones in "APBS-blacklist settings.txt".
  // Not doing so, you can find veeery OP weapons, with luck of course, even on scavs. This setting depends on what you want from the game. I will not judge you.
@@ -72,12 +72,7 @@
 
  // ### 5. Using mod by Hood - The Gambler
 
- // If you want to gamble for weapon variants this is mod for you.
- // Link: https://hub.sp-tarkov.com/files/file/2013-gambler-trader/#overview
-
- // To this mod compatibility to works The Gambler should be loaded AFTER Weapon Variants (Note: can be loaded before, but this ends up with Weapon Variants that can't be sold to traders and can't be insured)
- // To enable gambling for weapons in this mod you need to (unfortunately) edit file in (SPT\user\mods\TheGambler\src\containers\Weapons.ts) using file "TheGambler-WeaponsVariants.txt":
- // Remove last } and paste whole file content from "TheGambler-WeaponVariants.txt" (Note: please use Notepad++ or other similar/better text editors and spare yourself embarrassment from using Notepad...)
+ // Mod is not updated to 3.10 so below setting is not working
 
  "theGambler": {
  	"enabled": false
