@@ -44,7 +44,7 @@
  },
 
  // ### 4. Using mod by AcidPhantasm - Progressive Bot System (APBS)
- // tl;dr Copy lines from APBS-blacklist settings.txt marked as "progressive" and replace them in (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.json), change apbsBlacklist.progressive in below config to true.
+ // tl;dr Copy lines from APBS-blacklist settings.txt marked as "progressive" and replace them in "weaponBlacklist" in file (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.json), change apbsBlacklist.progressive in below config to true.
 
  // If you want to have your enemies to spawn with Weapon Variants you can use this mod.
  // Link: https://hub.sp-tarkov.com/files/file/2180-apbs-acid-s-progressive-bot-system/#overview
@@ -59,7 +59,7 @@
  // "scavWeaponWeights": 0.1,
  // "followerWeaponWeights": 0.6,
 
- // Add some Meta/OP weapons to Weapon Blacklist. You can just replace "tierXWeaponBlacklist" using provided ones in "APBS-blacklist settings.txt".
+ // Add some Meta/OP weapons to Weapon Blacklist. You can just replace "weaponBlacklist.tierXBlacklist" using provided ones in "APBS-blacklist settings.txt".
  // Not doing so, you can find veeery OP weapons, with luck of course, even on scavs. This setting depends on what you want from the game. I will not judge you.
 
  // After replacing weapon blacklist you can change below setting to have information which weapons can be found on enemies:
@@ -67,7 +67,7 @@
  	// Change only one of below lines to true matching what you copied to weapon blacklist
  	"allowAllWeapons": false,
  	"allowOnlyBaseWeapons": false, // Base and below!
- 	"progressive": false // unlocks all weapons for bots, but unlocks them by bot level - RECOMMENDED
+ 	"progressive": false // is adding all weapons for bots, but unlocks them by bot level - RECOMMENDED
  },
 
  // ### 5. Using mod by Hood - The Gambler
