@@ -12,7 +12,7 @@ Config with explanation on how to use 2 different modes (APBS and The Gambler) t
 ## Compatibility with SPT versions
 
 3.9.* - release available  
-3.10.* - at the later date
+3.10.* - release available (latest version)
 
 ## Suggestions Questions
 
