@@ -21,7 +21,7 @@ implements IPreSptLoadMod, IPostDBLoadMod
 {
     private Instance: WTTInstanceManager = new WTTInstanceManager();
     private version: string;
-    private modName = "Szonszczyk-DefinitiveWeaponVariants";
+    private modName = "DefinitiveWeaponVariants";
     private config;
     private hashUtil: HashUtil;
     private customItemService: CustomItemService = new CustomItemService();
@@ -90,7 +90,7 @@ implements IPreSptLoadMod, IPostDBLoadMod
     private displayCreditBanner(): void 
     {
         this.Instance.logger.log(
-            `[${this.modName}] Developers:  Szonszczyk | Codebase: GroovypenguinX`,
+            `[${this.modName}] Developers: Szonszczyk | Codebase: GroovypenguinX`,
             LogTextColor.GREEN
         );
     }
