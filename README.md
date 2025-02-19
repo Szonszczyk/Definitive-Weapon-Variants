@@ -5,7 +5,7 @@ Whether you want an automatic version of your favorite weapon, click scavs to de
 
 ## Features
 
-342 weapons of 30 different variant types divided into 7 rarity settings.  
+341 weapons of 30 different variant types divided into 7 rarity settings.  
 Config that enables blacklisting specific quality, for example, for appearing in airdrops.  
 Config with explanation on how to use 2 different modes (APBS and The Gambler) to expand your experience with this mod.
 
