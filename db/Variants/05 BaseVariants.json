@@ -1,0 +1,230 @@
+{
+    "Modified": {
+		"Description": "Upgraded to be a slightly better weapon, but its improved statistics come at the cost of sacrificing others",
+		"Explanation": "Weapon variant in equilibrium with the universe, featuring adjustments to various aspects: reduced vertical recoil but increased horizontal recoil, improved ergonomics, lowered fire rate, increased heat buildup, and reduced weight",
+		"ShortName": "Modified",
+		"props": {
+			"RecoilForceBack": "-25%",
+			"RecoilForceUp": "+25%",
+			"RecoilDampingHandRotation": "+7%",
+		    "RecoilReturnSpeedHandRotation": "-7%",
+			"Ergonomics": "+25",
+			"SingleFireRate": "-25%",
+			"bFirerate": "-25%",
+			"HeatFactorByShot": "+25%",
+			"Weight": "-25%"
+		},
+		"Weapons": [
+			"TX-15 DML", "VSK-94", "AK-74N", "AK-104", "AUG A3",
+			"Mk47", "RD-704", "MP7A2"
+		],
+		"ID": "0501",
+		"rarity": "Base"
+	},
+	"Sniper": {
+		"Description": "A weapon designed for hunters who occasionally mistake a human for a wild boar—from a comfortably safe distance",
+		"Explanation": "Shotgun weapon variant with increased velocity and accuracy",
+		"ShortName": "Sniper",
+		"props": {
+			"Velocity": 100,
+			"shotgunDispersion": "-95%",
+			"CenterOfImpact": 0.01
+        },
+        "additionalChanges": {
+        	"Slots": {
+        		"mod_barrel": [
+        			"5c6f323a656ca1ff0977e17c"
+                ]
+        	}
+        },
+		"Weapons": [
+			"KS-23M", "M3 Super 90", "M870", "MP-133", "MP-153",
+			"Saiga-12K", "TOZ-106", "590A1"
+		],
+		"ID": "0502",
+        "rarity": "Base"
+	},
+	"SMG": {
+		"Description": "A weapon for true gamblers—its fire rate depends entirely on how fast you can pull the trigger. Keep pulling, and eventually, you'll win",
+		"Explanation": "Weapon variant chambered in 4.6x30mm HK caliber, featuring reduced recoil and an exceptionally high single-fire rate",
+		"ShortName": "SMG",
+		"props": {
+			"RecoilForceBack": "-50%",
+			"RecoilForceUp": "-50%",
+			"RecoilCamera": "-40%",
+			"RecoilStableAngleIncreaseStep": "+40%",
+			"RecoilDampingHandRotation": 0.1,
+			"RecoilReturnSpeedHandRotation": "+30%",
+			"DurabilityBurnRatio": "-70%",
+			"SingleFireRate": "+300%",
+			"bFirerate": "+300%",
+			"ammoCaliber": "Caliber46x30"
+		},
+		"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "5bd70322209c4d00d7167b8f"
+        	},
+        	"Slots": {
+			    "mod_magazine": "5bd70322209c4d00d7167b8f"
+			},
+			"minimum": {
+				"SingleFireRate": 450
+			},
+        	"addtoInventorySlots": ["Holster"]
+		},
+		"quests": {
+    		"id": "5bd70322209c4d00d7167b8f"
+    	},
+		"Weapons": [
+			"TX-15 DML", "G28", "M1A", "Mk-18", "RSASS",
+			"SR-25", "SVDS"
+		],
+		"ID": "0503",
+        "rarity": "Base"
+    },
+    "Mid-Range": {
+    	"Description": "This modification was designed to finally make a 12.7x55mm weapon effective at long range. The result? Well, it's mid. Mid-range, to be exact",
+    	"Explanation": "Weapon variant chambered in 12.7x55mm caliber but with a bullet velocity penalty",
+    	"ShortName": "Mid-Range",
+    	"props": {
+			"ammoCaliber": "Caliber127x55",
+			"Velocity": -60
+    	},
+    	"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "5cadfbf7ae92152ac412eeef"
+        	},
+        	"Slots": {
+			    "mod_magazine": "5cadfbf7ae92152ac412eeef"
+			}
+		},
+		"quests": {
+    		"id": "5cadfbf7ae92152ac412eeef"
+    	},
+		"Weapons": [
+			"T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
+			"VPO-215"
+		],
+		"ID": "0504",
+        "rarity": "Base"
+    },
+    "Speedy": {
+    	"Description": "Gas gas gas! I'm gonna step on the gas Tonight I'll fly...",
+    	"Explanation": "Weapon variant with double the fire rate, increased horizontal recoil, and reduced vertical recoil",
+    	"ShortName": "Speedy",
+    	"props": {
+			"bFirerate": "+99%",
+			"RecoilForceBack": "-40%",
+			"RecoilForceUp": "+40%",
+			"RecoilCamera": "+25%"
+    	},
+		"Weapons": [
+			"MP5", "PP-19-01", "SR-2M", "UMP 45", "MP7A2",
+			"MPX", "P90", "PPSh-41", "Vector .45", "Vector 9x19",
+			"AK-102", "RPK-16", "Mk 43 Mod 1", "UZI"
+		],
+		"ID": "0505",
+        "rarity": "Base"
+    },
+    "No-Bolt": {
+    	"Description": "Someone decided bolt-action rifles were too difficult to use, so they simply removed the bolt. Now it's no bolt, but plenty of action",
+    	"Explanation": "Bolt action, but it is now DMR",
+    	"ShortName": "No-Bolt",
+    	"props": {
+    		"bFirerate": "+0%",
+    		"weapFireType": [ "burst" ],
+    		"BurstShotsCount": 1
+    	},
+    	"additionalChanges": {
+    		"minimum": {
+				"bFirerate": 450
+			}
+    	},
+		"Weapons": [
+			"T-5000M", "SV-98", "DVL-10", "M700", "VPO-215"
+		],
+		"ID": "0506",
+        "rarity": "Base"
+    },
+    "20/70": {
+    	"Description": "A typo in the weapon's description, left uncorrected out of sheer laziness. And now? Well, it's stuck like this—for better or worse",
+    	"Explanation": "Shotgun variant chambered in 20ga shotgun cartridges",
+    	"ShortName": "20/70",
+    	"props": {
+    		"ammoCaliber": "Caliber20g"
+    	},
+    	"additionalChanges": {
+    		"Chambers": {
+        		"patron_in_weapon": "5a38e6bac4a2826c6e06d79b"
+        	},
+        	"Slots": {
+        		"mod_magazine": [{
+			    	"basedOn": "ReloadMode",
+			    	"variants": {
+			    		"ExternalMagazine": "5a38e6bac4a2826c6e06d79b",
+						"InternalMagazine": [
+							"cc3f46f481a96779f53a3725"
+						]
+			    	}
+			    }]
+			}
+		},
+		"quests": {
+    		"id": "5a38e6bac4a2826c6e06d79b"
+    	},
+		"Weapons": [
+			"KS-23M", "M3 Super 90", "590A1", "M870", "MP-43-1C",
+			"MP-133", "MP-153", "MP-155", "MP-43 sawed-off", "Saiga-12K",
+			"AA-12 Gen 2"
+		],
+		"ID": "0507",
+        "rarity": "Base"
+    },
+	"Shotgun-o-Revolver": {
+		"Description": "Trio of revolvers that wants to be shotguns",
+		"Explanation": "Variant that is changing revolvers into shotguns",
+		"ShortName": "Shotgun-o",
+		"props": {
+			"ShotgunDispersion": 1,
+			"shotgunDispersion": 20,
+			"weapClass": "shotgun",
+			"ammoCaliber": "Caliber12g",
+			"defAmmo": "560d5e524bdc2d25448b4571"
+		},
+		"additionalChanges": {
+    		"Slots": {
+			    "mod_magazine": [{
+			    	"basedOn": "ammoCaliber",
+			    	"variants": {
+			    		"Caliber127x55": [
+							"8ca579021a498134d7c4d595"
+						],
+						"Caliber9x33R": [
+							"9cf1bf1bb0ea0be41ef4dc9d"
+						],
+						"Caliber9x19PARA": [
+							"5ad70825cbf24d7866f75a64"
+						]
+			    	}
+			    }]
+			},
+			"CR 200DS": {
+				"ammoCaliber": "Caliber12g",
+				"defAmmo": "560d5e524bdc2d25448b4571"
+			},
+			"CR 50DS": {
+				"ammoCaliber": "Caliber20g",
+				"defAmmo": "5a38ebd9c4a282000d722a5b"
+			},
+			"RSh-12": {
+				"ammoCaliber": "Caliber23x75",
+				"defAmmo": "5e85aa1a988a8701445df1f5"
+			}
+		},
+		"Weapons": [
+			"CR 200DS", "CR 50DS", "RSh-12"
+		],
+		"ID": "0508",
+		"rarity": "Base"
+	}
+}

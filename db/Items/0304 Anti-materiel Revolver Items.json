@@ -1,0 +1,152 @@
+{
+    "69330141f5636b1891326b3f": {
+		"itemTplToClone": "633ec6ee025b096d320a3b15",
+		"parentId": "610720f290b75a49ff2e5e25",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Cartridges": [
+			  {
+			    "_id": "f93ea2a9c3267b01ed814b8c",
+			    "_max_count": 5,
+			    "_name": "cartridges",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+			            "5cde8864d7f00c0010373be1",
+                		"5d2f2ab648f03550091993ca"
+			          ]
+			        }
+			      ]
+			    },
+			    "_proto": "5748538b2459770af276a261"
+			  }
+			],
+			"Slots": [
+			  {
+			    "_id": "f8bfb6ea1e7ee1b6948adf70",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_000",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+			            "5cde8864d7f00c0010373be1",
+            			"5d2f2ab648f03550091993ca"
+			          ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "9f7f1882bac020d24004a7c5",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_001",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+			            "5cde8864d7f00c0010373be1",
+            			"5d2f2ab648f03550091993ca"
+			          ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "ca058690803088e9ed58753f",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_002",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+			            "5cde8864d7f00c0010373be1",
+            			"5d2f2ab648f03550091993ca"
+			          ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "2bef6fb21d165b38987cd9fa",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_003",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+			            "5cde8864d7f00c0010373be1",
+            			"5d2f2ab648f03550091993ca"
+			          ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "22fb202dff7032246ab26fbb",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_004",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+			            "5cde8864d7f00c0010373be1",
+            			"5d2f2ab648f03550091993ca"
+			          ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  }
+			]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#dada26>Anti-materiel revolver 12.7x108 5-round cylinder</color></b>",
+				"shortName": "AMR R cyl.",
+				"description": "<align=\"center\">A 5-round 12.7x108 cylinder for Anti-materiel revolver Variant weapons. Now with 50% more wormholes!</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 24000,
+		"handbookPriceRoubles": 12000,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}

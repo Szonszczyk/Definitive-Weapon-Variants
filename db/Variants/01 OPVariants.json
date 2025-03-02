@@ -1,0 +1,124 @@
+{
+	"Meta": {
+		"Description": "A weapon modification rumored to have been crafted by the Mechanic himself. Created entirely with his bare hands, without the use of any tools",
+		"Explanation": "Weapon variant with reduced recoil, improved ergonomics, and decreased heat buildup, offering no drawbacks",
+		"ShortName": "Meta",
+		"props": {
+			"RecoilForceBack": "-25%",
+			"RecoilForceUp": "-25%",
+			"RecoilDampingHandRotation": "-25%",
+		    "RecoilReturnSpeedHandRotation": "-25%",
+			"Ergonomics": "+25",
+			"HeatFactorByShot": "-25%"
+		},
+		"Weapons": [
+			"9A-91", "AVT-40", "AK-12", "G36", "M4A1",
+			"MCX SPEAR", "Mk47", "SA-58", "AS VAL", "PPSh-41",
+			"PKP", "RPK-16", "M60E6", "AK-102", "HK 416A5",
+			"AKM"
+		],
+		"ID": "0101",
+		"rarity": "OP"
+	},
+	"Lapua": {
+        "Description": "A highly requested weapon variant, crafted for all you devoted Lapua enthusiasts",
+        "Explanation": "Weapon variant chambered with .338 Lapua Magnum caliber and compatible with all .338 magazines but with increased recoil and heat buildup",
+        "ShortName": ".338",
+        "props": {
+            "RecoilForceBack": "+50%",
+            "RecoilForceUp": "+50%",
+            "RecoilCamera": "+50%",
+            "RecoilReturnPathDampingHandRotation": "-30%",
+            "RecoilDampingHandRotation": "+5%",
+			"RecoilReturnSpeedHandRotation": "-30%",
+			"HeatFactorByShot": "+100%",
+            "ammoCaliber": "Caliber86x70"
+        },
+        "additionalChanges": {
+        	"Slots": {
+        		"mod_magazine": [
+                    "5fc23426900b1d5091531e15",
+                    "628120f210e26c1f344e6558",
+                    "628120fd5631d45211793c9f"
+                ]
+        	},
+            "Chambers": {
+        		"patron_in_weapon": [
+					"5fc382a9d724d907e2077dab",
+					"5fc275cf85fd526b824a571a",
+					"5fc382c1016cce60e8341b20",
+					"5fc382b6d6fa9c00c571bbc3"
+				]
+        	}
+        },
+        "quests": {
+    		"id": "5fc22d7c187fea44d52eda44"
+    	},
+		"Weapons": [
+			"SAG AK", "TX-15 DML", "G28", "M1A", "RSASS",
+			"AS VAL", "AK-74"
+		],
+		"ID": "0102",
+        "rarity": "OP"
+	},
+	"Overclocked & Automatic": {
+        "Description": "What happens when you put a processor in a weapon? It becomes automatic and requires cooling. And if you're adding cooling, why not overclock it to fire faster? Researchers remain deeply unsettled by this abomination",
+        "Explanation": "Weapon variant with a full-auto fire mode only, featuring an increased fire rate and improved cooling capabilities, but reduced ergonomics",
+        "ShortName": "OC/AC",
+        "props": {
+            "weapFireType": [ "fullauto" ],
+            "CoolFactorGun": "+50%",
+            "CoolFactorGunMods": 1,
+            "SingleFireRate": "+35%",
+            "bFirerate": "+40%",
+            "Ergonomics": "-20%"
+        },
+		"additionalChanges": {
+			"minimum": {
+				"bFirerate": 450
+			}
+		},
+		"Weapons": [
+			"OP-SKS", "RFB", "VPO-209", "SR-25", "RSASS",
+    		"M1A", "Glock 19X", "SR-1MP", "USP .45", "Glock 18C"
+		],
+		"ID": "0103",
+        "rarity": "OP"
+	},
+	"Heavy Machine Gun": {
+    	"Description": "Close your eyes and pull the trigger. Feel nothing. Become one with the gun",
+    	"Explanation": "A weapon variant with full-auto fire mode only, featuring lower vertical recoil, significantly higher horizontal recoil, and an increased fire rate",
+    	"ShortName": "HMG",
+    	"props": {
+    		"RecoilForceBack": "+300%",
+    		"RecoilForceUp": "-60%",
+			"weapFireType": [ "fullauto" ],
+			"bFirerate": "+20%"
+    	},
+		"Weapons": [
+			"PKM", "RPDN", "M60E6", "HK 416A5", "RPK-16"
+		],
+		"ID": "0104",
+    	"rarity": "OP"
+    },
+	"Explosion": {
+		"Description": "God has blessed this weapon with a very big... cylinder",
+    	"Explanation": "Revolvers that wants to be grenade launchers",
+    	"ShortName": "Explosion",
+		"props": {
+    	},
+		"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "6275303a9f372d6ea97f9ec7"
+        	},
+    		"Slots": {
+			    "mod_magazine": "6275303a9f372d6ea97f9ec7"
+			}
+    	},
+		"Weapons": [
+			"RSh-12", "CR 50DS", "CR 200DS", "MTs-255-12"
+		],
+		"ID": "0105",
+        "rarity": "OP"
+	}
+}

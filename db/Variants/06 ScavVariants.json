@@ -1,0 +1,144 @@
+{
+    "Panic": {
+        "Description": "Don't panic—it's just a cockroach... *bang* *bang* *bang*",
+        "Explanation": "Shotguns limited to a MaxRounds Powermag 20-round magazine, featuring a full-auto fire mode, increased recoil, and a higher fire rate",
+        "ShortName": "Panic",
+        "props": {
+            "bFirerate": "+20%",
+            "weapFireType": [ "fullauto" ],
+            "RecoilForceBack": "+59%",
+            "RecoilForceUp": "+59%",
+            "RecoilCamera": "+50%"
+        },
+        "additionalChanges": {
+            "Chambers": {
+                "patron_in_weapon": "576165642459773c7a400233"
+            },
+            "Slots": {
+                "mod_magazine": [{
+                    "basedOn": "ReloadMode",
+                    "variants": {
+                        "ExternalMagazine": [
+                            "5cf8f3b0d7f00c00217872ef"
+                        ],
+                        "InternalMagazine": [
+                            "911e2cff5d5389b4a6fd7638"
+                        ]
+                    }
+                }]
+            },
+            "minimum": {
+                "bFirerate": 250
+            },
+            "M3 Super 90": {
+                "weapFireType": [ "semiauto" ]
+            }
+        },
+        "Weapons": [
+            "KS-23M", "M3 Super 90", "590A1", "M870", "MP-133",
+            "MP-153", "MP-155", "TOZ-106", "AA-12 Gen 1"
+        ],
+        "ID": "0601",
+        "rarity": "Scav"
+    },
+    "Control-Fire": {
+        "Description": "A practice weapon for newly appointed PMCs eager to try full-auto. Unfortunately, they end up disappointed. Oh, and some stats didn't load properly—they're just there to intimidate potential users",
+        "Explanation": "Weapon variant with only a full-auto fire mode but offering better controllability due to a low fire rate and no recoil",
+        "ShortName": "Control",
+        "props": {
+            "bFirerate": 100,
+            "weapFireType": [ "fullauto" ],
+            "RecoilStableIndexShot": 0,
+            "RecoilForceBack": "+200%",
+            "RecoilForceUp": "+200%"
+        },
+        "Weapons": [
+            "TX-15 DML", "G28", "M1A", "Mk-18", "RSASS",
+            "SR-25", "SVDS", "OP-SKS", "RFB", "SAG AK",
+            "VPO-101"
+        ],
+        "ID": "0602",
+        "rarity": "Scav"
+    },
+    "Pistol": {
+        "Description": "A weapon variant designed specifically for pistol quests, tailored for those who dislike using actual pistols",
+        "Explanation": "Bolt-action rifles with significantly improved accuracy and handling, but chambered in the 9x18 pistol caliber",
+        "ShortName": "9x18PM",
+        "props": {
+            "ammoCaliber": "Caliber9x18PM",
+            "DropSoundType": "Pistol",
+            "weapUseType": "secondary",
+            "CenterOfImpact": 0.01,
+            "Ergonomics": "+50",
+            "Velocity": "+20",
+            "Weight": "-90%"
+        },
+        "additionalChanges": {
+            "Slots": {
+                "mod_magazine": "5448bd6b4bdc2dfc2f8b4569"
+            },
+            "Chambers": {
+                "patron_in_weapon": "5448bd6b4bdc2dfc2f8b4569"
+            },
+            "addtoInventorySlots": ["Holster"],
+            "minimum": {
+                "bFirerate": 450
+            }
+        },
+        "quests": {
+            "id": "5448bd6b4bdc2dfc2f8b4569"
+        },
+        "Weapons": [
+            "T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
+            "VPO-215", "Desert Eagle L6"
+        ],
+        "ID": "0603",
+        "rarity": "Scav"
+    },
+    "Upgraded": {
+        "Description": "Modified to be a slightly better weapon—but when you tweak every statistic without understanding them, you're just as likely to make it worse",
+        "Explanation": "Weapon variant with most statistics enhanced, including increased burst count (for weapons with burst fire), recoil, ergonomics, fire rate, velocity, heat buildup, and weight",
+        "ShortName": "Upgraded",
+        "props": {
+            "BurstShotsCount": "+2",
+            "RecoilForceBack": "+30%",
+            "RecoilForceUp": "+30%",
+            "RecoilCamera": "+25%",
+            "AimPlane": "+20%",
+            "RecoilStableIndexShot": "+50%",
+            "RecoilDampingHandRotation": "+7%",
+            "RecoilReturnSpeedHandRotation": "+7%",
+            "RecolDispersion": "+50%",
+            "Ergonomics": "+35",
+            "SingleFireRate": "+35%",
+            "bFirerate": "+35%",
+            "Velocity": "+36",
+            "HeatFactorByShot": "+30%",
+            "Weight": "+99%"
+        },
+        "Weapons": [
+            "Mk47", "SCAR-L", "MCX SPEAR", "AK-74N", "AK-103",
+            "AKS-74U", "AKS-74N", "PM", "PB", "APS",
+            "PP-91-01 Kedr-B", "PP-91 Kedr", "Glock 17", "MP5K-N", "Saiga-9",
+            "MP7A1", "SR-3M"
+        ],
+        "ID": "0604",
+        "rarity": "Scav"
+    },
+    "Dung Spreader": {
+        "Description": "MoooooA. MooooA. MoooooooooooA!",
+        "Explanation": "Weapon variant with unbelievable bad spread. Even hitting your enemy will be achievement in itself",
+        "ShortName": "Spreader",
+        "props": {
+            "RecolDispersion": 1000,
+            "RecoilForceBack": "+300%",
+            "RecoilForceUp": "+300%",
+            "AimPlane": "+1000%"
+        },
+        "Weapons": [
+            "M4A1", "SA-58", "MCX", "Mk47", "AUG A3"
+        ],
+        "ID": "0605",
+        "rarity": "Scav"
+    }
+}

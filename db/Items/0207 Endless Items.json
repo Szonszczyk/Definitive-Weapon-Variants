@@ -1,0 +1,158 @@
+{
+    "2a5fc2e3ceed69119e174f24": {
+		"itemTplToClone": "660ea4453786cc0af808a1be",
+		"parentId": "5448bc234bdc2d3c308b4569",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"LoadUnloadModifier": 150,
+			"Cartridges": [
+				{
+				  "_id": "656653c662c7aafe71ece9bf",
+				  "_max_count": 250,
+				  "_name": "cartridges",
+				  "_parent": "2a5fc2e3ceed69119e174f24",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+							"5e85aa1a988a8701445df1f5",
+							"5e85aac65505fa48730d8af2",
+							"5e85a9a6eacf8c039e4e2ac1",
+							"5f647f31b6238e5dd066e196",
+							"5e85a9f4add9fe03027d9bf1",
+							"5f647fd3f6e4ab66c82faed6",
+							"59e6920f86f77411d82aa167",
+							"59e6927d86f77411da468256",
+							"54527a984bdc2d4e668b4567",
+							"54527ac44bdc2d36668b4567",
+							"59e68f6f86f7746c9f75e846",
+							"59e6906286f7746c9f75e847",
+							"59e690b686f7746c9f75e848",
+							"59e6918f86f7746c9f75e849",
+							"60194943740c5d77f6705eea",
+							"601949593ae8f707c4608daa",
+							"5c0d5ae286f7741e46554302",
+							"59e0d99486f7744a32234762",
+							"59e4d3d286f774176a36250a",
+							"5656d7c34bdc2d9d198b4587",
+							"59e4cf5286f7741778269d8a",
+							"59e4d24686f7741776641ac7",
+							"601aa3d2b2bcb34913271e6d",
+							"64b7af5a8532cf95ee0a0dbd",
+							"64b7af734b75259c590fa895",
+							"64b7af434b75259c590fa893"
+						]
+					  }
+					]
+				  },
+				  "_proto": "5748538b2459770af276a261"
+				}
+			  ]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#ca741f>M60 250-round \"Endless\" ammo box</color></b>",
+				"shortName": "End.250",
+				"description": "<align=\"center\">Special 250-round \"Endless\" ammo box magazine for \"Endless\" Variant weapons\nFits 7.62x51mm NATO, 7.62x39mm and 5.56x45mm NATO ammunition</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 48000,
+		"handbookPriceRoubles": 24000,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	},
+	"d43dadc0c35611c82c0a3803": {
+		"itemTplToClone": "660ea4453786cc0af808a1be",
+		"parentId": "5448bc234bdc2d3c308b4569",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"LoadUnloadModifier": 200,
+			"Cartridges": [
+				{
+				  "_id": "4bcf370894245b8a4733ae77",
+				  "_max_count": 400,
+				  "_name": "cartridges",
+				  "_parent": "d43dadc0c35611c82c0a3803",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+							"5e81f423763d9f754677bf2e",
+							"5efb0cabfb3e451d70735af5",
+							"5efb0fc6aeb21837e749c801",
+							"5efb0d4f4bc50b58e81710f3",
+							"5ea2a8e200685063ec28c05a",
+							"5efb0da7a29a85116f6ea05f",
+							"5c3df7d588a4501f290594e5",
+							"58864a4f2459770fcc257101",
+							"56d59d3ad2720bdb418b4577",
+							"5c925fa22e221601da359b7b",
+							"5a3c16fe86f77452b62de32a",
+							"5efb0e16aeb21837e749c7ff",
+							"5c0d56a986f774449d5de529",
+							"64b7bbb74b75259c590fa897",
+							"5ba26812d4351e003201fef1",
+							"5ba26835d4351e0035628ff5",
+							"5ba2678ad4351e44f824b344",
+							"5ba26844d4351e00334c9475",
+							"64b6979341772715af0f9c39",
+							"5cc80f53e4a949000e1ea4f8",
+							"5cc86832d7f00c000d3a6e6c",
+							"5cc86840d7f00c002412c56c",
+							"5cc80f67e4a949035e43bbba",
+							"5cc80f38e4a949001152b560",
+							"5cc80f8fe4a949033b0224a2",
+							"5cc80f79e4a949033c7343b2"
+						]
+					  }
+					]
+				  },
+				  "_proto": "5748538b2459770af276a261"
+				}
+			  ]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#ca741f>M60 400-round \"Endless\" ammo box</color></b>",
+				"shortName": "End.400",
+				"description": "<align=\"center\">Special 400-round \"Endless\" ammo box magazine for \"Endless\" Variant weapons\nFits .45 ACP, 9x19mm, 4.6x30mm HK and 5.7x28mm FN ammunition</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 48000,
+		"handbookPriceRoubles": 24000,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}

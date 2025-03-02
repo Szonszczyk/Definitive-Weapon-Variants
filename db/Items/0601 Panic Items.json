@@ -1,0 +1,38 @@
+{
+    "911e2cff5d5389b4a6fd7638": {
+		"itemTplToClone": "5cf8f3b0d7f00c00217872ef",
+		"parentId": "5448bc234bdc2d3c308b4569",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"ReloadMagType": "InternalMagazine",
+			"RaidModdable": false
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#2cda26>SOK-12 12ga MaxRounds Powermag Internal 20-round magazine</color></b>",
+				"shortName": "Powermag Internal",
+				"description": "<align=\"center\">Special MaxRounds Powermag 20-shell magazine for Panic Variant weapons with internal magazine</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 35000,
+		"handbookPriceRoubles": 25000,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}

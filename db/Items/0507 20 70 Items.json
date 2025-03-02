@@ -1,0 +1,38 @@
+{
+    "cc3f46f481a96779f53a3725": {
+		"itemTplToClone": "5c6161fb2e221600113fbde5",
+		"parentId": "5448bc234bdc2d3c308b4569",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"ReloadMagType": "InternalMagazine",
+			"RaidModdable": false
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#2694da>TOZ-106 20ga MTs 20-01 Sb.3 Internal 5-shot magazine</color></b>",
+				"shortName": "Sb.3x5 Internal",
+				"description": "<align=\"center\">Special TOZ-106 20ga MTs 20-01 Sb.3 5-shot magazine for 20/70 Variant weapons with internal magazine</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 2137,
+		"handbookPriceRoubles": 1410,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}

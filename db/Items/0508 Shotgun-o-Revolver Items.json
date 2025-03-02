@@ -1,0 +1,662 @@
+{
+	"5ad70825cbf24d7866f75a64": {
+		"itemTplToClone": "624c3074dbbd335e8e6becf3",
+		"parentId": "610720f290b75a49ff2e5e25",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Cartridges": [
+			  {
+			    "_id": "f6c9ca280ea0735b664d9060",
+			    "_max_count": 5,
+			    "_name": "cartridges",
+			    "_parent": "5ad70825cbf24d7866f75a64",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"560d5e524bdc2d25448b4571",
+						"5d6e6772a4b936088465b17c",
+						"5d6e67fba4b9361bc73bc779",
+						"5d6e6806a4b936088465b17e",
+						"5d6e68dea4b9361bcc29e659",
+						"5d6e6911a4b9361bd5780d52",
+						"5c0d591486f7744c505b416f",
+						"58820d1224597753c90aeb13",
+						"5d6e68c4a4b9361b93413f79",
+						"5d6e68a8a4b9360b6c0d54e2",
+						"5d6e68e6a4b9361c140bcfe0",
+						"5d6e6869a4b9361c140bcfde",
+						"5d6e68b3a4b9361bca7e50b5",
+						"5d6e6891a4b9361bd473feea",
+						"5d6e689ca4b9361bc8618956",
+						"5d6e68d1a4b93622fe60e845",
+						"64b8ee384b75259c590fa89b"
+					  ]
+			        }
+			      ]
+			    },
+			    "_proto": "5748538b2459770af276a261"
+			  }
+			],
+			"Slots": [
+			  {
+			    "_id": "37883c0bad01c0ec9ece9f9f",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_000",
+			    "_parent": "5ad70825cbf24d7866f75a64",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"560d5e524bdc2d25448b4571",
+						"5d6e6772a4b936088465b17c",
+						"5d6e67fba4b9361bc73bc779",
+						"5d6e6806a4b936088465b17e",
+						"5d6e68dea4b9361bcc29e659",
+						"5d6e6911a4b9361bd5780d52",
+						"5c0d591486f7744c505b416f",
+						"58820d1224597753c90aeb13",
+						"5d6e68c4a4b9361b93413f79",
+						"5d6e68a8a4b9360b6c0d54e2",
+						"5d6e68e6a4b9361c140bcfe0",
+						"5d6e6869a4b9361c140bcfde",
+						"5d6e68b3a4b9361bca7e50b5",
+						"5d6e6891a4b9361bd473feea",
+						"5d6e689ca4b9361bc8618956",
+						"5d6e68d1a4b93622fe60e845",
+						"64b8ee384b75259c590fa89b"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "990a3f07ba7fcc61ac9f5683",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_001",
+			    "_parent": "5ad70825cbf24d7866f75a64",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"560d5e524bdc2d25448b4571",
+						"5d6e6772a4b936088465b17c",
+						"5d6e67fba4b9361bc73bc779",
+						"5d6e6806a4b936088465b17e",
+						"5d6e68dea4b9361bcc29e659",
+						"5d6e6911a4b9361bd5780d52",
+						"5c0d591486f7744c505b416f",
+						"58820d1224597753c90aeb13",
+						"5d6e68c4a4b9361b93413f79",
+						"5d6e68a8a4b9360b6c0d54e2",
+						"5d6e68e6a4b9361c140bcfe0",
+						"5d6e6869a4b9361c140bcfde",
+						"5d6e68b3a4b9361bca7e50b5",
+						"5d6e6891a4b9361bd473feea",
+						"5d6e689ca4b9361bc8618956",
+						"5d6e68d1a4b93622fe60e845",
+						"64b8ee384b75259c590fa89b"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "b847ab0715a7448ecc9c1d8b",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_002",
+			    "_parent": "5ad70825cbf24d7866f75a64",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"560d5e524bdc2d25448b4571",
+						"5d6e6772a4b936088465b17c",
+						"5d6e67fba4b9361bc73bc779",
+						"5d6e6806a4b936088465b17e",
+						"5d6e68dea4b9361bcc29e659",
+						"5d6e6911a4b9361bd5780d52",
+						"5c0d591486f7744c505b416f",
+						"58820d1224597753c90aeb13",
+						"5d6e68c4a4b9361b93413f79",
+						"5d6e68a8a4b9360b6c0d54e2",
+						"5d6e68e6a4b9361c140bcfe0",
+						"5d6e6869a4b9361c140bcfde",
+						"5d6e68b3a4b9361bca7e50b5",
+						"5d6e6891a4b9361bd473feea",
+						"5d6e689ca4b9361bc8618956",
+						"5d6e68d1a4b93622fe60e845",
+						"64b8ee384b75259c590fa89b"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "05112bfe8d7260d9612a631e",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_003",
+			    "_parent": "5ad70825cbf24d7866f75a64",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"560d5e524bdc2d25448b4571",
+						"5d6e6772a4b936088465b17c",
+						"5d6e67fba4b9361bc73bc779",
+						"5d6e6806a4b936088465b17e",
+						"5d6e68dea4b9361bcc29e659",
+						"5d6e6911a4b9361bd5780d52",
+						"5c0d591486f7744c505b416f",
+						"58820d1224597753c90aeb13",
+						"5d6e68c4a4b9361b93413f79",
+						"5d6e68a8a4b9360b6c0d54e2",
+						"5d6e68e6a4b9361c140bcfe0",
+						"5d6e6869a4b9361c140bcfde",
+						"5d6e68b3a4b9361bca7e50b5",
+						"5d6e6891a4b9361bd473feea",
+						"5d6e689ca4b9361bc8618956",
+						"5d6e68d1a4b93622fe60e845",
+						"64b8ee384b75259c590fa89b"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "2fe63ce33dfa35c9e46301b0",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_004",
+			    "_parent": "5ad70825cbf24d7866f75a64",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"560d5e524bdc2d25448b4571",
+						"5d6e6772a4b936088465b17c",
+						"5d6e67fba4b9361bc73bc779",
+						"5d6e6806a4b936088465b17e",
+						"5d6e68dea4b9361bcc29e659",
+						"5d6e6911a4b9361bd5780d52",
+						"5c0d591486f7744c505b416f",
+						"58820d1224597753c90aeb13",
+						"5d6e68c4a4b9361b93413f79",
+						"5d6e68a8a4b9360b6c0d54e2",
+						"5d6e68e6a4b9361c140bcfe0",
+						"5d6e6869a4b9361c140bcfde",
+						"5d6e68b3a4b9361bca7e50b5",
+						"5d6e6891a4b9361bd473feea",
+						"5d6e689ca4b9361bc8618956",
+						"5d6e68d1a4b93622fe60e845",
+						"64b8ee384b75259c590fa89b"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "9e68735f18760b309141457b",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_005",
+			    "_parent": "5ad70825cbf24d7866f75a64",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"560d5e524bdc2d25448b4571",
+						"5d6e6772a4b936088465b17c",
+						"5d6e67fba4b9361bc73bc779",
+						"5d6e6806a4b936088465b17e",
+						"5d6e68dea4b9361bcc29e659",
+						"5d6e6911a4b9361bd5780d52",
+						"5c0d591486f7744c505b416f",
+						"58820d1224597753c90aeb13",
+						"5d6e68c4a4b9361b93413f79",
+						"5d6e68a8a4b9360b6c0d54e2",
+						"5d6e68e6a4b9361c140bcfe0",
+						"5d6e6869a4b9361c140bcfde",
+						"5d6e68b3a4b9361bca7e50b5",
+						"5d6e6891a4b9361bd473feea",
+						"5d6e689ca4b9361bc8618956",
+						"5d6e68d1a4b93622fe60e845",
+						"64b8ee384b75259c590fa89b"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  }
+			]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#dada26>Chiappa Rhino 12/70 6-round cylinder</color></b>",
+				"shortName": "CR 12/70",
+				"description": "<align=\"center\">A 6-round cylinder 12/70 cylinder for Chiappa Rhino 200DS Shotgun-o-Revolver Variant</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 3200,
+		"handbookPriceRoubles": 1600,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	},
+	"9cf1bf1bb0ea0be41ef4dc9d": {
+		"itemTplToClone": "619f54a1d25cbd424731fb99",
+		"parentId": "610720f290b75a49ff2e5e25",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Cartridges": [
+			  {
+			    "_id": "5c8efbbb5e56d679d52b2afd",
+			    "_max_count": 5,
+			    "_name": "cartridges",
+			    "_parent": "9cf1bf1bb0ea0be41ef4dc9d",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5a38ebd9c4a282000d722a5b",
+						"5d6e695fa4b936359b35d852",
+						"5d6e69b9a4b9361bc8618958",
+						"5d6e69c7a4b9360b6c0d54e4",
+						"5d6e6a5fa4b93614ec501745",
+						"5d6e6a53a4b9361bd473feec",
+						"5d6e6a42a4b9364f07165f52",
+						"5d6e6a05a4b93618084f58d0"
+					  ]
+			        }
+			      ]
+			    },
+			    "_proto": "5748538b2459770af276a261"
+			  }
+			],
+			"Slots": [
+			  {
+			    "_id": "4b5ec4eae0fca15021d631fa",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_000",
+			    "_parent": "9cf1bf1bb0ea0be41ef4dc9d",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5a38ebd9c4a282000d722a5b",
+						"5d6e695fa4b936359b35d852",
+						"5d6e69b9a4b9361bc8618958",
+						"5d6e69c7a4b9360b6c0d54e4",
+						"5d6e6a5fa4b93614ec501745",
+						"5d6e6a53a4b9361bd473feec",
+						"5d6e6a42a4b9364f07165f52",
+						"5d6e6a05a4b93618084f58d0"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "a3f12e6d662686022ed6baee",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_001",
+			    "_parent": "9cf1bf1bb0ea0be41ef4dc9d",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5a38ebd9c4a282000d722a5b",
+						"5d6e695fa4b936359b35d852",
+						"5d6e69b9a4b9361bc8618958",
+						"5d6e69c7a4b9360b6c0d54e4",
+						"5d6e6a5fa4b93614ec501745",
+						"5d6e6a53a4b9361bd473feec",
+						"5d6e6a42a4b9364f07165f52",
+						"5d6e6a05a4b93618084f58d0"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "e187956c5e254e8e9cca5f4c",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_002",
+			    "_parent": "9cf1bf1bb0ea0be41ef4dc9d",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5a38ebd9c4a282000d722a5b",
+						"5d6e695fa4b936359b35d852",
+						"5d6e69b9a4b9361bc8618958",
+						"5d6e69c7a4b9360b6c0d54e4",
+						"5d6e6a5fa4b93614ec501745",
+						"5d6e6a53a4b9361bd473feec",
+						"5d6e6a42a4b9364f07165f52",
+						"5d6e6a05a4b93618084f58d0"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "384c1399369b2d1525d6bbdd",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_003",
+			    "_parent": "9cf1bf1bb0ea0be41ef4dc9d",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5a38ebd9c4a282000d722a5b",
+						"5d6e695fa4b936359b35d852",
+						"5d6e69b9a4b9361bc8618958",
+						"5d6e69c7a4b9360b6c0d54e4",
+						"5d6e6a5fa4b93614ec501745",
+						"5d6e6a53a4b9361bd473feec",
+						"5d6e6a42a4b9364f07165f52",
+						"5d6e6a05a4b93618084f58d0"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "24a3945f53092ab97c4dd47e",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_004",
+			    "_parent": "9cf1bf1bb0ea0be41ef4dc9d",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5a38ebd9c4a282000d722a5b",
+						"5d6e695fa4b936359b35d852",
+						"5d6e69b9a4b9361bc8618958",
+						"5d6e69c7a4b9360b6c0d54e4",
+						"5d6e6a5fa4b93614ec501745",
+						"5d6e6a53a4b9361bd473feec",
+						"5d6e6a42a4b9364f07165f52",
+						"5d6e6a05a4b93618084f58d0"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "abd3d5cf1d125e005d4fe810",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_005",
+			    "_parent": "9cf1bf1bb0ea0be41ef4dc9d",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5a38ebd9c4a282000d722a5b",
+						"5d6e695fa4b936359b35d852",
+						"5d6e69b9a4b9361bc8618958",
+						"5d6e69c7a4b9360b6c0d54e4",
+						"5d6e6a5fa4b93614ec501745",
+						"5d6e6a53a4b9361bd473feec",
+						"5d6e6a42a4b9364f07165f52",
+						"5d6e6a05a4b93618084f58d0"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  }
+			]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#dada26>Chiappa Rhino 20/70 6-round cylinder</color></b>",
+				"shortName": "CR 20/70",
+				"description": "<align=\"center\">A 6-round 20/70 cylinder for Chiappa Rhino 50DS Shotgun-o-Revolver Variant</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 3256,
+		"handbookPriceRoubles": 1600,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	},
+	"8ca579021a498134d7c4d595": {
+		"itemTplToClone": "633ec6ee025b096d320a3b15",
+		"parentId": "610720f290b75a49ff2e5e25",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Cartridges": [
+			  {
+			    "_id": "0b4c02209c761cc43cbb468c",
+			    "_max_count": 5,
+			    "_name": "cartridges",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5e85aa1a988a8701445df1f5",
+						"5e85aac65505fa48730d8af2",
+						"5e85a9a6eacf8c039e4e2ac1",
+						"5f647f31b6238e5dd066e196",
+						"5e85a9f4add9fe03027d9bf1",
+						"5f647fd3f6e4ab66c82faed6"
+					  ]
+			        }
+			      ]
+			    },
+			    "_proto": "5748538b2459770af276a261"
+			  }
+			],
+			"Slots": [
+			  {
+			    "_id": "826bcbe425a18e4b191ac9bc",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_000",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5e85aa1a988a8701445df1f5",
+						"5e85aac65505fa48730d8af2",
+						"5e85a9a6eacf8c039e4e2ac1",
+						"5f647f31b6238e5dd066e196",
+						"5e85a9f4add9fe03027d9bf1",
+						"5f647fd3f6e4ab66c82faed6"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "214e570caafa1274438e0f46",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_001",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5e85aa1a988a8701445df1f5",
+						"5e85aac65505fa48730d8af2",
+						"5e85a9a6eacf8c039e4e2ac1",
+						"5f647f31b6238e5dd066e196",
+						"5e85a9f4add9fe03027d9bf1",
+						"5f647fd3f6e4ab66c82faed6"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "408419a6bd7605d759083de2",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_002",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5e85aa1a988a8701445df1f5",
+						"5e85aac65505fa48730d8af2",
+						"5e85a9a6eacf8c039e4e2ac1",
+						"5f647f31b6238e5dd066e196",
+						"5e85a9f4add9fe03027d9bf1",
+						"5f647fd3f6e4ab66c82faed6"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "9627108a01dcdd8ba05b0038",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_003",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5e85aa1a988a8701445df1f5",
+						"5e85aac65505fa48730d8af2",
+						"5e85a9a6eacf8c039e4e2ac1",
+						"5f647f31b6238e5dd066e196",
+						"5e85a9f4add9fe03027d9bf1",
+						"5f647fd3f6e4ab66c82faed6"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  },
+			  {
+			    "_id": "9601128a2ee6c88c3e076ee8",
+			    "_mergeSlotWithChildren": false,
+			    "_name": "camora_004",
+			    "_parent": "69330141f5636b1891326b3f",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5e85aa1a988a8701445df1f5",
+						"5e85aac65505fa48730d8af2",
+						"5e85a9a6eacf8c039e4e2ac1",
+						"5f647f31b6238e5dd066e196",
+						"5e85a9f4add9fe03027d9bf1",
+						"5f647fd3f6e4ab66c82faed6"
+					  ],
+			          "MaxStackCount": 1
+			        }
+			      ]
+			    },
+			    "_proto": "55d4af244bdc2d962f8b4571",
+			    "_required": false
+			  }
+			]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#dada26>RSh-12 23x75mm 5-round cylinder</color></b>",
+				"shortName": "RSh 23x75",
+				"description": "<align=\"center\">A 5-round 23x75mm cylinder for RSh-12 Shotgun-o-Revolver Variant</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 24000,
+		"handbookPriceRoubles": 12000,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}
+

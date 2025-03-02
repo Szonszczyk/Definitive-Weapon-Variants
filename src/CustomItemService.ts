@@ -1,51 +1,43 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import * as fs from "fs";
+import * as path from "path";
 import { NewItemFromCloneDetails } from "@spt/models/spt/mod/NewItemDetails";
-import {
-    Preset,
-    Item,
-    ConfigItem,
-    traderIDs,
-    currencyIDs,
-    allBotTypes,
-    inventorySlots
-} from "./references/configConsts";
+import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
+import { ILocation } from "@spt/models/eft/common/ILocation";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { WTTInstanceManager } from "./WTTInstanceManager";
+import { WeaponGeneration } from "./WeaponGeneration";
 import { ItemMap } from "./references/items";
 import { ItemBaseClassMap } from "./references/itemBaseClasses";
 import { ItemHandbookCategoryMap } from "./references/itemHandbookCategories";
-import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
-import * as fs from "fs";
-import * as path from "path";
-import { WTTInstanceManager } from "./WTTInstanceManager";
-import { ILocation } from "@spt/models/eft/common/ILocation";
-
-interface WeaponClones {
-  [key: string]: string[];
-}
-
-interface WeaponDescription {
-  [key: string]: string;
-}
+import {
+    Preset, Item, ConfigItem, traderIDs, currencyIDs,
+    allBotTypes, inventorySlots, WeaponClones
+} from "./references/configConsts";
 
 export class CustomItemService
 {
     private configs: ConfigItem;
     private Instance: WTTInstanceManager;
     private modConfig: any;
+    private weaponGeneration: WeaponGeneration = new WeaponGeneration();
 
     constructor() 
     {
         this.configs = this.loadCombinedConfig();
     }
 
-    public preSptLoad(Instance: WTTInstanceManager, config: any): void 
+    public preSptLoad(Instance: WTTInstanceManager, config: any, hashutil: HashUtil): void 
     {
         this.Instance = Instance;
         this.modConfig = config;
+        this.weaponGeneration.preSptLoad(this.Instance, config, hashutil);
     }
 
     public postDBLoad(): void 
     {
-        const jsonUtil = this.Instance.jsonUtil;
+        const newWeapons = this.weaponGeneration.generateWeapons();
+        Object.assign(this.configs, newWeapons);
 
         let numItemsAdded = 0;
 
@@ -54,18 +46,6 @@ export class CustomItemService
         const flea = this.Instance.configServer.configs["spt-ragfair"].dynamic.blacklist.custom;
 
         const weaponClones: WeaponClones = {};
-
-        const contributesToQuestsAsWeapon = {
-            "Pistol Variant": "5abccb7dd8ce87001773e277",
-            "Lapua Variant": "5fc22d7c187fea44d52eda44",
-            "Light Machine Gun Variant": "64ca3d3954fc657e230529cc",
-            "SMG Variant": "5bd70322209c4d00d7167b8f",
-            "Laser Variant": "5ea03f7400685063ec28bfa8",
-            "Mid-Range Variant": "5cadfbf7ae92152ac412eeef",
-            "Shotgun Variant": "576165642459773c7a400233",
-            "20/70 Variant": "5a38e6bac4a2826c6e06d79b"
-        };
-        const weaponDescriptions = this.createWeaponDescriptions(this.modConfig);
 
         for (const itemId in this.configs)
         {
@@ -85,33 +65,6 @@ export class CustomItemService
                 }
             } else {
 
-                //replace placeholder description with correct one based on config file
-                let variantRarity = "";
-                for (const desc in weaponDescriptions) {
-                    if (itemConfig.locales.en.description.includes(desc)) {
-                        itemConfig.locales.en.description = itemConfig.locales.en.description.replace(desc, weaponDescriptions[desc]);
-                        variantRarity = desc.replace("Description", "");
-                        break;
-                    }
-                }
-
-                //add weapons to containers based on config values
-                /*
-                if (this.modConfig.containers.probability.overall > 0 && this.modConfig.containers.probability[`${variantRarity}Weapons`]) {
-                    const containers = this.modConfig.containers.types;
-                    const containerMulti = this.modConfig.containers.probability;
-                    itemConfig.addtoStaticLootContainers = true;
-                    for(const container in containers) {
-                        if (containers[container] > 0) {
-                            itemConfig.StaticLootContainers.push({
-                                "ContainerName": container,
-                                "Probability": containers[container] * containerMulti.overall * containerMulti[`${variantRarity}Weapons`]
-                            });
-                        }
-                    }
-                }
-                */
-
                 this.Instance.customItem.createItemFromClone(exampleCloneItem);
                 this.processStaticLootContainers(itemConfig, itemId);
                 this.processModSlots(itemConfig, [finalItemTplToClone], itemId); // Wrap finalItemTplToClone in an array
@@ -125,34 +78,36 @@ export class CustomItemService
                 );
                 this.processTraders(itemConfig, itemId);
 
-                //for weapons that were changed caliber, found variant and matching weapon that this variant contributes to
-                let weaponToUseForKillQuests = finalItemTplToClone;
-                for (const variant in contributesToQuestsAsWeapon) {
-                    if (itemConfig.locales.en.name.includes(variant)) {
-                        weaponToUseForKillQuests = contributesToQuestsAsWeapon[variant];
+                //special area only for weapons
+                if (itemConfig?.additionalInfo) {
+                    const variantRarity = itemConfig.additionalInfo.rarity;
+                    //for weapons that were changed caliber, add them to different weapon for kill quests
+                    let weaponToUseForKillQuests = finalItemTplToClone;
+                    if (itemConfig?.additionalInfo.contributesToQuestsAsWeapon) {
+                        weaponToUseForKillQuests = itemConfig.additionalInfo.contributesToQuestsAsWeapon;
                     }
-                }
-
-                //add to weapon clones database to later add to quests
-                if (!weaponClones[weaponToUseForKillQuests]) {
-                    weaponClones[weaponToUseForKillQuests] = [];
-                }
-                weaponClones[weaponToUseForKillQuests].push(itemId);
-
-                // Add to weapon blacklist
-                if (this.modConfig.fenceBlacklist[`blacklist${variantRarity}Weapons`]) {
-                    blacklist.push(itemId);
-                }
-
-                // Add to flea blacklist
-                if (this.modConfig.fleaBlacklist[`blacklist${variantRarity}Weapons`]) {
-                    flea.push(itemId);
-                }
-                
-                // Add to airdrop blacklist
-                if (!this.modConfig.aidrop[`allow${variantRarity}Weapons`]) {
-                    for(const loot in airdropLoot) {
-                        airdropLoot[loot].itemBlacklist.push(itemId);
+    
+                    //add to weapon clones database to later add to quests
+                    if (!weaponClones[weaponToUseForKillQuests]) {
+                        weaponClones[weaponToUseForKillQuests] = [];
+                    }
+                    weaponClones[weaponToUseForKillQuests].push(itemId);
+    
+                    // Add to fence blacklist
+                    if (this.modConfig.fence.blacklist.includes(variantRarity)) {
+                        blacklist.push(itemId);
+                    }
+    
+                    // Add to flea blacklist
+                    if (this.modConfig.flea.blacklist.includes(variantRarity)) {
+                        flea.push(itemId);
+                    }
+                    
+                    // Add to airdrop blacklist
+                    if (this.modConfig.airdrop.blacklist.includes(variantRarity)) {
+                        for(const loot in airdropLoot) {
+                            airdropLoot[loot].itemBlacklist.push(itemId);
+                        }
                     }
                 }
                 numItemsAdded++;
@@ -775,39 +730,6 @@ export class CustomItemService
       return cloneIDs;
     }
     
-    private createWeaponDescriptions(
-        modConfig: any
-    ): WeaponDescription {
-
-        // Small check if only 1 APBS config is changed to true
-        if (+modConfig.apbs.allowAllWeapons + +modConfig.apbs.allowOnlyBaseWeapons + +modConfig.apbs.progressive >= 2) {
-            this.Instance.logger.log(
-                `[${this.Instance.modName}] 2 or more APBS config are 'true', but only 1 is needed. Please remove unnecessary one.`,
-                LogTextColor.RED
-            );
-        }
-
-        const weaponQualities: string[] = [ "OP", "Meta", "Decent", "Base", "Scav", "Meme" ];
-        const baseWeaponsQualities: string[] = [ "Base", "Scav", "Meme" ];
-        const descriptions: WeaponDescription = {};
-
-        for (const quality of weaponQualities) {
-            const textArray: string[] = [];
-
-            //if (modConfig.containers.probability.overall > 0 && modConfig.containers.probability[`${quality}Weapons`] > 0) { textArray.push("in containers"); };
-            if (modConfig.aidrop[`allow${quality}Weapons`]) { textArray.push("in airdrop"); };
-            if (!modConfig.fenceBlacklist[`blacklist${quality}Weapons`]) { textArray.push("in Fence"); };
-            if (!modConfig.fleaBlacklist[`blacklist${quality}Weapons`]) { textArray.push("on flea market"); };
-            if (modConfig.apbs.allowAllWeapons || (modConfig.apbs.allowOnlyBaseWeapons && baseWeaponsQualities.includes(quality))) { textArray.push("on enemies"); };
-            if (modConfig.apbs.progressive) { textArray.push("progressively on enemies"); };
-            if (modConfig.theGambler.enabled) { textArray.push("in weapon boxes sold by the Gambler"); };
-
-            descriptions[`${quality}Description`] = `Can be found: ${textArray.join(", ")}`;
-        }
-
-        return descriptions;
-    }
-
     /**
    * Loads and combines multiple configuration files into a single ConfigItem object.
    *

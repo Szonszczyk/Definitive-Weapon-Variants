@@ -1,0 +1,59 @@
+{
+    "61a68896f1d9538c1a5d181f": {
+		"itemTplToClone": "5f647d9f8499b57dc40ddb93",
+		"parentId": "5448bc234bdc2d3c308b4569",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Cartridges": [
+				{
+				  "_id": "a8e5cd4324ed59dabcbd4e51",
+				  "_max_count": 12,
+				  "_name": "cartridges",
+				  "_parent": "61a68896f1d9538c1a5d181f",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+						  "5e85aa1a988a8701445df1f5",
+						  "5e85aac65505fa48730d8af2",
+						  "5e85a9a6eacf8c039e4e2ac1",
+						  "5f647f31b6238e5dd066e196",
+						  "5e85a9f4add9fe03027d9bf1",
+						  "5f647fd3f6e4ab66c82faed6"
+						]
+					  }
+					]
+				  },
+				  "_proto": "5748538b2459770af276a261"
+				}
+			  ]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#ca741f>KS-23M 23x75 12-shell magazine cap</color></b>",
+				"shortName": "KS-23Mx12",
+				"description": "<align=\"center\">Special KS-23M 23x75 12-shell magazine for \"Karabin Spetsialniy\" Variant weapons</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 1069,
+		"handbookPriceRoubles": 521,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}
