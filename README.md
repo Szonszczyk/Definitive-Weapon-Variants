@@ -1,11 +1,12 @@
 # Szonszczyk - Definitive Weapon Variants
 
-Server mod for Single Player Tarkov featuring over 300 weapon variants based on existing guns.  
+Server mod for Single Player Tarkov featuring over 400 weapon variants based on existing guns.  
 Whether you want an automatic version of your favorite weapon, click scavs to death, tap bosses with anti-materiel rifles, troll friends with meme guns, or simply collect unique variants, this mod has it all!
 
 ## Features
 
-318 weapons of 28 different variant types divided into 7 quality settings.  
+402 weapons of 40 different variant types divided into 7 quality settings.  
+Easy adding new weapons to variant types, create your own variant or modify existing one!  
 Config that enables blacklisting specific quality, for example, for appearing in airdrops.  
 Config with explanation on how to use 2 different modes (APBS and The Gambler) to expand your experience with this mod.
 
@@ -25,9 +26,10 @@ Reach me out on discord "Szonszczyk" and tell me all about it!
 ## Credits
 
 Based on code by GroovypenguinX  
-Few of the weapon variants were suggested by Amidorak
+Half of the weapon variants were suggested by Amidorak
 
 Honorable mentions:  
 Hood - this mod was created to simply add new weapons to loot boxes. Oh well...  
 AcidPhantasm - for easy adding variants to enemies via APBS. Bots shooting Fullburst variant are the best  
 DeadLeaves - I found your code for text colors in Fika discord and added them to this mod
+... and SPT community for playing my mod!
