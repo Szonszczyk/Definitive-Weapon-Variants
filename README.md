@@ -31,5 +31,5 @@ Half of the weapon variants were suggested by Amidorak
 Honorable mentions:  
 Hood - this mod was created to simply add new weapons to loot boxes. Oh well...  
 AcidPhantasm - for easy adding variants to enemies via APBS. Bots shooting Fullburst variant are the best  
-DeadLeaves - I found your code for text colors in Fika discord and added them to this mod
+DeadLeaves - I found your code for text colors in Fika discord and added them to this mod  
 ... and SPT community for playing my mod!
