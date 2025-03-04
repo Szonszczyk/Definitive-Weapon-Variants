@@ -2,7 +2,7 @@
  // Config of Szonszczyk - Definitive Weapon Variants (DWV)
 
  // In here you can adjust how you want to get weapon variants in game
- // Make a copy, and save it as "config.jsonc" to not lose your config after update!
+ // Make a copy, and save it as "config.jsonc" after changing anything to not lose your config after update!
 
  // ### 1.1. Airdrop
  // You can choose which rarity of weapon variants you can find in airdrop
@@ -171,7 +171,7 @@
  // Set this to false if you don't want to use caching and are making changes to variants each time the server starts
  "useCache": true
 
- // #### DETAILED EXPLANATION
+ // #### DETAILED EXPLANATION ABOUT MODS COMPATIBILITY
 
  // If you make changes to files located in:
  // - db/Variants
@@ -186,5 +186,4 @@
 
  // ... or if you removed db/Cache/generatedWeapons.json
  // DWV will generate this file again
-
 }

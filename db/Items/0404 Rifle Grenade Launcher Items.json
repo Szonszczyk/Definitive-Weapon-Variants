@@ -1,0 +1,60 @@
+{
+	"49273d316bf67aec1ea84f5a": {
+		"itemTplToClone": "5ce69cbad7f00c00b61c5098",
+		"parentId": "5448bc234bdc2d3c308b4569",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Cartridges": [
+			  {
+			    "_id": "9e2a1b99450179aefa680a2a",
+			    "_max_count": 1,
+			    "_name": "cartridges",
+			    "_parent": "49273d316bf67aec1ea84f5a",
+			    "_props": {
+			      "filters": [
+			        {
+			          "Filter": [
+						"5ede474b0c226a66f5402622",
+						"5ede475b549eed7c6d5c18fb",
+						"5ede4739e0350d05467f73e8",
+						"5f0c892565703e5c461894e9",
+						"5ede47405b097655935d7d16",
+						"5ede475339ee016e8c534742",
+						"5ede47641cf3836a88318df1"
+					  ]
+			        }
+			      ]
+			    },
+			    "_proto": "5748538b2459770af276a261"
+			  }
+			]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#d326da>40mm Rifle Grenade single round magazine</color></b>",
+				"shortName": "R.Gre mag",
+				"description": "<align=\"center\">1-round magazine for Rifle Grenade Launcher Variant\nIt's not needed\nYou can even sell it right now\nDo it\nright\nNOW!</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 2,
+		"handbookPriceRoubles": 1,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}

@@ -20,10 +20,12 @@ export class WeaponGeneration
     protected hashUtil: HashUtil;
     private modsCompatibility: ModsCompatibility = new ModsCompatibility();
     private loadFromCache: boolean;
+    private colorConverterAPILoaded: boolean;
 
     constructor() 
     {
         this.variantTypes = this.loadCombinedConfig();
+        this.colorConverterAPILoaded = this.colorConverterAPICheck();
     }
 
     public preSptLoad(Instance: WTTInstanceManager, config: any, hashutil: HashUtil): void
@@ -108,7 +110,7 @@ export class WeaponGeneration
                     newWeapon[id] = {
                         itemTplToClone: copiedWeaponId,
                         overrideProperties: {
-                            BackgroundColor: rarity.bgColor
+                            BackgroundColor: this.colorConverterAPILoaded ? `${rarity.color}99` : rarity.bgColor 
                         },
                         parentId: copiedItem._parent,
                         handbookParentId: copiedItemHandbook.ParentId,
@@ -118,9 +120,11 @@ export class WeaponGeneration
                                 shortName: variantShortName,
                                 description: [
                                     `<align="center">${variant.Description}`,
-                                    `<b>${variantName} variant</b>`,
+                                    ``,
+                                    `<color=${rarity.color}><b>${variantName} Variant</b></color>`,
                                     `<i>${variant.Explanation}</i>`,
                                     `${weaponsNamesInVariant.replace(weaponShortname, `<b>${weaponShortname}</b>`)}`,
+                                    ``,
                                     `<color=${rarity.color}>${weaponDescriptions[variant.rarity]}`,
                                     `${rarity.explanation}</color>`,
                                     `This weapon counts toward ${getShortNameById(ShortNames, variant.quests?.id) || "original"} weapon kills for quest completion</align>`
@@ -329,7 +333,7 @@ export class WeaponGeneration
 		//this is after creating preset because we need to change some preset parts according to variant
         if (variant.additionalChanges?.Slots || variant.additionalChanges?.[weaponShortname]?.Slots) {
             let slotsOriginal = structuredClone(copiedItem._props.Slots);
-            let slots = variant.additionalChanges?.Slots ? variant.additionalChanges.Slots : variant.additionalChanges?.[weaponShortname]?.Slots;
+            let slots = structuredClone(variant.additionalChanges?.Slots ? variant.additionalChanges.Slots : variant.additionalChanges?.[weaponShortname]?.Slots);
             if (variant.additionalChanges?.Slots && variant.additionalChanges?.[weaponShortname]?.Slots) {
                 Object.assign(slots, variant.additionalChanges?.[weaponShortname]?.Slots);
             }
@@ -338,7 +342,11 @@ export class WeaponGeneration
                 const newFilter: string[] = slots[slot];
                 if (slotOriginal) {
                     if (typeof newFilter === 'object' && newFilter.length == 0) {
+                        // remove if no filter
                         slotsOriginal = slotsOriginal.filter(element => element._name != slot);
+                        itemConfig[id].weaponpresets[0]._items = itemConfig[id].weaponpresets[0]._items.filter(presetItem => {
+                            return !(presetItem.slotId && presetItem.slotId === slot);
+                        });
                     } else {
                         //allow choosing eg. different magazines if external/internal magazine
                         let choosenFilter = newFilter[0].basedOn ? newFilter[0].variants[copiedItem._props[newFilter[0].basedOn]] : newFilter;
@@ -351,10 +359,7 @@ export class WeaponGeneration
                         }
                         //make changes to preset
                         const slotToChange = findItemWithSlotId(itemConfig[id].weaponpresets[0]._items, slot);
-                        //delete if no filter
-                        itemConfig[id].weaponpresets[0]._items = itemConfig[id].weaponpresets[0]._items.filter(presetItem => {
-                            return !(presetItem.slotId && presetItem.slotId === slot && choosenFilter.length === 0);
-                        });
+
                         if (slotToChange) {
                             slotToChange._tpl = choosenFilter[0];
                         }
@@ -467,7 +472,7 @@ export class WeaponGeneration
             info[weapon.additionalInfo.rarity]++;
         }
         this.Instance.logger.log(
-            `[${this.Instance.modName}] ${description}: |  OP|META|DECE|GIMM|BASE|SCAV|MEME| Rarity. Total types: ${Object.keys(this.variantTypes).length}`,
+            `[${this.Instance.modName}] ${description}: |  OP|META|DECE|GIMM|BASE|SCAV|MEME| Rarity. Total types: **${Object.keys(this.variantTypes).length}**`,
             LogTextColor.GREEN
         );
         let weaponCount: string[] = [];
@@ -475,7 +480,7 @@ export class WeaponGeneration
             weaponCount.push(i.toString().padStart(4));
         }
         this.Instance.logger.log(
-            `[${this.Instance.modName}] ${description}: |${weaponCount.join("|")}| Weapons. Total weapons: ${Object.keys(items).length}`,
+            `[${this.Instance.modName}] ${description}: |${weaponCount.join("|")}| Weapons. Total weapons: **${Object.keys(items).length}**`,
             LogTextColor.GREEN
         );
         if (skipped.length > 0) {
@@ -554,6 +559,21 @@ export class WeaponGeneration
         });
 
         return combinedConfig;
+    }
+
+    private colorConverterAPICheck(): boolean 
+    {
+        const pluginName = "rairai.colorconverterapi.dll";
+            // Fails if there's no ./BepInEx/plugins/ folder
+        try 
+        {
+            const pluginList = fs.readdirSync("./BepInEx/plugins").map(plugin => plugin.toLowerCase());
+            return pluginList.includes(pluginName);
+        }
+        catch 
+        {
+            return false;
+        }
     }
 
 }

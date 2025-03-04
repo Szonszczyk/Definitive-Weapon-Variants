@@ -101,11 +101,12 @@
 		"ID": "0104",
     	"rarity": "OP"
     },
-	"Explosion": {
-		"Description": "God has blessed this weapon with a very big... cylinder",
-    	"Explanation": "Revolvers that wants to be grenade launchers",
-    	"ShortName": "Explosion",
+	"Bombardier": {
+		"Description": "God has blessed this weapon with a very big... cylinder. And an absurd amount of firepower!",
+    	"Explanation": "A revolver that dreams of being a grenade launcher",
+    	"ShortName": "Bombardier",
 		"props": {
+			"ammoCaliber": "Caliber40x46"
     	},
 		"additionalChanges": {
 			"Chambers": {

@@ -23,7 +23,7 @@
 			"SR-25", "SVDS", "OP-SKS", "RFB", "SAG AK",
 			"SAG AK Short", "VPO-101", "VPO-209", "ADAR 2-15", "STM-9",
 			"FN 5-7", "M9A3", "M45A1", "PL-15", "TT",
-			"Desert Eagle L5 .357", "Desert Eagle Mk XIX", "Saiga-12K"
+			"Desert Eagle L5 .357", "Desert Eagle Mk XIX", "Saiga-12K", "Glock 17"
 		],
 		"ID": "0201",
 		"rarity": "Meta"
@@ -83,8 +83,8 @@
 		"rarity": "Meta"
 	},
 	"Unbreakable": {
-		"Description": "Some famous guy from television used his advertised product to make this gun unbreakable. Now you can throw thus gun into the sand without worring that it will jam afterwards. ~It even works underwater!~ Just maybe don't cut it in half...",
-    	"Explanation": "Weapon variant without durability damage, overheating and unable to malfunction",
+		"Description": "Some famous guy from television used his miracle product to make this gun unbreakable\nNow you can throw it into the sand without worrying about jams\n~It even works underwater!~\nJust... maybe don't cut it in half",
+    	"Explanation": "Weapon variant immune to durability damage, overheating, and malfunctions",
     	"ShortName": "Unbreakable",
 		"props": {
 			"DurabilityBurnRatio": 0,
@@ -102,8 +102,8 @@
 		"rarity": "Meta"
 	},
 	"Karabin Spetsialniy": {
-		"Description": "KS-23 \"Special Carbine\" is a shotgun designated by the Russian military as a carbine. So we made more of them",
-    	"Explanation": "Shotgun variant chambered in 23x75mmR featured a special 12-round magazine and without interclip reload for more carbine action!",
+		"Description": "The KS-23 'Special Carbine' is a shotgun officially designated as a carbine by the Russian military\nSo we made even more of them",
+    	"Explanation": "A shotgun variant chambered in 23x75mmR, featuring a special 12-round magazine and no interclip reload-for that true carbine experience!",
     	"ShortName": "KS+23mm",
 		"props": {
 			"weapFireType": [ "burst" ],
@@ -121,6 +121,9 @@
 				"weapFireType": [ "semiauto" ]
 			}
     	},
+		"quests": {
+    		"id": "5e848cc2988a8701445df1e8"
+    	},
 		"Weapons": [
 			"M3 Super 90", "590A1", "M870", "MP-133", "MP-153",
 			"MP-155" 
@@ -129,8 +132,8 @@
 		"rarity": "Meta"
 	},
 	"Assault Rifle": {
-		"Description": "\"I want to have a refund, this weapon is too large for me! B-but I like the caliber. Can you get me something smaller that can fit in my handbag?\"",
-		"Explanation": "Pistols chambered in 5.56x45mm NATO caliber and fitting all M4A1 magazines",
+		"Description": "\"I want a refund! This weapon is way too big for me! B-but I like the caliber. Can you get me something smaller that can fit in my handbag?\"",
+		"Explanation": "Pistol chambered in 5.56x45mm NATO, compatible with all M4A1 magazines",
 		"ShortName": "AR",
 		"props": {
 			"weapFireType": [ "single", "burst", "fullauto" ],
@@ -146,6 +149,9 @@
 			    "mod_magazine": "5447a9cd4bdc2dbd208b4567"
 			}
     	},
+		"quests": {
+    		"id": "5447a9cd4bdc2dbd208b4567"
+    	},
 		"Weapons": [
 			"PM(t)", "APB", "MP-443 Grach", "P226R", "TT Gold",
 			"M9A3", "PL-15", "M45A1", "M1911A1", "Desert Eagle L5 .50 AE"
@@ -154,8 +160,8 @@
 		"rarity": "Meta"
 	},
 	"Endless": {
-		"Description": "Do you even need 250 or even 400 ammo in one raid?\nI don't think so, but this weapon think differently so here we are",
-		"Explanation": "Weapon variant with magazine that is heavy and bulky, but very spacious",
+		"Description": "Do you really need 250 or even 400 rounds in one raid? Probably not\nBut this weapon was built differently… so here we are",
+		"Explanation": "Weapon variant with a magazine that's heavy and bulky, but incredibly spacious",
 		"ShortName": "Endless",
 		"props": {
 			"HeatFactorByShot": "-33%",

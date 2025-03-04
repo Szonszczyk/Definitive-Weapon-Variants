@@ -86,8 +86,8 @@
     	"rarity": "Gimmick"
     },
 	"Rifle Grenade Launcher": {
-		"Description": "- It's like using underbarrel grenade launcher, but instead it is inbarrel grenade launcher!\n- It's called rifle grenade\n- Exactly what I have in mind!",
-    	"Explanation": "Weapon variant chambered in grenade launcher(?)",
+		"Description": "- It's like an underbarrel grenade launcher, but instead, it's an in-barrel grenade launcher!\n- You mean a rifle grenade…?\n- Exactly what I have in mind!",
+    	"Explanation": "Weapon variant chambered in 40mm grenades, with no magazine. Just load grenade launcher rounds directly into the chamber",
     	"ShortName": "R.Grenade",
     	"props": {
     	},
@@ -96,11 +96,17 @@
         		"patron_in_weapon": "5e81ebcd8e146c7080625e15"
         	},
     		"Slots": {
-			    "mod_magazine": []
+			    "mod_magazine": [ "49273d316bf67aec1ea84f5a" ]
+			},
+			"Blicky": {
+				"Slots": {
+					"mod_magazine": []
+				}
 			}
     	},
 		"Weapons": [
-			"MP-43-1C", "MP-18", "Blicky", "AXMC"
+			"MP-43-1C", "MP-18", "Blicky", "AXMC", "Mk-18",
+			"OP-SKS", "SV-98", "Mosin Infantry", "SAG AK Short", "ADAR 2-15"
 		],
 		"ID": "0404",
         "rarity": "Gimmick"

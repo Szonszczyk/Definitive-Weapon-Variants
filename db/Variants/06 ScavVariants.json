@@ -127,7 +127,7 @@
     },
     "Dung Spreader": {
         "Description": "MoooooA. MooooA. MoooooooooooA!",
-        "Explanation": "Weapon variant with unbelievable bad spread. Even hitting your enemy will be achievement in itself",
+        "Explanation": "A weapon variant with unbelievably bad spread. Even landing a hit on your enemy will be an achievement in itself",
         "ShortName": "Spreader",
         "props": {
             "RecolDispersion": 1000,

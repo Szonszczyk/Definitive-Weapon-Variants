@@ -30,8 +30,8 @@
     	"ShortName": "Laser",
     	"props": {
     		"ammoCaliber": "Caliber762x25TT",
-    		"SingleFireRate": "+300%",
-			"bFirerate": "+300%",
+    		"SingleFireRate": "+200%",
+			"bFirerate": "+200%",
     		"weapFireType": [ "fullauto" ],
     		"DurabilityBurnRatio": "-100%",
     		"RecoilForceBack": "-70%",
@@ -102,7 +102,7 @@
     },
 	"Tornado": {
 		"Description": "Objective: Spin in a specific motion to try to kill enemies",
-    	"Explanation": "Weapon variant with only a full-auto fire mode, insane vertical recoil and no point of stabilization",
+    	"Explanation": "Weapon variant with full-auto fire only, insane vertical recoil, and no stabilization point",
     	"ShortName": "T0RN2D0",
 		"props": {
 			"weapFireType": [ "fullauto" ],
@@ -122,6 +122,9 @@
 			"minimum": {
 				"bFirerate": 450
 			}
+    	},
+		"quests": {
+    		"id": "6513ef33e06849f06c0957ca"
     	},
 		"Weapons": [
 			"SA-58", "Saiga-12K", "AK-74M", "RSASS", "Mk47"

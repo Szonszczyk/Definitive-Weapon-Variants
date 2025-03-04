@@ -181,8 +181,8 @@
         "rarity": "Base"
     },
 	"Shotgun-o-Revolver": {
-		"Description": "Trio of revolvers that wants to be shotguns",
-		"Explanation": "Variant that is changing revolvers into shotguns",
+		"Description": "Somewhere, deep in the void of forbidden weapon concepts, someone asked: 'What if revolvers... but shotguns?",
+		"Explanation": "Revolver variant converted to fire shotgun shells. Because sometimes six big booms are better than six small ones",
 		"ShortName": "Shotgun-o",
 		"props": {
 			"ShotgunDispersion": 1,
