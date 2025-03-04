@@ -178,7 +178,7 @@ export class WeaponGeneration
                     this.changeAdditionalPropertiesSlots(newWeapon, id, weaponShortname, copiedItem, variant);
                     this.changeAdditionalPropertiesChambers(newWeapon, id, weaponShortname, copiedItem, variant);
 
-                    this.modsCompatibility.addToAPBSBlacklist(id, variant.rarity, variantName);
+                    this.modsCompatibility.addToAPBSBlacklist(id, variant.rarity, variantName, weaponShortname);
                     this.modsCompatibility.createPresetForGambler(newWeapon[id].weaponpresets[0], ids, variant.rarity, variantName);
 
                     Object.assign(generatedItems, newWeapon);

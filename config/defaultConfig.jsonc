@@ -89,6 +89,8 @@
  // Other blacklists will be copied from blacklists.json file from APBS
  // To exclude specific weapon variant types (e.g., "Laser", "SMG") from being added to APBS bots, list them below. This will blacklist them regardless of other settings
 	"notAddVariantTypes": [],
+ // You can exclude weapons too
+	"notAddWeapons": ["Blicky AMR", "Blicky R.Grenade"],
  // Run the server once, then copy the generated blacklists.json from this mod's config folder to acidphantasm-progressivebotsystem/config, replacing the existing file
  // or...
  // Enable DWV to apply changes to APBS blacklist automatically

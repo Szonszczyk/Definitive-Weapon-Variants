@@ -125,11 +125,11 @@ export class ModsCompatibility
         if (this.modConfig.apbs.settingSelected.custom) this.APBSSetting = this.modConfig.apbs.settings.custom;
     }
 
-    public addToAPBSBlacklist(id: string, rarity: string, variantName: string): void 
+    public addToAPBSBlacklist(id: string, rarity: string, variantName: string, weaponShortname: string): void 
     {
         if (!this.modsEnabled.APBS) return;
         for (let i = 1; i < 8; i++) {
-            if (this.APBSSetting[i].includes(rarity) || this.modConfig.apbs.notAddVariantTypes.includes(variantName)) {
+            if (this.APBSSetting[i].includes(rarity) || this.modConfig.apbs.notAddVariantTypes.includes(variantName) || this.modConfig.apbs.notAddWeapons.includes(`${weaponShortname} ${variantName}`)) {
                 this.compatLayer.APBS.weaponBlacklist[`tier${i}Blacklist`].push(id);
             }
         }
