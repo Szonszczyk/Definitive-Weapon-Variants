@@ -54,12 +54,12 @@ export class TraderChanges
             this.Instance.database.traders[traderId].assort.loyal_level_items[newItemToAdd._id] = item.lvl ? item.lvl : lvlDefault;
             numItemsAdded++;
         }
-
-        this.Instance.logger.log(
-            `[${this.Instance.modName}] Database: Added ${numItemsAdded} items to trader assort.`,
-            LogTextColor.GREEN
-        );
-
+        if (this.Instance.debug) {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] Database: Added ${numItemsAdded} items to trader assort.`,
+                LogTextColor.GREEN
+            );
+        }
     }
 
     private removeItemFromTrader(itemTpl, traderID): void {

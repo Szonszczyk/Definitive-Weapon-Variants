@@ -50,13 +50,15 @@ export interface ConfigItem
         masterySections: {
             Name: string;
             Templates: string[];
-            Level2: number;
-            Level3: number;
         };
         addweaponpreset: boolean;
         weaponpresets: Preset[];
         addtoHallOfFame: boolean;
         addtoSpecialSlots: boolean;
+        additionalInfo: {
+            rarity: string;
+            contributesToQuestsAsWeapon: string;
+        }
     };
     };
 }
@@ -94,6 +96,70 @@ export interface VoiceConfig
     };
 }
 
+// Added interfaces
+
+export interface WeaponClones {
+    [key: string]: string[];
+}
+
+export interface WeaponDescription {
+    [key: string]: string;
+}
+
+export interface VariantType
+{
+    [variantName: string]: {
+        Description: string,
+        Explanation: string,
+        ShortName: string,
+        props: any,
+        additionalChanges: any,
+        quests: {
+            id: string,
+            description: string
+        },
+        Weapons: string[],
+        ID: string,
+        rarity: string
+    };
+}
+
+export function findPresetsWithEncyclopedia(
+    obj: Record<string, Preset>,
+    searchString: string
+): Preset[] {
+    return Object.values(obj).filter(
+        preset => preset._encyclopedia === searchString
+    );
+}
+
+export interface Slot
+{
+    _id: string,
+    _mergeSlotWithChildren: boolean,
+    _name: string,
+    _parent: string,
+    _props: {
+        filters: [ { Filter: string[], Shift: number } ]
+    },
+    _proto: string,
+    _required: boolean
+}
+
+export function findSlotWithName(
+    slots: Slot[],
+    searchString: string
+): Slot {
+    return slots.filter(slot => slot._name === searchString)[0];
+}
+
+export function findItemWithSlotId(
+    items: Item[],
+    searchString: string
+): Item {
+    return items.filter(item => item.slotId === searchString)[0];
+}
+
 // Traders and Task related items
 
 //#region Enums
@@ -106,14 +172,7 @@ export enum traderIDs
     PRAPOR = "54cb50c76803fa8b248b4571",
     JAEGAR = "5c0647fdd443bc2504c2d371",
     RAGMAN = "5ac3b934156ae10c4430e83c",
-    FENCE = "579dc571d53a0658a154fbec",
-    GOBLINKING = "GoblinKing",
-    CONDUCTOR = "Conductor",
-    COURIER = "Courier",
-    CROW = "Crow",
-    WOLF = "Wolf",
-    JUNKDEALER = "JunkDealer",
-    WTTDATABASE = "WTTDatabase"
+    FENCE = "579dc571d53a0658a154fbec"
 }
 
 export enum currencyIDs 

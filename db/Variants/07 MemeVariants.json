@@ -1,0 +1,135 @@
+{
+    "Fullburst": {
+		"Description": "The trigger is broken and can get stuck, causing the entire magazine to unload with a single pull—or not, as it might jam in the meantime. Fullburst, but only sometimes",
+		"Explanation": "Weapon variant with a 100-round burst fire mode only, featuring reduced fire rate and recoil, but with an increased chance of jamming due to higher heat buildup",
+		"ShortName": "Fullburst",
+		"props": {
+			"weapFireType": [
+				"burst"
+			],
+			"bFirerate": 450,
+			"RecoilForceBack": "-20%",
+			"RecoilForceUp": "-20%",
+			"RecoilDampingHandRotation": "-20%",
+		    "RecoilReturnSpeedHandRotation": "-20%",
+			"BurstShotsCount": 100,
+			"HeatFactorByShot": "+100%"
+		},
+		"Weapons": [
+			"M4A1", "SA-58", "AK-74M", "SKS", "VSK-94",
+			"AK-103", "DT MDR 5.56x45", "MCX SPEAR", "MP9", "MP9-N",
+			"PP-9 Klin", "AKS-74UB", "AKS-74UN", "AKMN", "AKMS",
+			"Glock 18C", "SR-3M"
+		],
+		"ID": "0701",
+		"rarity": "Meme"
+	},
+	"Laser": {
+    	"Description": "If your goal isn't to kill your enemies but to seriously injure them, this is the perfect weapon for you. Just don't expect it to actually shoot lasers",
+    	"Explanation": "Bootleg of the PPSh-41 gun, but in addition it offers an exceptionally high fire rate, low recoil, and immunity to malfunctions",
+    	"ShortName": "Laser",
+    	"props": {
+    		"ammoCaliber": "Caliber762x25TT",
+    		"SingleFireRate": "+200%",
+			"bFirerate": "+200%",
+    		"weapFireType": [ "fullauto" ],
+    		"DurabilityBurnRatio": "-100%",
+    		"RecoilForceBack": "-70%",
+			"RecoilForceUp": "-70%",
+			"RecoilCamera": "-60%",	
+			"AllowJam": false,
+			"AllowFeed": false,
+			"AllowMisfire": false,
+			"AllowSlide": false
+    	},
+    	"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "571a12c42459771f627b58a0"
+        	},
+        	"Slots": {
+			    "mod_magazine": "5ea03f7400685063ec28bfa8"
+			},
+			"minimum": {
+				"bFirerate": 600
+			}
+		},
+		"quests": {
+    		"id": "5ea03f7400685063ec28bfa8"
+    	},
+		"Weapons": [
+			"MCX", "TX-15 DML", "VSK-94", "Vector 9x19", "MCX SPEAR",
+			"Mk-18", "ASh-12", "RSASS", "AK-74N", "AK-101"
+		],
+		"ID": "0702",
+        "rarity": "Meme"
+    },
+    "Broken": {
+    	"Description": "Oh, that weapon is broken!",
+    	"Explanation": "Weapon variant that suffers massive durability damage with each shot and has a very high chance of mechanical malfunction",
+    	"ShortName": "Broken",
+    	"props": {
+    		"BaseMalfunctionChance": "+5000%",
+    		"DurabilityBurnRatio": "+5000%",
+    		"AllowMisfire": false
+    	},
+		"Weapons": [
+			"M4A1", "SA-58", "AK-74M", "SKS", "VSK-94",
+			"AK-103", "DT MDR 5.56x45", "MCX SPEAR", "MP9", "MP9-N",
+			"PP-9 Klin", "AKS-74UB", "AKS-74UN", "AKMN", "AKMS",
+			"Glock 18C", "VPO-136", "AK-101", "UZI PRO SMG", "AA-12 Gen 1",
+			"MP-43 sawed-off"
+		],
+		"ID": "0703",
+        "rarity": "Meme"
+    },
+    "No-Scope": {
+    	"Description": "Do a 360 headshot with this!",
+    	"Explanation": "Weapon variant missing scope slot",
+    	"ShortName": "No-Scope",
+    	"props": {
+    	},
+    	"additionalChanges": {
+    		"Slots": {
+    			"mod_scope": []
+    		}
+    	},
+		"Weapons": [
+			"G36", "ASh-12", "DT MDR 5.56x45", "DT MDR 7.62x51", "Vector 9x19",
+			"Vector .45", "RSASS"
+		],
+		"ID": "0704",
+        "rarity": "Meme"
+    },
+	"Tornado": {
+		"Description": "Objective: Spin in a specific motion to try to kill enemies",
+    	"Explanation": "Weapon variant with full-auto fire only, insane vertical recoil, and no stabilization point",
+    	"ShortName": "T0RN2D0",
+		"props": {
+			"weapFireType": [ "fullauto" ],
+			"bFirerate": "+200%",
+			"RecoilForceUp": "+1500%",
+			"RecoilStableIndexShot": 100,
+			"HeatFactorByShot": 0,
+			"RecolDispersion": 60
+    	},
+		"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "59d6088586f774275f37482f"
+        	},
+    		"Slots": {
+			    "mod_magazine": "6513ef33e06849f06c0957ca"
+			},
+			"minimum": {
+				"bFirerate": 450
+			}
+    	},
+		"quests": {
+    		"id": "6513ef33e06849f06c0957ca"
+    	},
+		"Weapons": [
+			"SA-58", "Saiga-12K", "AK-74M", "RSASS", "Mk47"
+		],
+		"ID": "0705",
+        "rarity": "Meme"
+	}
+}

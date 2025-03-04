@@ -1,0 +1,200 @@
+{
+    "Automatic": {
+		"Description": "The fire selector is stuck on a non-existent setting",
+		"Explanation": "Weapon variant with only a full-auto fire mode, featuring an increased fire rate but reduced ergonomics",
+		"ShortName": "Auto",
+		"props": {
+			"weapFireType": [
+				"fullauto"
+			],
+			"bFirerate": "+10%",
+			"Ergonomics": "-15%"
+		},
+		"additionalChanges": {
+			"minimum": {
+				"bFirerate": 450
+			},
+			"Saiga-12K": {
+				"shotgunDispersion": 1
+			}
+		},
+		"Weapons": [
+			"TX-15 DML", "G28", "M1A", "Mk-18", "RSASS",
+			"SR-25", "SVDS", "OP-SKS", "RFB", "SAG AK",
+			"SAG AK Short", "VPO-101", "VPO-209", "ADAR 2-15", "STM-9",
+			"FN 5-7", "M9A3", "M45A1", "PL-15", "TT",
+			"Desert Eagle L5 .357", "Desert Eagle Mk XIX", "Saiga-12K", "Glock 17"
+		],
+		"ID": "0201",
+		"rarity": "Meta"
+	},
+	"Marksman": {
+		"Description": "To combat the high prices of ammunition, this weapon has been modified to remove its full-auto fire mode. As a result, it now excels in medium-distance engagements",
+		"Explanation": "Weapon variant with the fire mode changed to Single/Burst, featuring reduced recoil and no weapon malfunctions",
+		"ShortName": "Marksman",
+		"props": {
+			"weapFireType": [
+		        "single",
+		        "burst"
+		    ],
+		    "SingleFireRate": 400,
+		    "RecoilForceBack": "-30%",
+		    "RecoilForceUp": "-20%",
+		    "RecoilDampingHandRotation": "-30%",
+		    "RecoilReturnSpeedHandRotation": "-30%",
+		    "BurstShotsCount": 2,
+		    "AllowJam": false,
+			"AllowFeed": false,
+			"AllowMisfire": false,
+			"AllowSlide": false
+		},
+		"additionalChanges": {
+			"M60E6": {
+				"weapFireType": [ "single" ]
+			}
+		},
+		"Weapons": [
+			"MCX", "MCX SPEAR", "Mk47", "SA-58", "SCAR-H", 
+			"SCAR-L", "AK-12", "AK-74N", "AK-103", "DT MDR 7.62x51", 
+			"VSS", "P90", "M4A1", "AK-105", "AKM",
+			"ASh-12", "M60E6"
+		],
+		"ID": "0202",
+		"rarity": "Meta"
+	},
+	"Handy": {
+		"Description": "Due to changes in how you can hold the weapon, using it is now as natural as walking",
+		"Explanation": "Weapon variant with significantly enhanced ergonomics, allowing for improved handling, faster aim transitions, and reduced fatigue during prolonged use",
+		"ShortName": "Handy",
+		"props": {
+			"Ergonomics": "+25"
+		},
+		"additionalChanges": {
+			"minimum": {
+				"Ergonomics": 40
+			}
+		},
+		"Weapons": [
+			"T-5000M", "Mosin Sniper", "SV-98", "DVL-10", "AXMC",
+			"SCAR-H", "M700", "Mosin Infantry", "VPO-215", "PPSh-41",
+			"Vector .45", "AK-74", "AKMSN"
+		],
+		"ID": "0203",
+		"rarity": "Meta"
+	},
+	"Unbreakable": {
+		"Description": "Some famous guy from television used his miracle product to make this gun unbreakable\nNow you can throw it into the sand without worrying about jams\n~It even works underwater!~\nJust... maybe don't cut it in half",
+    	"Explanation": "Weapon variant immune to durability damage, overheating, and malfunctions",
+    	"ShortName": "Unbreakable",
+		"props": {
+			"DurabilityBurnRatio": 0,
+			"HeatFactorByShot": 0,
+			"AllowJam": false,
+			"AllowFeed": false,
+			"AllowMisfire": false,
+			"AllowSlide": false
+		},
+		"Weapons": [
+			"AS VAL", "VSS", "AVT-40", "M4A1", "PKP",
+			"MP5", "VPO-101"
+		],
+		"ID": "0204",
+		"rarity": "Meta"
+	},
+	"Karabin Spetsialniy": {
+		"Description": "The KS-23 'Special Carbine' is a shotgun officially designated as a carbine by the Russian military\nSo we made even more of them",
+    	"Explanation": "A shotgun variant chambered in 23x75mmR, featuring a special 12-round magazine and no interclip reload-for that true carbine experience!",
+    	"ShortName": "KS+23mm",
+		"props": {
+			"weapFireType": [ "burst" ],
+    		"BurstShotsCount": 1,
+			"bFirerate": 420
+		},
+		"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "5e848cc2988a8701445df1e8"
+        	},
+    		"Slots": {
+			    "mod_magazine": [ "61a68896f1d9538c1a5d181f" ]
+			},
+			"M3 Super 90": {
+				"weapFireType": [ "semiauto" ]
+			}
+    	},
+		"quests": {
+    		"id": "5e848cc2988a8701445df1e8"
+    	},
+		"Weapons": [
+			"M3 Super 90", "590A1", "M870", "MP-133", "MP-153",
+			"MP-155" 
+		],
+		"ID": "0205",
+		"rarity": "Meta"
+	},
+	"Assault Rifle": {
+		"Description": "\"I want a refund! This weapon is way too big for me! B-but I like the caliber. Can you get me something smaller that can fit in my handbag?\"",
+		"Explanation": "Pistol chambered in 5.56x45mm NATO, compatible with all M4A1 magazines",
+		"ShortName": "AR",
+		"props": {
+			"weapFireType": [ "single", "burst", "fullauto" ],
+			"BurstShotsCount": 3,
+			"bFirerate": 750,
+			"HeatFactorByShot": "-40%"
+		},
+		"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "5447a9cd4bdc2dbd208b4567"
+        	},
+    		"Slots": {
+			    "mod_magazine": "5447a9cd4bdc2dbd208b4567"
+			}
+    	},
+		"quests": {
+    		"id": "5447a9cd4bdc2dbd208b4567"
+    	},
+		"Weapons": [
+			"PM(t)", "APB", "MP-443 Grach", "P226R", "TT Gold",
+			"M9A3", "PL-15", "M45A1", "M1911A1", "Desert Eagle L5 .50 AE"
+		],
+		"ID": "0206",
+		"rarity": "Meta"
+	},
+	"Endless": {
+		"Description": "Do you really need 250 or even 400 rounds in one raid? Probably not\nBut this weapon was built differently… so here we are",
+		"Explanation": "Weapon variant with a magazine that's heavy and bulky, but incredibly spacious",
+		"ShortName": "Endless",
+		"props": {
+			"HeatFactorByShot": "-33%",
+			"BaseMalfunctionChance": "-33%"
+		},
+		"additionalChanges": {
+    		"Slots": {
+			    "mod_magazine": [{
+			    	"basedOn": "weapClass",
+			    	"variants": {
+			    		"assaultRifle": [
+							"2a5fc2e3ceed69119e174f24"
+						],
+						"smg": [
+							"d43dadc0c35611c82c0a3803"
+						],
+						"marksmanRifle": [
+							"2a5fc2e3ceed69119e174f24"
+						],
+						"assaultCarbine": [
+							"2a5fc2e3ceed69119e174f24"
+						]
+			    	}
+			    }]
+			}
+    	},
+		"Weapons": [
+			"SA-58", "RFB", "RSASS", "AKM", "RD-704",
+			"OP-SKS", "AUG A3", "M4A1", "TX-15 DML", "P90", 
+			"STM-9", "Vector 9x19", "MPX", "Vector .45", "UMP 45",
+			"MP7A2"
+		],
+		"ID": "0207",
+		"rarity": "Meta"
+	}
+}

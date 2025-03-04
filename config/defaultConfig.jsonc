@@ -1,80 +1,191 @@
 {
- // Config of Szonszczyk - Definitive Weapon Variants
+ // Config of Szonszczyk - Definitive Weapon Variants (DWV)
 
- // In here you can adjust how you want to get Weapon Variants in game
- // Save it as "config.jsonc" after changing anything to not loose your config after update!
+ // In here you can adjust how you want to get weapon variants in game
+ // Make a copy, and save it as "config.jsonc" after changing anything to not lose your config after update!
 
- // ### 1. Airdrop
- // You can choose which rarity of Weapon Variants you can find in airdrop
- // Note: Allowing Weapon Variants to spawn in airdrop will basically remove all other weapons from airdrop (because of sheer number of weapons in this mod)
+ // ### 1.1. Airdrop
+ // You can choose which rarity of weapon variants you can find in airdrop
 
- "aidrop": {
- 	"allowOPWeapons": false,
- 	"allowMetaWeapons": true,
- 	"allowDecentWeapons": true,
- 	"allowBaseWeapons": true,
- 	"allowScavWeapons": true,
- 	"allowMemeWeapons": true
+ "airdrop": {
+	// Example: Move "Meta" from "enable" to "blacklist" to remove Meta variant rarity
+	"enable": [ "Decent", "Gimmick", "Base", "Scav", "Meme" ],
+	"blacklist": [ "OP", "Meta" ]
  },
 
- // ### 2. Fence
- // You can add some weapons to Fence blacklist to not see them in Fence
- // This will remove blacklisted items from Flea Market as well
- // To this to work correctly, mod "ServerValueModifier"(SVM) should be loaded BEFORE Weapon Variants (Note: SVM is replacing whole Fence blacklist when corresponding setting is enabled)
+ // ### 1.2. Fence
+ // You can choose which rarity of weapon variants you can find on Fence
+ // Warning: You will see sometimes variants without magazine/barrel that can't be bought anywhere
+ // For this to work correctly, mod "ServerValueModifier"(SVM) should be loaded BEFORE Weapon Variants (Note: SVM is replacing whole Fence blacklist when corresponding setting is enabled)
 
- "fenceBlacklist": {
- 	"blacklistOPWeapons": true,
-	"blacklistMetaWeapons": true,
-	"blacklistDecentWeapons": true,
-	"blacklistBaseWeapons": true,
-	"blacklistScavWeapons": false,
-	"blacklistMemeWeapons": false
+ "fence": {
+	"enable": [ "Scav", "Meme" ],
+	"blacklist": [ "OP", "Meta", "Decent", "Gimmick", "Base" ]
  },
 
- // ### 3. Flea market
- // You can remove Weapon Variants based on rarity from being sold on flea market
+ // ### 1.3. Flea Market
+ // You can choose which rarity of Weapon Variants you can find on the Flea Market
+ // If "enable" is empty, no weapon variants will appear on the Flea Market
 
- "fleaBlacklist": {
- 	"blacklistOPWeapons": true,
-	"blacklistMetaWeapons": true,
-	"blacklistDecentWeapons": true,
-	"blacklistBaseWeapons": true,
-	"blacklistScavWeapons": true,
-	"blacklistMemeWeapons": true
+ "flea": {
+	"enable": [  ],
+	"blacklist": [ "OP", "Meta", "Decent", "Gimmick", "Base", "Scav", "Meme" ]
  },
 
- // ### 4. Using mod by AcidPhantasm - Progressive Bot System (APBS)
- // tl;dr Copy lines from APBS-blacklist settings.txt marked as "progressive" and replace them in "weaponBlacklist" in file (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.json), change apbsBlacklist.progressive in below config to true.
+ // ### 1.4. Remove variant types from generation
+ // Add name of variant type ("Laser"/"SMG" etc.) to below array to exclude it from generation
+ // This may cause issues with your profile if you already have a weapon of this variant type in your inventory
+ 
+ "notGenerateVariantTypes": [],
 
- // If you want to have your enemies to spawn with Weapon Variants you can use this mod.
- // Link: https://hub.sp-tarkov.com/files/file/2180-apbs-acid-s-progressive-bot-system/#overview
- // You need only to change a few things in a config (SPT\user\mods\acidphantasm-progressivebotsystem\config\config.json):
+ // ### 1.5. Remove specific weapons from generation
+ // Add short name with variant name (from db/Variants, e.g. "AKM Meta") to exclude it from generation
+ // This may cause issues with your profile if this weapon is already in your inventory
+ 
+ "notGenerateWeapons": [],
 
- // Enable setting to add modded weapons to bots.
- // To this to work, APBS should be loaded AFTER Weapon Variants (Note: APBS is loading only weapons from mods that are already loaded)
- // "enableModdedWeapons": true,
+ // ### 1.6. Remove specific rarity from generation
+ // Add rarity name (e.g. "Meme") to exclude it from generation
+ // This may cause issues with your profile if weapon from this rarity is already in your inventory
 
- // Lower modded weapon weight. I use 10% of the original (below values) and still get them quite usually:
- // "pmcWeaponWeights": 0.8,
- // "scavWeaponWeights": 0.1,
- // "followerWeaponWeights": 0.6,
+ "notGenerateRarity": [],
 
- // Add some Meta/OP weapons to Weapon Blacklist. You can just replace "weaponBlacklist.tierXBlacklist" using provided ones in "APBS-blacklist settings.txt".
- // Not doing so, you can find veeery OP weapons, with luck of course, even on scavs. This setting depends on what you want from the game. I will not judge you.
+ // #### MODS COMPATIBILITY ####
 
- // After replacing weapon blacklist you can change below setting to have information which weapons can be found on enemies:
+ // ### 2.1. Using mod by AcidPhantasm - Progressive Bot System (APBS)
  "apbs": {
- 	// Change only one of below lines to true matching what you copied to weapon blacklist
- 	"allowAllWeapons": false,
- 	"allowOnlyBaseWeapons": false, // Base and below!
- 	"progressive": false // is adding all weapons for bots, but unlocks them by bot level - RECOMMENDED
+ // If you want your enemies to spawn with weapon variants, APBS is the mod you need
+ // Link: https://hub.sp-tarkov.com/files/file/2180-apbs-acid-s-progressive-bot-system/#overview
+ // Ensure that APBS is loaded after DWV in the mod load order
+
+ // ## First setup of APBS config:
+ // Make sure that this is correct folder name for APBS:
+	"apbsName": "acidphantasm-progressivebotsystem",
+ // Open SPT/user/mods/acidphantasm-progressivebotsystem/APBSConfig.exe
+ // General Config => Mod Import => Modded Weapon => Set to 'True'
+ //                                 Set 'PMC/Scav/Guard Weapon Weights' to '1'. You can lower this value in config/config.json, but note that setting it to a float (e.g., 0.1) will break APBSConfig.exe
+ //                                 Set 'Tier Appearance Level' to '1' if using progressive mode; otherwise, leave it at '3'
+
+ // ## APBS blacklist:
+ // If you want to prevent OP weapons from appearing on low-level enemies, you can adjust the APBS blacklist
+ // Change settings:
+ // Set one of the following options to 'true' to use it as the base for generating the blacklist
+ 	"settingSelected": {
+		"custom": false, // make your own => settings.custom
+		"progressive": false, // is adding all weapons for bots, but unlocks them by bot level - RECOMMENDED if not using The Gambler
+		"allWeapons": false, // is adding all weapons for bots
+		"onlyBaseWeapons": false // is adding only base and below rarity - RECOMMENDED if using The Gambler
+	},
+ // To add weapons from other mods to the APBS blacklist, list them here (id). They will be added to generated blacklists.json and included in automatic updates
+	"blacklistOtherWeapons": {
+		"tier1Blacklist": [],
+		"tier2Blacklist": [],
+		"tier3Blacklist": [],
+		"tier4Blacklist": [],
+		"tier5Blacklist": [],
+		"tier6Blacklist": [],
+		"tier7Blacklist": []
+	},
+ // Other blacklists will be copied from blacklists.json file from APBS
+ // To exclude specific weapon variant types (e.g., "Laser", "SMG") from being added to APBS bots, list them below. This will blacklist them regardless of other settings
+	"notAddVariantTypes": [],
+ // You can exclude weapons too
+	"notAddWeapons": ["Blicky AMR", "Blicky R.Grenade"],
+ // Run the server once, then copy the generated blacklists.json from this mod's config folder to acidphantasm-progressivebotsystem/config, replacing the existing file
+ // or...
+ // Enable DWV to apply changes to APBS blacklist automatically
+ // Make backup of APBS blacklist file (acidphantasm-progressivebotsystem/config/blacklists.json) before enabling!
+ // You'll need to restart server twice each time you ma;e a change (unfortunately :< )
+	"automaticUpdate": {
+		"enabled": false // change to true if you want to enable it
+	},
+	
+ // Settings of blacklist generation, please make only changes to custom one
+	"settings": {
+		"custom": {
+			// "OP" in "1" means lvl 1 enemies won't be spawning with "OP" rarity variants
+			"1": ["OP", "Meta", "Decent", "Gimmick", "Base", "Scav", "Meme"],
+			"2": [],
+			"3": [],
+			"4": [],
+			"5": [],
+			"6": [],
+			"7": []
+		},
+		"progressive": {
+			"1": ["OP", "Meta", "Decent", "Gimmick", "Base", "Scav"],
+			"2": ["OP", "Meta", "Decent", "Gimmick", "Base"],
+			"3": ["OP", "Meta", "Decent", "Gimmick"],
+			"4": ["OP", "Meta", "Decent"],
+			"5": ["OP", "Meta"],
+			"6": ["OP"],
+			"7": []
+		},
+		"allWeapons": {
+			"1": [],
+			"2": [],
+			"3": [],
+			"4": [],
+			"5": [],
+			"6": [],
+			"7": []
+		},
+		"onlyBaseWeapons": {
+			"1": ["OP", "Meta", "Decent", "Gimmick"],
+			"2": ["OP", "Meta", "Decent", "Gimmick"],
+			"3": ["OP", "Meta", "Decent", "Gimmick"],
+			"4": ["OP", "Meta", "Decent", "Gimmick"],
+			"5": ["OP", "Meta", "Decent", "Gimmick"],
+			"6": ["OP", "Meta", "Decent", "Gimmick"],
+			"7": ["OP", "Meta", "Decent", "Gimmick"]
+		}
+	}
  },
 
- // ### 5. Using mod by Hood - The Gambler
+ // ### 2.2. Using mod by Hood - The Gambler
+"theGambler": {
+ // If you want to gamble for weapon variants, this is the mod for you
+ // Link: https://hub.sp-tarkov.com/files/file/2013-gambler-trader/#overview
+ // Ensure that The Gambler is loaded after DWV in the mod load order
+ // You can add weapons to The Gambler's weapon mystery box presets manually or automatically using this config file
 
- // Mod is not updated to 3.10 so below setting is not working
+ // Manual changing of The Gambler weapon mystery box presets:
+ // Enable mod compatibility
+ 	"enabled": false,
+ // Make sure that this is correct folder name for The Gambler
+	"gamblerName": "zzzGamblerTrader",
+ // Add name of variant type ("Laser"/"SMG" etc.) to below array to exclude it from being added to The Gambler presets
+	"notAddVariantTypes": [],
+ // Run the server once, then copy the generated Weapons.ts from this mod's config folder to TheGambler/src/containers, replacing the existing file
+ // or...
+ // Enable DWV to make changes to The Gambler TheGambler/src/containers/Weapons.ts file automatically
+ // WARNING: if this is enabled and something broke in Weapons.ts file, you MUST reach out to author of this mod
+	"automaticUpdate": {
+		"enabled": false
+	}
+ },
 
- "theGambler": {
- 	"enabled": false
- }
+ // #### OTHER ####
+
+ // This is just the config version-nothing fancy
+ "version": 2,
+
+ // Set this to false if you don't want to use caching and are making changes to variants each time the server starts
+ "useCache": true
+
+ // #### DETAILED EXPLANATION ABOUT MODS COMPATIBILITY
+
+ // If you make changes to files located in:
+ // - db/Variants
+ // - db/Items
+ // Or to the config file:
+ // - config/config.jsonc
+ 
+ // In the past hour and have enabled compatibility with mods, DWV will check files in mod folders if any changes are necessary
+ // If file that was found in mod folder is different then the generated file, message about it will apear in console
+ // If you have enabled automatic updates, you will receive info in red-restart server one more time or if you see info in cyan (light blue),
+ //   you need to move file stated in console message to location stated in console message and replace file
+
+ // ... or if you removed db/Cache/generatedWeapons.json
+ // DWV will generate this file again
 }
