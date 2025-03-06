@@ -60,12 +60,12 @@ export class WeaponGeneration
             if (weapons.length == 0) {
                 this.Instance.logger.log(
                     `[${this.Instance.modName}] weaponGeneration.generateWeapons: Variant type '${variantName}' do not have any weapons attached to it. Skipping`,
-                    LogTextColor.RED
+                    LogTextColor.YELLOW
                 );
             }
             if (weapons.length !== new Set(weapons).size) {
                 this.Instance.logger.log(
-                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Variant type '${variantName}' have duplicates. Skipping generating of whole variant type`,
+                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Variant type '${variantName}' have duplicates. Skipping generation of whole variant type`,
                     LogTextColor.RED
                 );
                 weapons = [];
@@ -73,6 +73,7 @@ export class WeaponGeneration
             for(const weaponShortname of weapons) {
                 const variantShortName = `${weaponShortname} ${variant.ShortName}`;
                 const copiedWeaponId = ShortNames[weaponShortname];
+                const copiedItem = this.Instance.database.templates.items[copiedWeaponId];
                 let allowGeneration = true;
                 if (!copiedWeaponId) {
                     this.Instance.logger.log(
@@ -81,12 +82,18 @@ export class WeaponGeneration
                     );
                     allowGeneration = false;
                 }
+                if (!copiedItem) {
+                    this.Instance.logger.log(
+                        `[${this.Instance.modName}] weaponGeneration.generateWeapons: Base weapon '${weaponShortname}/${copiedWeaponId}' not found. Skipping`,
+                        LogTextColor.YELLOW
+                    );
+                    allowGeneration = false;
+                }
                 // allow users to blacklist specific variant or variant type from generating
                 if (this.modConfig.notGenerateWeapons.includes(variantShortName) || this.modConfig.notGenerateVariantTypes.includes(variantName) || this.modConfig.notGenerateRarity.includes(variant.rarity)) {
                     allowGeneration = false;
                 }
                 if (allowGeneration) {
-                    const copiedItem = this.Instance.database.templates.items[copiedWeaponId];
                     const copiedItemHandbook = this.Instance.database.templates.handbook.Items.filter(item => item.Id === copiedWeaponId)[0];
                     const copiedItemName = this.Instance.database.locales.global.en[`${copiedWeaponId} Name`];
                     if (!weaponsIds[weaponShortname]) {
@@ -242,13 +249,13 @@ export class WeaponGeneration
         ];
 
         for (const prop in variant.props) {
-			let oldWeaponPropValue = copiedItem._props[prop];
-			//check minimum values
-			if (variant.additionalChanges?.minimum?.[prop]) {
-				if (oldWeaponPropValue < variant.additionalChanges["minimum"][prop]) {
-					oldWeaponPropValue = variant.additionalChanges["minimum"][prop];
-				}
-			}
+            let oldWeaponPropValue = copiedItem._props[prop];
+            //check minimum values
+            if (variant.additionalChanges?.minimum?.[prop]) {
+                if (oldWeaponPropValue < variant.additionalChanges["minimum"][prop]) {
+                    oldWeaponPropValue = variant.additionalChanges["minimum"][prop];
+                }
+            }
 
             //fix for firemode and other props that are objects/arrays
             let newValue: any;
@@ -257,15 +264,15 @@ export class WeaponGeneration
             } else {
                 newValue = variant.props[prop];
             }
-			//made additional changes according to variant
-			if (variant.additionalChanges && variant.additionalChanges[weaponShortname] && variant.additionalChanges[weaponShortname][prop]) {
+            //made additional changes according to variant
+            if (variant.additionalChanges && variant.additionalChanges[weaponShortname] && variant.additionalChanges[weaponShortname][prop]) {
                 if (this.Instance.debug) {
                     console.log(`Changing property of ${weaponShortname} ${variant.ShortName} / ${variant.additionalChanges[weaponShortname][prop]}`);
                 }
-				newValue = variant.additionalChanges[weaponShortname][prop];
-			}
-			itemConfig[id].overrideProperties[prop] = integerProps.includes(prop) ? Math.ceil(newValue) : newValue;
-		}
+                newValue = variant.additionalChanges[weaponShortname][prop];
+            }
+            itemConfig[id].overrideProperties[prop] = integerProps.includes(prop) ? Math.ceil(newValue) : newValue;
+        }
     }
 
     private calculateValue(first: number, second: string | number): number {
@@ -286,7 +293,6 @@ export class WeaponGeneration
         }
     }
 
-
     private addPreset(
         itemConfig: ConfigItem,
         id: string,
@@ -296,12 +302,19 @@ export class WeaponGeneration
         ids: string[]
     ): void {
         const preset = findPresetsWithEncyclopedia(this.Instance.database.globals.ItemPresets, copiedItem._id)[0];
-		if (!preset) console.log(`Preset not found for ${copiedItem._id}`);
-		const defaultPreset = structuredClone(preset);
+        if (!preset) {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] WeaponGeneration.addPreset: Preset not found for '${copiedItem._id}'. Skipping...`,
+                LogTextColor.YELLOW
+            );
+            itemConfig[id].addweaponpreset = false;
+            return;
+        }
+        const defaultPreset = structuredClone(preset);
         defaultPreset._encyclopedia = id;
-        const oldId = defaultPreset._items[0]._id
+        const oldId = defaultPreset._items[0]._id;
         defaultPreset._id = ids[1];
-        defaultPreset._parent = ids[2]
+        defaultPreset._parent = ids[2];
         defaultPreset._items[0] = {
             _id: ids[2],
             _tpl: id,
@@ -316,10 +329,10 @@ export class WeaponGeneration
         defaultPreset._changeWeaponName = false;
         defaultPreset._name = `${weaponShortname} ${variant.ShortName} Variant Default Preset`;
 
-		if (variant.props["weapFireType"]) {
-			defaultPreset._items[0].upd.FireMode.FireMode = variant.props["weapFireType"][0];
-		}
-		itemConfig[id].weaponpresets.push(defaultPreset);
+        if (variant.props["weapFireType"]) {
+            defaultPreset._items[0].upd.FireMode.FireMode = variant.props["weapFireType"][0];
+        }
+        itemConfig[id].weaponpresets.push(defaultPreset);
     }
 
     private changeAdditionalPropertiesSlots(
@@ -330,7 +343,7 @@ export class WeaponGeneration
         variant: VariantType
     ): void {
         //made additional changes based on "additionalChanges" property from variant object
-		//this is after creating preset because we need to change some preset parts according to variant
+        //this is after creating preset because we need to change some preset parts according to variant
         if (variant.additionalChanges?.Slots || variant.additionalChanges?.[weaponShortname]?.Slots) {
             let slotsOriginal = structuredClone(copiedItem._props.Slots);
             let slots = structuredClone(variant.additionalChanges?.Slots ? variant.additionalChanges.Slots : variant.additionalChanges?.[weaponShortname]?.Slots);
