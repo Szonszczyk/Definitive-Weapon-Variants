@@ -37,14 +37,14 @@ export class WeaponGeneration
         this.modsCompatibility.preSptLoad(this.Instance, config, this.loadFromCache);
     }
 
-    public generateWeapons(): { any: any } {
-
+    public generateWeapons(): { any: any }
+    {
         const generatedItems: any = {};
-        const skippedItems: string[] = [];
+        let skippedItems: number = 0;
         if (this.loadFromCache) {
             const weaponsFromCache = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/Cache/generatedWeapons.json"), "utf-8", (err) => {}));
             Object.assign(generatedItems, weaponsFromCache);
-            this.logWeapons(generatedItems, "Loaded from cache", []);
+            this.logWeapons(generatedItems, "Loaded from cache", 0);
             return generatedItems;
         }
         const weaponDescriptions = this.createWeaponDescriptions();
@@ -53,138 +53,114 @@ export class WeaponGeneration
         for (const variantName in this.variantTypes) {
             const variant = this.variantTypes[variantName];
             const rarity = raritySettings[variant.rarity];
-            let weapons = variant.Weapons ? variant.Weapons : [];
+            const weapons = this.checkWeaponsInVariant(variant.Weapons, variantName, variant);
+            skippedItems += variant.Weapons.length - weapons.length;
             const weaponsNamesInVariant = weapons.join(" | ");
+
             if (!variantIds[variantName]) variantIds[variantName] = {};
             const weaponsIds = variantIds[variantName];
-            if (weapons.length == 0) {
-                this.Instance.logger.log(
-                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Variant type '${variantName}' do not have any weapons attached to it. Skipping`,
-                    LogTextColor.RED
-                );
-            }
-            if (weapons.length !== new Set(weapons).size) {
-                this.Instance.logger.log(
-                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Variant type '${variantName}' have duplicates. Skipping generating of whole variant type`,
-                    LogTextColor.RED
-                );
-                weapons = [];
-            }
+
+            
             for(const weaponShortname of weapons) {
                 const variantShortName = `${weaponShortname} ${variant.ShortName}`;
                 const copiedWeaponId = ShortNames[weaponShortname];
-                let allowGeneration = true;
-                if (!copiedWeaponId) {
+                const copiedItem = this.Instance.database.templates.items[copiedWeaponId];
+                const copiedItemHandbook = this.Instance.database.templates.handbook.Items.filter(item => item.Id === copiedWeaponId)[0];
+                const copiedItemName = this.Instance.database.locales.global.en[`${copiedWeaponId} Name`];
+                if (!weaponsIds[weaponShortname]) {
+                    weaponsIds[weaponShortname] = [];
+                }
+                const ids = weaponsIds[weaponShortname];
+                if (ids.length == 0) {
                     this.Instance.logger.log(
-                        `[${this.Instance.modName}] weaponGeneration.generateWeapons: Shortname '${weaponShortname}' missing in 'references/shortNames' file. Skipping`,
-                        LogTextColor.RED
+                        `[${this.Instance.modName}] weaponGeneration.generateWeapons: Generating mongoids for '${variantShortName}'`,
+                        LogTextColor.GREEN
                     );
-                    allowGeneration = false;
+                    saveIds = true;
+                    for(let i = 0; i < 5; i++) {
+                        ids.push(this.hashUtil.generate())
+                    }
                 }
-                // allow users to blacklist specific variant or variant type from generating
-                if (this.modConfig.notGenerateWeapons.includes(variantShortName) || this.modConfig.notGenerateVariantTypes.includes(variantName) || this.modConfig.notGenerateRarity.includes(variant.rarity)) {
-                    allowGeneration = false;
-                }
-                if (allowGeneration) {
-                    const copiedItem = this.Instance.database.templates.items[copiedWeaponId];
-                    const copiedItemHandbook = this.Instance.database.templates.handbook.Items.filter(item => item.Id === copiedWeaponId)[0];
-                    const copiedItemName = this.Instance.database.locales.global.en[`${copiedWeaponId} Name`];
-                    if (!weaponsIds[weaponShortname]) {
-                        weaponsIds[weaponShortname] = [];
-                    }
-                    const ids = weaponsIds[weaponShortname];
-                    if (ids.length == 0) {
-                        this.Instance.logger.log(
-                            `[${this.Instance.modName}] weaponGeneration.generateWeapons: Generating mongoids for '${variantShortName}'`,
-                            LogTextColor.GREEN
-                        );
-                        saveIds = true;
-                        for(let i = 0; i < 5; i++) {
-                            ids.push(this.hashUtil.generate())
+
+                const id = ids[0];
+
+                const newWeapon: ConfigItem = {};
+                newWeapon[id] = {
+                    itemTplToClone: copiedWeaponId,
+                    overrideProperties: {
+                        BackgroundColor: this.colorConverterAPILoaded ? `${rarity.color}ff` : rarity.bgColor
+                    },
+                    parentId: copiedItem._parent,
+                    handbookParentId: copiedItemHandbook.ParentId,
+                    locales: {
+                        en: {
+                            name: `<b><color=${rarity.color}>${copiedItemName} ${variantName} Variant</color></b>`,
+                            shortName: variantShortName,
+                            description: [
+                                `<align="center">${variant.Description}`,
+                                ``,
+                                `<color=${rarity.color}><b>${variantName} Variant</b></color>`,
+                                `<i>${variant.Explanation}</i>`,
+                                `${weaponsNamesInVariant.replace(weaponShortname, `<b>${weaponShortname}</b>`)}`,
+                                ``,
+                                `<color=${rarity.color}><b>${rarity.starRating} ${variant.rarity} Quality ${rarity.starRating}</b></color>`,
+                                `<i>${rarity.flavour}</i>`,
+                                `<color=${rarity.color}>${rarity.description}`,
+                                `${weaponDescriptions[variant.rarity]}</color>`,
+                                `This weapon counts toward ${getShortNameById(ShortNames, variant.quests?.id) || "original"} weapon kills for quest completion</align>`
+                            ].join('\n')
                         }
+                    },
+                    fleaPriceRoubles: Math.ceil(copiedItemHandbook.Price * rarity.priceMultiplier * 2),
+                    handbookPriceRoubles: Math.ceil(copiedItemHandbook.Price * rarity.priceMultiplier),
+                    clearClonedProps: false,
+                    addtoInventorySlots: [],
+                    addtoModSlots: false,
+                    modSlot: [],
+                    ModdableItemWhitelist: "",
+                    ModdableItemBlacklist: "",
+                    addtoTraders: false,
+                    traderId: traderIDs.PEACEKEEPER,
+                    traderItems: [],
+                    barterScheme: [],
+                    loyallevelitems: 1,
+                    addtoBots: false,
+                    addtoStaticLootContainers: false,
+                    StaticLootContainers: "",
+                    Probability: 0,
+                    masteries: true,
+                    masterySections: {},
+                    addweaponpreset: true,
+                    weaponpresets: [],
+                    addtoHallOfFame: true,
+                    addtoSpecialSlots: false,
+                    additionalInfo: {
+                        rarity: variant.rarity,
+                        variantType: variantName,
+                        contributesToQuestsAsWeapon: variant?.quests?.id ? variant.quests.id : ""
                     }
+                };
 
-                    const id = ids[0];
-
-                    const newWeapon: ConfigItem = {};
-                    newWeapon[id] = {
-                        itemTplToClone: copiedWeaponId,
-                        overrideProperties: {
-                            BackgroundColor: this.colorConverterAPILoaded ? `${rarity.color}99` : rarity.bgColor 
-                        },
-                        parentId: copiedItem._parent,
-                        handbookParentId: copiedItemHandbook.ParentId,
-                        locales: {
-                            en: {
-                                name: `<b><color=${rarity.color}>${copiedItemName} ${variantName} Variant</color></b>`,
-                                shortName: variantShortName,
-                                description: [
-                                    `<align="center">${variant.Description}`,
-                                    ``,
-                                    `<color=${rarity.color}><b>${variantName} Variant</b></color>`,
-                                    `<i>${variant.Explanation}</i>`,
-                                    `${weaponsNamesInVariant.replace(weaponShortname, `<b>${weaponShortname}</b>`)}`,
-                                    ``,
-                                    `<color=${rarity.color}>${weaponDescriptions[variant.rarity]}`,
-                                    `${rarity.explanation}</color>`,
-                                    `This weapon counts toward ${getShortNameById(ShortNames, variant.quests?.id) || "original"} weapon kills for quest completion</align>`
-                                ].join('\n')
-                            }
-                        },
-                        fleaPriceRoubles: Math.ceil(copiedItemHandbook.Price * rarity.priceMultiplier * 2),
-                        handbookPriceRoubles: Math.ceil(copiedItemHandbook.Price * rarity.priceMultiplier),
-                        clearClonedProps: false,
-                        addtoInventorySlots: [],
-                        addtoModSlots: false,
-                        modSlot: [],
-                        ModdableItemWhitelist: "",
-                        ModdableItemBlacklist: "",
-                        addtoTraders: false,
-                        traderId: traderIDs.PEACEKEEPER,
-                        traderItems: [],
-                        barterScheme: [],
-                        loyallevelitems: 1,
-                        addtoBots: false,
-                        addtoStaticLootContainers: false,
-                        StaticLootContainers: "",
-                        Probability: 0,
-                        masteries: true,
-                        masterySections: {},
-                        addweaponpreset: true,
-                        weaponpresets: [],
-                        addtoHallOfFame: true,
-                        addtoSpecialSlots: false,
-                        additionalInfo: {
-                            rarity: variant.rarity, 
-                            contributesToQuestsAsWeapon: variant?.quests?.id ? variant.quests.id : ""
-                        }
-                    };
-
-                    //add to mastery section - blame grenade launchers that do not have their own section
-                    if (!this.Instance.database.globals.config.Mastering.filter(item => item.Templates.includes(copiedWeaponId))[0]?.Name) {
-                        newWeapon[id].masteries = false;
-                    } else {
-                        newWeapon[id].masterySections = {
-                            "Name": this.Instance.database.globals.config.Mastering.filter(item => item.Templates.includes(copiedWeaponId))[0].Name,
-                            "Templates": [
-                                id
-                            ]
-                        }
-                    }
-
-                    this.addToInventorySlots(newWeapon, id, weaponShortname, copiedItem, variant);
-                    this.changeNormalProperties(newWeapon, id, weaponShortname, copiedItem, variant);
-                    this.addPreset(newWeapon, id, weaponShortname, copiedItem, variant, ids);
-                    this.changeAdditionalPropertiesSlots(newWeapon, id, weaponShortname, copiedItem, variant);
-                    this.changeAdditionalPropertiesChambers(newWeapon, id, weaponShortname, copiedItem, variant);
-
-                    this.modsCompatibility.addToAPBSBlacklist(id, variant.rarity, variantName, weaponShortname);
-                    this.modsCompatibility.createPresetForGambler(newWeapon[id].weaponpresets[0], ids, variant.rarity, variantName);
-
-                    Object.assign(generatedItems, newWeapon);
+                //add to mastery section - blame grenade launchers that do not have their own section
+                if (!this.Instance.database.globals.config.Mastering.filter(item => item.Templates.includes(copiedWeaponId))[0]?.Name) {
+                    newWeapon[id].masteries = false;
                 } else {
-                    skippedItems.push(`${weaponShortname} ${variant.ShortName}`);
+                    newWeapon[id].masterySections = {
+                        "Name": this.Instance.database.globals.config.Mastering.filter(item => item.Templates.includes(copiedWeaponId))[0].Name,
+                        "Templates": [
+                            id
+                        ]
+                    }
                 }
+
+                this.addToInventorySlots(newWeapon, id, weaponShortname, copiedItem, variant);
+                this.changeNormalProperties(newWeapon, id, weaponShortname, copiedItem, variant);
+                this.addPreset(newWeapon, id, weaponShortname, copiedItem, variant, ids);
+                this.changeAdditionalPropertiesSlots(newWeapon, id, weaponShortname, copiedItem, variant);
+                this.changeAdditionalPropertiesChambers(newWeapon, id, weaponShortname, copiedItem, variant);
+                this.modsCompatibility.addToAPBSBlacklist(id, variant.rarity, variantName, weaponShortname);
+                this.modsCompatibility.createPresetForGambler(newWeapon[id].weaponpresets[0], ids, variant.rarity, variantName);
+                Object.assign(generatedItems, newWeapon);
             }
         }
         this.logWeapons(generatedItems, "Generated", skippedItems);
@@ -193,6 +169,48 @@ export class WeaponGeneration
         this.modsCompatibility.saveGamblerPresets();
         fs.writeFileSync(path.join(__dirname, "../db/Cache/generatedWeapons.json"), JSON.stringify(generatedItems, null, 2));
         return generatedItems;
+    }
+
+    private checkWeaponsInVariant(weapons: string[], variantName: string, variant: VariantType): string[] {
+        if (this.modConfig.notGenerateVariantTypes.includes(variantName) || this.modConfig.notGenerateQuality.includes(variant.rarity)) return [];
+        if (!weapons || weapons.length == 0) {
+            // check for missing weapons property or blank array
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] weaponGeneration.generateWeapons: Variant type '${variantName}' do not have any weapons attached to it. Skipping whole variant type`,
+                LogTextColor.YELLOW
+            );
+            return [];
+        }
+        if (weapons.length !== new Set(weapons).size) {
+            // check for duplicates
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] weaponGeneration.generateWeapons: Variant type '${variantName}' have duplicates. Skipping whole variant type`,
+                LogTextColor.RED
+            );
+            return [];
+        }
+        const newWeapons: string[] = [];
+        for(const weaponShortname of weapons) {
+            const copiedWeaponId = ShortNames[weaponShortname];
+            const variantShortName = `${weaponShortname} ${variant.ShortName}`;
+            // check if base weapon is in the game
+            if (!copiedWeaponId) {
+                this.Instance.logger.log(
+                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Shortname '${weaponShortname}' missing in 'references/shortNames.ts' file. Skipping '${variantShortName}'`,
+                    LogTextColor.RED
+                );
+            } else 
+            if (!this.Instance.database.templates.items[copiedWeaponId]) {
+                this.Instance.logger.log(
+                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Base weapon '${weaponShortname}/${copiedWeaponId}' not found. Skipping '${variantShortName}'`,
+                    LogTextColor.YELLOW
+                );
+            } else
+            if (!this.modConfig.notGenerateWeapons.includes(variantShortName)) {
+                newWeapons.push(weaponShortname);
+            }
+        }
+        return newWeapons;
     }
 
     private addToInventorySlots(
@@ -238,18 +256,18 @@ export class WeaponGeneration
             "RecoilForceBack",
             "RecoilForceUp",
             "bFirerate",
-            "Ergonomics"
+            "Ergonomics",
+            "RecoilStableIndexShot"
         ];
-
         for (const prop in variant.props) {
-			let oldWeaponPropValue = copiedItem._props[prop];
-			//check minimum values
-			if (variant.additionalChanges?.minimum?.[prop]) {
-				if (oldWeaponPropValue < variant.additionalChanges["minimum"][prop]) {
-					oldWeaponPropValue = variant.additionalChanges["minimum"][prop];
-				}
-			}
-
+            let oldWeaponPropValue = copiedItem._props[prop];
+            //add check type of prop
+            //check minimum values
+            if (variant.additionalChanges?.minimum?.[prop]) {
+                if (oldWeaponPropValue < variant.additionalChanges["minimum"][prop]) {
+                    oldWeaponPropValue = variant.additionalChanges["minimum"][prop];
+                }
+            }
             //fix for firemode and other props that are objects/arrays
             let newValue: any;
             if (typeof variant.props[prop] === 'string' && /^[+-]\d+%?$/.test(variant.props[prop])) {
@@ -257,15 +275,15 @@ export class WeaponGeneration
             } else {
                 newValue = variant.props[prop];
             }
-			//made additional changes according to variant
-			if (variant.additionalChanges && variant.additionalChanges[weaponShortname] && variant.additionalChanges[weaponShortname][prop]) {
+            //made additional changes according to variant
+            if (variant.additionalChanges && variant.additionalChanges[weaponShortname] && variant.additionalChanges[weaponShortname][prop]) {
                 if (this.Instance.debug) {
                     console.log(`Changing property of ${weaponShortname} ${variant.ShortName} / ${variant.additionalChanges[weaponShortname][prop]}`);
                 }
-				newValue = variant.additionalChanges[weaponShortname][prop];
-			}
-			itemConfig[id].overrideProperties[prop] = integerProps.includes(prop) ? Math.ceil(newValue) : newValue;
-		}
+                newValue = variant.additionalChanges[weaponShortname][prop];
+            }
+            itemConfig[id].overrideProperties[prop] = integerProps.includes(prop) ? Math.ceil(newValue) : newValue;
+        }
     }
 
     private calculateValue(first: number, second: string | number): number {
@@ -286,7 +304,6 @@ export class WeaponGeneration
         }
     }
 
-
     private addPreset(
         itemConfig: ConfigItem,
         id: string,
@@ -296,12 +313,19 @@ export class WeaponGeneration
         ids: string[]
     ): void {
         const preset = findPresetsWithEncyclopedia(this.Instance.database.globals.ItemPresets, copiedItem._id)[0];
-		if (!preset) console.log(`Preset not found for ${copiedItem._id}`);
-		const defaultPreset = structuredClone(preset);
+        if (!preset) {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] WeaponGeneration.addPreset: Preset not found for '${copiedItem._id}'. Skipping...`,
+                LogTextColor.YELLOW
+            );
+            itemConfig[id].addweaponpreset = false;
+            return;
+        }
+        const defaultPreset = structuredClone(preset);
         defaultPreset._encyclopedia = id;
-        const oldId = defaultPreset._items[0]._id
+        const oldId = defaultPreset._items[0]._id;
         defaultPreset._id = ids[1];
-        defaultPreset._parent = ids[2]
+        defaultPreset._parent = ids[2];
         defaultPreset._items[0] = {
             _id: ids[2],
             _tpl: id,
@@ -316,10 +340,10 @@ export class WeaponGeneration
         defaultPreset._changeWeaponName = false;
         defaultPreset._name = `${weaponShortname} ${variant.ShortName} Variant Default Preset`;
 
-		if (variant.props["weapFireType"]) {
-			defaultPreset._items[0].upd.FireMode.FireMode = variant.props["weapFireType"][0];
-		}
-		itemConfig[id].weaponpresets.push(defaultPreset);
+        if (variant.props["weapFireType"]) {
+            defaultPreset._items[0].upd.FireMode.FireMode = variant.props["weapFireType"][0];
+        }
+        itemConfig[id].weaponpresets.push(defaultPreset);
     }
 
     private changeAdditionalPropertiesSlots(
@@ -330,7 +354,7 @@ export class WeaponGeneration
         variant: VariantType
     ): void {
         //made additional changes based on "additionalChanges" property from variant object
-		//this is after creating preset because we need to change some preset parts according to variant
+        //this is after creating preset because we need to change some preset parts according to variant
         if (variant.additionalChanges?.Slots || variant.additionalChanges?.[weaponShortname]?.Slots) {
             let slotsOriginal = structuredClone(copiedItem._props.Slots);
             let slots = structuredClone(variant.additionalChanges?.Slots ? variant.additionalChanges.Slots : variant.additionalChanges?.[weaponShortname]?.Slots);
@@ -422,7 +446,7 @@ export class WeaponGeneration
 
     private createWeaponDescriptions(): WeaponDescription {
 
-        const weaponRarity: string[] = [ "OP", "Meta", "Decent", "Gimmick", "Base", "Scav", "Meme" ];
+        const weaponRarity: string[] = Object.keys(raritySettings);
         const descriptions: WeaponDescription = {};
         for (const rarity of weaponRarity) {
             const textArray: string[] = [];
@@ -440,7 +464,7 @@ export class WeaponGeneration
                     textArray.push(`on enemies of level: ${this.groupConsecutiveNumbers(apbsLvls).join(", ")}`);
                 }
             }
-            descriptions[rarity] = `Weapons of this variant can be found: ${textArray.join(", ")}`;
+            descriptions[rarity] = `Weapons of this quality can be found: ${textArray.join(", ")}`;
         }
         return descriptions;
     }
@@ -465,31 +489,23 @@ export class WeaponGeneration
         );
     }
 
-    private logWeapons(items: any, description: string, skipped: string[]): void {
-        const info = { "OP": 0, "Meta": 0, "Decent": 0, "Gimmick": 0, "Base": 0, "Scav": 0, "Meme": 0 };
+    private logWeapons(items: any, description: string, skipped: number): void {
+        const info = Object.fromEntries(Object.keys(raritySettings).map(key => [key, 0]));
+        const types: string[] = [];
         for (const item in items) {
-            const weapon = items[item];
-            info[weapon.additionalInfo.rarity]++;
+            const w = items[item].additionalInfo;
+            info[w.rarity]++;
+            if (!types.includes(w.variantType)) types.push(w.variantType);
         }
+        const weaponCount = Object.values(info).map(i => `  ${i.toString().padStart(3)}   `);
         this.Instance.logger.log(
-            `[${this.Instance.modName}] ${description}: |  OP|META|DECE|GIMM|BASE|SCAV|MEME| Rarity. Total types: **${Object.keys(this.variantTypes).length}**`,
+            [
+                `[${this.Instance.modName}] ${description}: |ULTIMATE|SUPERIOR|ADVANCED|  NICHE |BASELINE| FLAWED |  MEME  |`,
+                `[${this.Instance.modName}] ${description}: |${weaponCount.join("|")}|`,
+                `[${this.Instance.modName}] ${description}: ${Object.keys(items).length} weapons of ${types.length} variant types${skipped > 0 ? `. Skipped generation of ${skipped} Weapons` : ""}`,
+            ].join('\n'),
             LogTextColor.GREEN
         );
-        let weaponCount: string[] = [];
-        for (const i of Object.values(info)) {
-            weaponCount.push(i.toString().padStart(4));
-        }
-        this.Instance.logger.log(
-            `[${this.Instance.modName}] ${description}: |${weaponCount.join("|")}| Weapons. Total weapons: **${Object.keys(items).length}**`,
-            LogTextColor.GREEN
-        );
-        if (skipped.length > 0) {
-            this.Instance.logger.log(
-                `[${this.Instance.modName}] Skipped generation of ${skipped.length} Weapons`,
-                LogTextColor.GREEN
-            );
-        }
-        
     }
 
     private getFileStatus(filePath: string): 'OK' | 'MODIFIED' | 'MISSING' {

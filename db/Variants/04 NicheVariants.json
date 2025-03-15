@@ -1,0 +1,70 @@
+{
+	"Pocket-size": {
+     	"Description": "Illegally small guns. Do not the gun",
+    	"Explanation": "This weapon fits in one hand and can be equiped in holster slot. With a boost to ergonomics and almost weightless!",
+    	"ShortName": "smol",
+    	"props": {
+    		"Ergonomics": "+20%",
+			"Weight": "-92%"
+    	},
+    	"additionalChanges": {
+    		"addtoInventorySlots": ["Holster"]
+    	},
+		"Weapons": [
+			"FN40GL", "M32A1", "AXMC", "AKMSN", "M60E6",
+			"UMP 45"
+		],
+		"ID": "0401",
+    	"rarity": "Niche"
+    },
+	"Rifle Grenade Launcher": {
+		"Description": "- It's like an underbarrel grenade launcher, but instead, it's an in-barrel grenade launcher!\n- You mean a rifle grenade…?\n- Exactly what I have in mind!",
+    	"Explanation": "Weapon variant chambered in 40mm grenades, with no magazine. Just load grenade launcher rounds directly into the chamber",
+    	"ShortName": "R.Grenade",
+    	"props": {
+    	},
+    	"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "5e81ebcd8e146c7080625e15"
+        	},
+    		"Slots": {
+			    "mod_magazine": [ "49273d316bf67aec1ea84f5a" ]
+			},
+			"Blicky": {
+				"Slots": {
+					"mod_magazine": []
+				}
+			}
+    	},
+		"Weapons": [
+			"MP-43-1C", "MP-18", "Blicky", "AXMC", "Mk-18",
+			"OP-SKS", "SV-98", "Mosin Infantry", "SAG AK Short", "ADAR 2-15"
+		],
+		"ID": "0402",
+        "rarity": "Niche"
+	},
+	"Bombardier": {
+		"Description": "God has blessed this weapon with a very big... cylinder. And an absurd amount of firepower!",
+    	"Explanation": "A revolver that dreams of being a grenade launcher",
+    	"ShortName": "Bombardier",
+		"props": {
+			"ammoCaliber": "Caliber40x46"
+    	},
+		"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "6275303a9f372d6ea97f9ec7"
+        	},
+    		"Slots": {
+			    "mod_magazine": [
+					"be284bb10ff4a4c7eb00214b",
+					"627bce33f21bc425b06ab967"
+				]
+			}
+    	},
+		"Weapons": [
+			"RSh-12", "CR 50DS", "CR 200DS", "MTs-255-12"
+		],
+		"ID": "0403",
+        "rarity": "Niche"
+	}
+}

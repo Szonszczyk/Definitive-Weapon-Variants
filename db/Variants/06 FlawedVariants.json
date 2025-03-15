@@ -1,6 +1,6 @@
 {
     "Panic": {
-        "Description": "Don't panic—it's just a cockroach... *bang* *bang* *bang*",
+        "Description": "Don't panic-it's just a cockroach... *bang* *bang* *bang*",
         "Explanation": "Shotguns limited to a MaxRounds Powermag 20-round magazine, featuring a full-auto fire mode, increased recoil, and a higher fire rate",
         "ShortName": "Panic",
         "props": {
@@ -39,18 +39,17 @@
             "MP-153", "MP-155", "TOZ-106", "AA-12 Gen 1"
         ],
         "ID": "0601",
-        "rarity": "Scav"
+        "rarity": "Flawed"
     },
     "Control-Fire": {
-        "Description": "A practice weapon for newly appointed PMCs eager to try full-auto. Unfortunately, they end up disappointed. Oh, and some stats didn't load properly—they're just there to intimidate potential users",
+        "Description": "A practice weapon for newly appointed PMCs eager to try legendary 'fullauto' fire mode. Unfortunately, they end up disappointed",
         "Explanation": "Weapon variant with only a full-auto fire mode but offering better controllability due to a low fire rate and no recoil",
         "ShortName": "Control",
         "props": {
-            "bFirerate": 100,
+            "bFirerate": 80,
             "weapFireType": [ "fullauto" ],
             "RecoilStableIndexShot": 0,
-            "RecoilForceBack": "+200%",
-            "RecoilForceUp": "+200%"
+            "RecoilForceBack": "+100%"
         },
         "Weapons": [
             "TX-15 DML", "G28", "M1A", "Mk-18", "RSASS",
@@ -58,7 +57,7 @@
             "VPO-101"
         ],
         "ID": "0602",
-        "rarity": "Scav"
+        "rarity": "Flawed"
     },
     "Pistol": {
         "Description": "A weapon variant designed specifically for pistol quests, tailored for those who dislike using actual pistols",
@@ -93,7 +92,7 @@
             "VPO-215", "Desert Eagle L6"
         ],
         "ID": "0603",
-        "rarity": "Scav"
+        "rarity": "Flawed"
     },
     "Upgraded": {
         "Description": "Modified to be a slightly better weapon—but when you tweak every statistic without understanding them, you're just as likely to make it worse",
@@ -101,11 +100,11 @@
         "ShortName": "Upgraded",
         "props": {
             "BurstShotsCount": "+2",
-            "RecoilForceBack": "+30%",
-            "RecoilForceUp": "+30%",
-            "RecoilCamera": "+25%",
-            "AimPlane": "+20%",
-            "RecoilStableIndexShot": "+50%",
+            "RecoilForceUp": "+20%",
+            "RecoilForceBack": "+40%",
+            "RecoilCamera": "+15%",
+            "AimPlane": "+10%",
+            "RecoilStableIndexShot": "+2",
             "RecoilDampingHandRotation": "+7%",
             "RecoilReturnSpeedHandRotation": "+7%",
             "RecolDispersion": "+50%",
@@ -114,7 +113,7 @@
             "bFirerate": "+35%",
             "Velocity": "+36",
             "HeatFactorByShot": "+30%",
-            "Weight": "+99%"
+            "Weight": "+50%"
         },
         "Weapons": [
             "Mk47", "SCAR-L", "MCX SPEAR", "AK-74N", "AK-103",
@@ -123,22 +122,46 @@
             "MP7A1", "SR-3M"
         ],
         "ID": "0604",
-        "rarity": "Scav"
+        "rarity": "Flawed"
     },
-    "Dung Spreader": {
-        "Description": "MoooooA. MooooA. MoooooooooooA!",
-        "Explanation": "A weapon variant with unbelievably bad spread. Even landing a hit on your enemy will be an achievement in itself",
-        "ShortName": "Spreader",
-        "props": {
-            "RecolDispersion": 1000,
-            "RecoilForceBack": "+300%",
-            "RecoilForceUp": "+300%",
-            "AimPlane": "+1000%"
-        },
-        "Weapons": [
-            "M4A1", "SA-58", "MCX", "Mk47", "AUG A3"
-        ],
-        "ID": "0605",
-        "rarity": "Scav"
+    "No-Scope": {
+    	"Description": "Do a 360 headshot with this!",
+    	"Explanation": "Weapon variant missing scope slot", 
+    	"ShortName": "No-Scope",
+    	"props": {
+    	},
+    	"additionalChanges": {
+    		"Slots": {
+    			"mod_scope": []
+    		}
+    	},
+		"Weapons": [
+			"G36", "ASh-12", "DT MDR 5.56x45", "DT MDR 7.62x51", "Vector 9x19",
+			"Vector .45", "RSASS"
+		],
+		"ID": "0605",
+        "rarity": "Flawed"
+    },
+    "Mid-Range": {
+    	"Description": "This modification was designed to finally make a 9x39mm weapon effective at long range. The result? Well, it's mid. Mid-range, to be exact",
+    	"Explanation": "Weapon variant chambered in 9x39mm caliber",
+    	"ShortName": "Mid-Range",
+    	"props": {
+			"ammoCaliber": "Caliber9x39"
+    	},
+    	"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "57838ad32459774a17445cd2"
+        	},
+        	"Slots": {
+			    "mod_magazine": "57838ad32459774a17445cd2"
+			}
+		},
+		"Weapons": [
+			"T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
+			"VPO-215"
+		],
+		"ID": "0606",
+        "rarity": "Flawed"
     }
 }

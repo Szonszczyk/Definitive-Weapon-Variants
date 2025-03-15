@@ -34,12 +34,12 @@ interface gamblerPresets
 
 enum gamblerRarity
 {
-    OP = "Meta",
-    Meta = "Meta",
-    Decent = "Decent",
-    Gimmick = "Decent",
-    Base = "Base",
-    Scav = "Scav",
+    Ultimate = "Meta",
+    Superior = "Meta",
+    Advanced = "Decent",
+    Niche = "Decent",
+    Baseline = "Base",
+    Flawed = "Scav",
     Meme = "Meme"
 }
 
@@ -197,7 +197,7 @@ export class ModsCompatibility
 
     public createPresetForGambler(basePreset: Preset, ids: string[], rarity: string, variantName: string): void
     {
-        if(!this.modsEnabled.Gambler) return;
+        if(!this.modsEnabled.Gambler || !basePreset) return;
 
         const basePresetCopy = structuredClone(basePreset);
         const newPreset: gamblerPreset = {

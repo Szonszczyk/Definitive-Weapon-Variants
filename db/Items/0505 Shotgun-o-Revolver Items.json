@@ -247,7 +247,7 @@
 		},
 		"locales": {
 			"en": {
-				"name": "<b><color=#dada26>Chiappa Rhino 12/70 6-round cylinder</color></b>",
+				"name": "<b><color=#2694da>Chiappa Rhino 12/70 6-round cylinder</color></b>",
 				"shortName": "CR 12/70",
 				"description": "<align=\"center\">A 6-round cylinder 12/70 cylinder for Chiappa Rhino 200DS Shotgun-o-Revolver Variant</align>"
 			}
@@ -458,7 +458,7 @@
 		},
 		"locales": {
 			"en": {
-				"name": "<b><color=#dada26>Chiappa Rhino 20/70 6-round cylinder</color></b>",
+				"name": "<b><color=#2694da>Chiappa Rhino 20/70 6-round cylinder</color></b>",
 				"shortName": "CR 20/70",
 				"description": "<align=\"center\">A 6-round 20/70 cylinder for Chiappa Rhino 50DS Shotgun-o-Revolver Variant</align>"
 			}
@@ -632,7 +632,7 @@
 		},
 		"locales": {
 			"en": {
-				"name": "<b><color=#dada26>RSh-12 23x75mm 5-round cylinder</color></b>",
+				"name": "<b><color=#2694da>RSh-12 23x75mm 5-round cylinder</color></b>",
 				"shortName": "RSh 23x75",
 				"description": "<align=\"center\">A 5-round 23x75mm cylinder for RSh-12 Shotgun-o-Revolver Variant</align>"
 			}

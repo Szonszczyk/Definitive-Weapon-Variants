@@ -26,7 +26,7 @@
 		},
 		"locales": {
 			"en": {
-				"name": "<b><color=#dada26>12.7x108 Anti-materiel rifle Variant 2-round magazine</color></b>",
+				"name": "<b><color=#ca1f2b>12.7x108 Anti-materiel rifle Variant 2-round magazine</color></b>",
 				"shortName": "AMR mag",
 				"description": "<align=\"center\">Special 2-round magazine for special Anti-materiel rifle needs. Includes small blackhole and smells like black magic</align>"
 			}
@@ -65,7 +65,7 @@
 		},
 		"locales": {
 			"en": {
-				"name": "<b><color=#dada26>12.7x108mm One-shot</color></b>",
+				"name": "<b><color=#ca1f2b>12.7x108mm One-shot</color></b>",
 				"shortName": "One-shot",
 				"description": "<align=\"center\">WARNING: Special Anti-materiel rifle ammo dealing massive damage but destroys weapon in the process.</align>"
 			}

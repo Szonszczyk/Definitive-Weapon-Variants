@@ -57,6 +57,7 @@ export interface ConfigItem
         addtoSpecialSlots: boolean;
         additionalInfo: {
             rarity: string;
+            variantType: string;
             contributesToQuestsAsWeapon: string;
         }
     };

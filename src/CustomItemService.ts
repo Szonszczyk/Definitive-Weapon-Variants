@@ -83,7 +83,7 @@ export class CustomItemService
                     const variantRarity = itemConfig.additionalInfo.rarity;
                     //for weapons that were changed caliber, add them to different weapon for kill quests
                     let weaponToUseForKillQuests = finalItemTplToClone;
-                    if (itemConfig?.additionalInfo.contributesToQuestsAsWeapon) {
+                    if (itemConfig.additionalInfo.contributesToQuestsAsWeapon != "") {
                         weaponToUseForKillQuests = itemConfig.additionalInfo.contributesToQuestsAsWeapon;
                     }
     

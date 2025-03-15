@@ -150,60 +150,68 @@ export function getShortNameById(object: { [key: string]: string }, id: string):
 
 export const raritySettings: {
     [rarityName: string]: {
-        type: string,
         color: string,
         bgColor: string,
-        explanation: string,
+        description: string,
+        flavour: string,
+        starRating: string,
         priceMultiplier: number
     }
 } = {
-    "OP": {
-        "type": "weaponMetaBuilds",
+    "Ultimate": {
         "color": "#ca1f2b",
         "bgColor": "red",
-        "explanation": "This variant boasts OP quality—capable of outperforming even the best-modified weapons",
+        "description": "This Ultimate-quality variant is capable of outperforming even the best modified weapons",
+        "flavour": "You earned it, now use it to your advantage. Kick some scav ass or something!",
+        "starRating": "★★★★",
         "priceMultiplier": 1.8
     },
-    "Meta": {
-        "type": "weaponMetaBuilds",
+    "Superior": {
         "color": "#ca741f",
         "bgColor": "orange",
-        "explanation": "This Meta-quality variant offers better performance than standard weapons",
+        "description": "This Superior-quality variant offers outstanding performance",
+        "flavour": "With some training and good attachments, this weapon can turn you into a machine of destruction!",
+        "starRating": "★★★",
         "priceMultiplier": 1.4
     },
-    "Decent": {
-        "type": "weaponDecentBuilds",
-        "color": "#dada26",
+    "Advanced": {
+        "color": "#f6f15d",
         "bgColor": "yellow",
-        "explanation": "This Decent-quality variant can surpass standard weapons but comes with some drawbacks",
+        "description": "This Advanced-quality variant offers better performance than standard weapons",
+        "flavour": "This is a very good weapon, but don't rely only on its power. Weapons don't play, users do!",
+        "starRating": "★★",
         "priceMultiplier": 1.2
     },
-    "Gimmick": {
-        "type": "weaponDecentBuilds",
-        "color": "#d326da",
+    "Niche": {
+        "color": "#75339c",
         "bgColor": "violet",
-        "explanation": "This Gimmick-quality variant features a unique twist that often improves the weapon but depends on the base model",
+        "description": "This Niche-quality variant is best used in very specific circumstances and situations",
+        "flavour": "Maybe you don't know when you'll need the help of a 'Blicky Rifle Grenade Launcher' right now, but you will when the time comes...",
+        "starRating": "★",
         "priceMultiplier": 1.2
     },
-    "Base": {
-        "type": "weaponBaseBuilds",
+    "Baseline": {
         "color": "#2694da",
         "bgColor": "blue",
-        "explanation": "This Base-quality variant performs on par with the original weapon",
+        "description": "This Baseline-quality variant performs on par with the original weapon",
+        "flavour": "Shiny weapon, but not that original. The stats are changed, but not by much. It's mid, I would say",
+        "starRating": "✧✧✧",
         "priceMultiplier": 1
     },
-    "Scav": {
-        "type": "weaponScavBuilds",
-        "color": "#2cda26",
+    "Flawed": {
+        "color": "#10a43a",
         "bgColor": "green",
-        "explanation": "This Scav-quality variant delivers worse performance or may even be unusable",
-        "priceMultiplier": 0.8
+        "description": "This Flawed-quality variant delivers worse performance than the original weapon",
+        "flavour": "Despite being flawed, this weapon is still desired and used mostly by scavs, but only because of the low price and frequent sales",
+        "starRating": "✧✧",
+        "priceMultiplier": 0.7
     },
     "Meme": {
-        "type": "weaponMemeBuilds",
-        "color": "#81da7e",
+        "color": "#808080",
         "bgColor": "tracerGreen",
-        "explanation": "This Meme-quality variant includes a gimmick that makes it perform worse than the original weapon",
-        "priceMultiplier": 0.6
+        "description": "This Meme-quality variant may be unusable in most situations",
+        "flavour": "A clown weapon for clown users, but remember-have fun before you die trying to kill someone with this god-forgotten thing",
+        "starRating": "✧",
+        "priceMultiplier": 0.5
     }
 };

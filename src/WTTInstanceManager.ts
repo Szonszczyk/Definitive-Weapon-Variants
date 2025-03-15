@@ -21,7 +21,6 @@ import { ImporterUtil } from "@spt/utils/ImporterUtil";
 import { SaveServer } from "@spt/servers/SaveServer";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { ApplicationContext } from "@spt/context/ApplicationContext";
-import { VFS } from "@spt/utils/VFS";
 
 export class WTTInstanceManager 
 {
@@ -57,7 +56,6 @@ export class WTTInstanceManager
     public importerUtil: ImporterUtil;
     public traderAssortService: TraderAssortService;
     public applicationContext: ApplicationContext;
-    public vfs: VFS;
     //#endregion
 
     // Call at the start of the mods postDBLoad method
@@ -78,9 +76,6 @@ export class WTTInstanceManager
         this.staticRouter = container.resolve<StaticRouterModService>("StaticRouterModService");
         this.dynamicRouter = container.resolve<DynamicRouterModService>("DynamicRouterModService");
         this.traderAssortService = container.resolve<TraderAssortService>("TraderAssortService");
-        this.vfs = container.resolve<VFS>("VFS");
-
-
     }
 
     public postDBLoad(container: DependencyContainer): void

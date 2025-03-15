@@ -1,0 +1,36 @@
+{
+	"5c6f323a656ca1ff0977e17c": {
+		"itemTplToClone": "628121434fa03b6b6c35dc6a",
+		"parentId": "555ef6e44bdc2de9068b457e",
+		"handbookParentId": "5b5f75c686f774094242f19f",
+		"overrideProperties": {
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#dada26>Sniper Variant 28 inch barrel</color></b>",
+				"shortName": "Sniper 28\"",
+				"description": "<align=\"center\">Special 28 inch barrel for Sniper Variant Weapons</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 64537,
+		"handbookPriceRoubles": 39876,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	}
+}
