@@ -26,7 +26,7 @@
 			"Desert Eagle L5 .357", "Desert Eagle Mk XIX", "Saiga-12K", "Glock 17"
 		],
 		"ID": "0201",
-		"rarity": "Meta"
+		"rarity": "Superior"
 	},
 	"Marksman": {
 		"Description": "To combat the high prices of ammunition, this weapon has been modified to remove its full-auto fire mode. As a result, it now excels in medium-distance engagements",
@@ -60,7 +60,7 @@
 			"ASh-12", "M60E6"
 		],
 		"ID": "0202",
-		"rarity": "Meta"
+		"rarity": "Superior"
 	},
 	"Handy": {
 		"Description": "Due to changes in how you can hold the weapon, using it is now as natural as walking",
@@ -80,26 +80,7 @@
 			"Vector .45", "AK-74", "AKMSN"
 		],
 		"ID": "0203",
-		"rarity": "Meta"
-	},
-	"Unbreakable": {
-		"Description": "Some famous guy from television used his miracle product to make this gun unbreakable\nNow you can throw it into the sand without worrying about jams\n~It even works underwater!~\nJust... maybe don't cut it in half",
-    	"Explanation": "Weapon variant immune to durability damage, overheating, and malfunctions",
-    	"ShortName": "Unbreakable",
-		"props": {
-			"DurabilityBurnRatio": 0,
-			"HeatFactorByShot": 0,
-			"AllowJam": false,
-			"AllowFeed": false,
-			"AllowMisfire": false,
-			"AllowSlide": false
-		},
-		"Weapons": [
-			"AS VAL", "VSS", "AVT-40", "M4A1", "PKP",
-			"MP5", "VPO-101"
-		],
-		"ID": "0204",
-		"rarity": "Meta"
+		"rarity": "Superior"
 	},
 	"Karabin Spetsialniy": {
 		"Description": "The KS-23 'Special Carbine' is a shotgun officially designated as a carbine by the Russian military\nSo we made even more of them",
@@ -128,8 +109,8 @@
 			"M3 Super 90", "590A1", "M870", "MP-133", "MP-153",
 			"MP-155" 
 		],
-		"ID": "0205",
-		"rarity": "Meta"
+		"ID": "0204",
+		"rarity": "Superior"
 	},
 	"Assault Rifle": {
 		"Description": "\"I want a refund! This weapon is way too big for me! B-but I like the caliber. Can you get me something smaller that can fit in my handbag?\"",
@@ -139,7 +120,8 @@
 			"weapFireType": [ "single", "burst", "fullauto" ],
 			"BurstShotsCount": 3,
 			"bFirerate": 750,
-			"HeatFactorByShot": "-40%"
+			"HeatFactorByShot": "-40%",
+			"ItemSound": "weap_ar"
 		},
 		"additionalChanges": {
 			"Chambers": {
@@ -156,8 +138,8 @@
 			"PM(t)", "APB", "MP-443 Grach", "P226R", "TT Gold",
 			"M9A3", "PL-15", "M45A1", "M1911A1", "Desert Eagle L5 .50 AE"
 		],
-		"ID": "0206",
-		"rarity": "Meta"
+		"ID": "0205",
+		"rarity": "Superior"
 	},
 	"Endless": {
 		"Description": "Do you really need 250 or even 400 rounds in one raid? Probably not\nBut this weapon was built differently… so here we are",
@@ -194,7 +176,74 @@
 			"STM-9", "Vector 9x19", "MPX", "Vector .45", "UMP 45",
 			"MP7A2"
 		],
+		"ID": "0206",
+		"rarity": "Superior"
+	},
+	"Anti-materiel revolver": {
+		"Description": "Using quantum physics—and perhaps a touch of black magic—this revolver fires rounds typically reserved for combating lightly armored vehicles",
+		"Explanation": "A revolver variant chambered in the 12.7x108mm caliber with increased horizontal recoil. Uses normal 12.7x108mm caliber ammo, available from Skier LL1",
+		"ShortName": "AMR",
+		"props": {
+			"RecoilForceBack": "+300%",
+			"ammoCaliber": "Caliber127x108",
+            "defAmmo": "5cde8864d7f00c0010373be1"
+        },
+        "additionalChanges": {
+        	"Slots": {
+        		"mod_magazine": [
+        			"69330141f5636b1891326b3f"
+                ]
+        	}
+        },
+		"Weapons": [
+			"RSh-12", "CR 50DS", "CR 200DS", "MTs-255-12"
+		],
 		"ID": "0207",
-		"rarity": "Meta"
+        "rarity": "Superior"
+	},
+	"Blackout": {
+		"Description": "Do you find it frustrating to check every 5.56x45 magazine because there's a chance it contains .300 Blackout?\nWith this gun, you don't have to!",
+    	"Explanation": "Weapon variant chambered in both .300 Blackout and 5.56x45mm NATO rounds, featuring reduced recoil and improved ergonomics",
+    	"ShortName": ".300",
+		"props": {
+			"RecoilForceUp": "-12%",
+			"RecoilForceBack": "-7%",
+			"RecoilReturnSpeedHandRotation": "+6%",
+			"RecoilCamera": "-6%",
+			"RecoilDampingHandRotation": "-6%",
+			"RecoilReturnPathDampingHandRotation": "-6%",
+			"Ergonomics": "+10",
+			"HeatFactorByShot": "-15%",
+			"ammoCaliber": "Caliber762x35"
+		},
+		"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": [
+					"5fbe3ffdf8b6a877a729ea82",
+					"5fd20ff893a8961fc660a954",
+					"619636be6db0f2477964e710",
+					"6196364158ef8c428c287d9f",
+					"6196365d58ef8c428c287da1",
+					"64b8725c4b75259c590fa899",
+					"59e6920f86f77411d82aa167",
+					"59e6927d86f77411da468256",
+					"54527a984bdc2d4e668b4567",
+					"54527ac44bdc2d36668b4567",
+					"59e68f6f86f7746c9f75e846",
+					"59e6906286f7746c9f75e847",
+					"59e690b686f7746c9f75e848",
+					"59e6918f86f7746c9f75e849",
+					"60194943740c5d77f6705eea",
+					"601949593ae8f707c4608daa",
+					"5c0d5ae286f7741e46554302"
+				]
+			}
+    	},
+		"Weapons": [
+			"HK 416A5", "AUG A1", "SCAR-L", "AUG A3", "DT MDR 5.56x45",
+			"M4A1", "G36", "ADAR 2-15", "TX-15 DML", "MCX"
+		],
+		"ID": "0208",
+		"rarity": "Superior"
 	}
 }

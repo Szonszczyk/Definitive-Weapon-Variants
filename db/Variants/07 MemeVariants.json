@@ -8,61 +8,22 @@
 				"burst"
 			],
 			"bFirerate": 450,
-			"RecoilForceBack": "-20%",
-			"RecoilForceUp": "-20%",
-			"RecoilDampingHandRotation": "-20%",
-		    "RecoilReturnSpeedHandRotation": "-20%",
+			"RecoilForceUp": "-40%",
+			"RecoilForceBack": "-30%",
+			"RecoilDampingHandRotation": "-95%",
+		    "RecoilReturnSpeedHandRotation": "+95%",
 			"BurstShotsCount": 100,
-			"HeatFactorByShot": "+100%"
+			"HeatFactorByShot": "+100%",
+			"CoolFactorGun": "+50%"
 		},
 		"Weapons": [
 			"M4A1", "SA-58", "AK-74M", "SKS", "VSK-94",
-			"AK-103", "DT MDR 5.56x45", "MCX SPEAR", "MP9", "MP9-N",
-			"PP-9 Klin", "AKS-74UB", "AKS-74UN", "AKMN", "AKMS",
-			"Glock 18C", "SR-3M"
+			"AK-103", "PP-9 Klin", "AKS-74UB", "AKS-74UN", "AKMN",
+			"AKMS", "Glock 18C", "SR-3M"
 		],
 		"ID": "0701",
 		"rarity": "Meme"
 	},
-	"Laser": {
-    	"Description": "If your goal isn't to kill your enemies but to seriously injure them, this is the perfect weapon for you. Just don't expect it to actually shoot lasers",
-    	"Explanation": "Bootleg of the PPSh-41 gun, but in addition it offers an exceptionally high fire rate, low recoil, and immunity to malfunctions",
-    	"ShortName": "Laser",
-    	"props": {
-    		"ammoCaliber": "Caliber762x25TT",
-    		"SingleFireRate": "+200%",
-			"bFirerate": "+200%",
-    		"weapFireType": [ "fullauto" ],
-    		"DurabilityBurnRatio": "-100%",
-    		"RecoilForceBack": "-70%",
-			"RecoilForceUp": "-70%",
-			"RecoilCamera": "-60%",	
-			"AllowJam": false,
-			"AllowFeed": false,
-			"AllowMisfire": false,
-			"AllowSlide": false
-    	},
-    	"additionalChanges": {
-			"Chambers": {
-        		"patron_in_weapon": "571a12c42459771f627b58a0"
-        	},
-        	"Slots": {
-			    "mod_magazine": "5ea03f7400685063ec28bfa8"
-			},
-			"minimum": {
-				"bFirerate": 600
-			}
-		},
-		"quests": {
-    		"id": "5ea03f7400685063ec28bfa8"
-    	},
-		"Weapons": [
-			"MCX", "TX-15 DML", "VSK-94", "Vector 9x19", "MCX SPEAR",
-			"Mk-18", "ASh-12", "RSASS", "AK-74N", "AK-101"
-		],
-		"ID": "0702",
-        "rarity": "Meme"
-    },
     "Broken": {
     	"Description": "Oh, that weapon is broken!",
     	"Explanation": "Weapon variant that suffers massive durability damage with each shot and has a very high chance of mechanical malfunction",
@@ -76,28 +37,9 @@
 			"M4A1", "SA-58", "AK-74M", "SKS", "VSK-94",
 			"AK-103", "DT MDR 5.56x45", "MCX SPEAR", "MP9", "MP9-N",
 			"PP-9 Klin", "AKS-74UB", "AKS-74UN", "AKMN", "AKMS",
-			"Glock 18C", "VPO-136", "AK-101", "UZI PRO SMG", "AA-12 Gen 1",
-			"MP-43 sawed-off"
+			"AA-12 Gen 1", "MP-43 sawed-off"
 		],
-		"ID": "0703",
-        "rarity": "Meme"
-    },
-    "No-Scope": {
-    	"Description": "Do a 360 headshot with this!",
-    	"Explanation": "Weapon variant missing scope slot",
-    	"ShortName": "No-Scope",
-    	"props": {
-    	},
-    	"additionalChanges": {
-    		"Slots": {
-    			"mod_scope": []
-    		}
-    	},
-		"Weapons": [
-			"G36", "ASh-12", "DT MDR 5.56x45", "DT MDR 7.62x51", "Vector 9x19",
-			"Vector .45", "RSASS"
-		],
-		"ID": "0704",
+		"ID": "0702",
         "rarity": "Meme"
     },
 	"Tornado": {
@@ -127,9 +69,35 @@
     		"id": "6513ef33e06849f06c0957ca"
     	},
 		"Weapons": [
-			"SA-58", "Saiga-12K", "AK-74M", "RSASS", "Mk47"
+			"SA-58", "Saiga-12K", "AK-74M", "RSASS", "Mk47",
+			"VPO-136", "AK-101", "MP9", "DT MDR 5.56x45", "AK-105",
+			"AK-74"
 		],
-		"ID": "0705",
+		"ID": "0703",
         "rarity": "Meme"
-	}
+	},
+	"Dung Spreader": {
+        "Description": "MoooooA. MooooA. MoooooooooooA!",
+        "Explanation": "A weapon variant with unbelievably bad spread. Even landing a hit on your enemy will be an achievement in itself",
+        "ShortName": "Spreader",
+        "props": {
+			"weapFireType": [ "fullauto" ],
+            "RecolDispersion": 1000,
+            "RecoilForceBack": "+300%",
+            "RecoilForceUp": "+300%",
+            "AimPlane": "+1000%"
+        },
+		"additionalChanges": {
+			"minimum": {
+				"bFirerate": 450
+			}
+    	},
+        "Weapons": [
+            "M4A1", "SA-58", "MCX", "Mk47", "AUG A3",
+			"Glock 18C", "UZI PRO SMG", "MP9-N", "MCX SPEAR", "AK-102",
+			"AKS-74"
+        ],
+        "ID": "0704",
+        "rarity": "Meme"
+    }
 }

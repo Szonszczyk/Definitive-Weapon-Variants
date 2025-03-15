@@ -4,60 +4,38 @@
 		"Explanation": "Weapon variant in equilibrium with the universe, featuring adjustments to various aspects: reduced vertical recoil but increased horizontal recoil, improved ergonomics, lowered fire rate, increased heat buildup, and reduced weight",
 		"ShortName": "Modified",
 		"props": {
-			"RecoilForceBack": "-25%",
-			"RecoilForceUp": "+25%",
+			"RecoilForceUp": "+15%",
+			"RecoilForceBack": "-60%",
 			"RecoilDampingHandRotation": "+7%",
 		    "RecoilReturnSpeedHandRotation": "-7%",
 			"Ergonomics": "+25",
 			"SingleFireRate": "-25%",
 			"bFirerate": "-25%",
 			"HeatFactorByShot": "+25%",
-			"Weight": "-25%"
+			"Weight": "-25%",
+			"RecoilCamera": "-25%"
 		},
 		"Weapons": [
 			"TX-15 DML", "VSK-94", "AK-74N", "AK-104", "AUG A3",
 			"Mk47", "RD-704", "MP7A2"
 		],
 		"ID": "0501",
-		"rarity": "Base"
-	},
-	"Sniper": {
-		"Description": "A weapon designed for hunters who occasionally mistake a human for a wild boar—from a comfortably safe distance",
-		"Explanation": "Shotgun weapon variant with increased velocity and accuracy",
-		"ShortName": "Sniper",
-		"props": {
-			"Velocity": 100,
-			"shotgunDispersion": "-95%",
-			"CenterOfImpact": 0.01
-        },
-        "additionalChanges": {
-        	"Slots": {
-        		"mod_barrel": [
-        			"5c6f323a656ca1ff0977e17c"
-                ]
-        	}
-        },
-		"Weapons": [
-			"KS-23M", "M3 Super 90", "M870", "MP-133", "MP-153",
-			"Saiga-12K", "TOZ-106", "590A1"
-		],
-		"ID": "0502",
-        "rarity": "Base"
+		"rarity": "Baseline"
 	},
 	"SMG": {
 		"Description": "A weapon for true gamblers—its fire rate depends entirely on how fast you can pull the trigger. Keep pulling, and eventually, you'll win",
 		"Explanation": "Weapon variant chambered in 4.6x30mm HK caliber, featuring reduced recoil and an exceptionally high single-fire rate",
 		"ShortName": "SMG",
 		"props": {
-			"RecoilForceBack": "-50%",
+			"weapFireType": [ "single" ],
 			"RecoilForceUp": "-50%",
+			"RecoilForceBack": "-30%",
+			"RecoilReturnSpeedHandRotation": "+30%",
 			"RecoilCamera": "-40%",
 			"RecoilStableAngleIncreaseStep": "+40%",
-			"RecoilDampingHandRotation": 0.1,
-			"RecoilReturnSpeedHandRotation": "+30%",
+			"RecoilDampingHandRotation": "-70%",
 			"DurabilityBurnRatio": "-70%",
 			"SingleFireRate": "+300%",
-			"bFirerate": "+300%",
 			"ammoCaliber": "Caliber46x30"
 		},
 		"additionalChanges": {
@@ -69,26 +47,25 @@
 			},
 			"minimum": {
 				"SingleFireRate": 450
-			},
-        	"addtoInventorySlots": ["Holster"]
+			}
 		},
 		"quests": {
     		"id": "5bd70322209c4d00d7167b8f"
     	},
 		"Weapons": [
 			"TX-15 DML", "G28", "M1A", "Mk-18", "RSASS",
-			"SR-25", "SVDS"
+			"SR-25", "SVDS", "AK-105", "AUG A1", "AKS-74",
+			"VPO-209", "G36"
 		],
-		"ID": "0503",
-        "rarity": "Base"
+		"ID": "0502",
+        "rarity": "Baseline"
     },
-    "Mid-Range": {
-    	"Description": "This modification was designed to finally make a 12.7x55mm weapon effective at long range. The result? Well, it's mid. Mid-range, to be exact",
-    	"Explanation": "Weapon variant chambered in 12.7x55mm caliber but with a bullet velocity penalty",
-    	"ShortName": "Mid-Range",
+    "Close Quarters": {
+    	"Description": "In tight spaces, size matters. This gun makes sure you win",
+    	"Explanation": "Modified to use 12.7x55mm rounds, excelling in close-quarters combat with unparalleled stopping power",
+    	"ShortName": "CQ",
     	"props": {
-			"ammoCaliber": "Caliber127x55",
-			"Velocity": -60
+			"ammoCaliber": "Caliber127x55"
     	},
     	"additionalChanges": {
 			"Chambers": {
@@ -98,56 +75,16 @@
 			    "mod_magazine": "5cadfbf7ae92152ac412eeef"
 			}
 		},
-		"quests": {
-    		"id": "5cadfbf7ae92152ac412eeef"
-    	},
 		"Weapons": [
-			"T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
-			"VPO-215"
+			"SVDS", "SV-98", "DVL-10", "AKM", "AK-74N",
+			"VPO-215", "OP-SKS", "VSS", "SAG AK","AK-101",
+			"AK-104", "AVT-40"
 		],
-		"ID": "0504",
-        "rarity": "Base"
-    },
-    "Speedy": {
-    	"Description": "Gas gas gas! I'm gonna step on the gas Tonight I'll fly...",
-    	"Explanation": "Weapon variant with double the fire rate, increased horizontal recoil, and reduced vertical recoil",
-    	"ShortName": "Speedy",
-    	"props": {
-			"bFirerate": "+99%",
-			"RecoilForceBack": "-40%",
-			"RecoilForceUp": "+40%",
-			"RecoilCamera": "+25%"
-    	},
-		"Weapons": [
-			"MP5", "PP-19-01", "SR-2M", "UMP 45", "MP7A2",
-			"MPX", "P90", "PPSh-41", "Vector .45", "Vector 9x19",
-			"AK-102", "RPK-16", "Mk 43 Mod 1", "UZI"
-		],
-		"ID": "0505",
-        "rarity": "Base"
-    },
-    "No-Bolt": {
-    	"Description": "Someone decided bolt-action rifles were too difficult to use, so they simply removed the bolt. Now it's no bolt, but plenty of action",
-    	"Explanation": "Bolt action, but it is now DMR",
-    	"ShortName": "No-Bolt",
-    	"props": {
-    		"bFirerate": "+0%",
-    		"weapFireType": [ "burst" ],
-    		"BurstShotsCount": 1
-    	},
-    	"additionalChanges": {
-    		"minimum": {
-				"bFirerate": 450
-			}
-    	},
-		"Weapons": [
-			"T-5000M", "SV-98", "DVL-10", "M700", "VPO-215"
-		],
-		"ID": "0506",
-        "rarity": "Base"
+		"ID": "0503",
+        "rarity": "Baseline"
     },
     "20/70": {
-    	"Description": "A typo in the weapon's description, left uncorrected out of sheer laziness. And now? Well, it's stuck like this—for better or worse",
+    	"Description": "A typo in the weapon's description, left uncorrected out of sheer laziness. And now? Well, it's stuck like this-for better or for worse",
     	"Explanation": "Shotgun variant chambered in 20ga shotgun cartridges",
     	"ShortName": "20/70",
     	"props": {
@@ -177,8 +114,8 @@
 			"MP-133", "MP-153", "MP-155", "MP-43 sawed-off", "Saiga-12K",
 			"AA-12 Gen 2"
 		],
-		"ID": "0507",
-        "rarity": "Base"
+		"ID": "0504",
+        "rarity": "Baseline"
     },
 	"Shotgun-o-Revolver": {
 		"Description": "Somewhere, deep in the void of forbidden weapon concepts, someone asked: 'What if revolvers... but shotguns?",
@@ -224,7 +161,44 @@
 		"Weapons": [
 			"CR 200DS", "CR 50DS", "RSh-12"
 		],
-		"ID": "0508",
-		"rarity": "Base"
-	}
+		"ID": "0505",
+		"rarity": "Baseline"
+	},
+	"World War II": {
+    	"Description": "If your goal isn't to kill your enemies but to seriously injure them, this is the perfect weapon for you. Now with occasional WW2 flashbacks!",
+    	"Explanation": "Bootleg of the PPSh-41. It even has the same fire rate and immunity to malfunctions! On top of that, it boasts low recoil",
+    	"ShortName": "WW2",
+    	"props": {
+			"bFirerate": 1250,
+    		"SingleFireRate": 625,
+    		"weapFireType": [ "single", "fullauto" ],
+			"RecoilForceUp": "-60%",
+    		"RecoilForceBack": "-70%",
+			"RecoilCamera": "-60%",	
+			"RecoilReturnSpeedHandRotation": "+40%",
+			"RecoilDampingHandRotation": "-50%",
+			"AllowJam": false,
+			"AllowFeed": false,
+			"AllowMisfire": false,
+			"AllowSlide": false,
+			"ammoCaliber": "Caliber762x25TT"
+    	},
+    	"additionalChanges": {
+			"Chambers": {
+        		"patron_in_weapon": "571a12c42459771f627b58a0"
+        	},
+        	"Slots": {
+			    "mod_magazine": "5ea03f7400685063ec28bfa8"
+			}
+		},
+		"quests": {
+    		"id": "5ea03f7400685063ec28bfa8"
+    	},
+		"Weapons": [
+			"MCX", "TX-15 DML", "VSK-94", "Vector 9x19", "MCX SPEAR",
+			"Mk-18", "ASh-12", "RSASS", "AK-74N", "AK-101"
+		],
+		"ID": "0506",
+        "rarity": "Baseline"
+    }
 }

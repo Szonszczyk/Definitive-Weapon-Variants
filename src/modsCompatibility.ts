@@ -34,12 +34,12 @@ interface gamblerPresets
 
 enum gamblerRarity
 {
-    OP = "Meta",
-    Meta = "Meta",
-    Decent = "Decent",
-    Gimmick = "Decent",
-    Base = "Base",
-    Scav = "Scav",
+    Ultimate = "Meta",
+    Superior = "Meta",
+    Advanced = "Decent",
+    Niche = "Decent",
+    Baseline = "Base",
+    Flawed = "Scav",
     Meme = "Meme"
 }
 

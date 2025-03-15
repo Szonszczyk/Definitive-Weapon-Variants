@@ -1,15 +1,15 @@
 {
-	"5c6f323a656ca1ff0977e17c": {
-		"itemTplToClone": "628121434fa03b6b6c35dc6a",
-		"parentId": "555ef6e44bdc2de9068b457e",
-		"handbookParentId": "5b5f75c686f774094242f19f",
+    "be284bb10ff4a4c7eb00214b": {
+		"itemTplToClone": "627bce33f21bc425b06ab967",
+		"parentId": "610720f290b75a49ff2e5e25",
+		"handbookParentId": "5b5f754a86f774094242f19b",
 		"overrideProperties": {
 		},
 		"locales": {
 			"en": {
-				"name": "<b><color=#2694da>Sniper Variant 28 inch barrel</color></b>",
-				"shortName": "Sniper 28\"",
-				"description": "<align=\"center\">Special 28 inch barrel for Sniper Variant Weapons</align>"
+				"name": "<b><color=#d326da>M32A1 40mm Bombardier cylinder</color></b>",
+				"shortName": "MSGL B.",
+				"description": "<align=\"center\">A standard-issue cylinder for the Bombardier Variant revolvers</align>"
 			}
 		},
 		"clearClonedProps": false,
@@ -18,8 +18,8 @@
 		"modSlot": [],
 		"ModdableItemWhitelist": [],
 		"ModdableItemBlacklist": [],
-		"fleaPriceRoubles": 64537,
-		"handbookPriceRoubles": 39876,
+		"fleaPriceRoubles": 30000,
+		"handbookPriceRoubles": 15000,
 		"addtoTraders": false,
 		"traderId": "PEACEKEEPER",
 		"traderItems": [],
