@@ -5,14 +5,15 @@ Whether you want an automatic version of your favorite weapon, click scavs to de
 
 ## Features
 
-445 weapons of 42 different variant types divided into 7 quality settings.  
+462 weapons of 42 different variant types divided into 7 quality settings.  
 Easy adding new weapons to variant types, create your own variant or modify existing one!  
 Config that enables blacklisting specific quality, for example, for appearing in airdrops.  
 Config with explanation on how to use 2 different modes (APBS and The Gambler) to expand your experience with this mod.
 
 ## Compatibility with SPT versions
 
-3.10.* - current version  
+3.11.* - current version  
+3.10.* - release available  
 3.9.* - release available
 
 ## Suggestions Questions
