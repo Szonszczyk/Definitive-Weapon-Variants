@@ -1,10 +1,10 @@
 {
 	"name": "Definitive Weapon Variants",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"main": "src/mod.js",
 	"license": "MIT",
 	"author": "Szonszczyk",
-    "sptVersion":"3.10.*",
+    "sptVersion":"3.11.*",
     "loadBefore": [
         "TheGambler",
         "acidphantasm-progressivebotsystem"

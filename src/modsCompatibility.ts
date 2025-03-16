@@ -92,6 +92,7 @@ export class ModsCompatibility
                 `[${this.Instance.modName}] modsCompatibility.checkAndLoadAPBSBlacklist: APBS folder '${this.modConfig.apbs.apbsName}' was not found. Check the name and adjust it in config file. Skipping generating/updating of APBS Blacklist`,
                 LogTextColor.RED
             );
+            this.modsEnabled.APBS = false;
             return;
         }
 
@@ -102,6 +103,7 @@ export class ModsCompatibility
                 `[${this.Instance.modName}] modsCompatibility.checkAndLoadAPBSBlacklist: APBS blacklists was not found in default path: '${filePath}'. Check config file if 'apbsName' is correct or check if you have installed APBS correctly. Skipping generating/updating of APBS Blacklist`,
                 LogTextColor.RED
             );
+            this.modsEnabled.APBS = false;
             return;
         }
         // load file and check structure
@@ -177,6 +179,7 @@ export class ModsCompatibility
                 `[${this.Instance.modName}] modsCompatibility.checkAndLoadGamblerPresets: Gambler folder '${this.modConfig.theGambler.gamblerName}' was not found. Check the name and adjust it in config file. Skipping generating/updating of Gambler presets`,
                 LogTextColor.RED
             );
+            this.modsEnabled.Gambler = false;
             return;
         }
         const filePath = path.join(__dirname, `../../${this.modConfig.theGambler.gamblerName}/src/containers/Weapons.ts`);
@@ -186,6 +189,7 @@ export class ModsCompatibility
                 `[${this.Instance.modName}] modsCompatibility.saveGamblerPresets: Gambler Weapons was not found in default path: '${filePath}'. Skipping generating/updating of Gambler presets`,
                 LogTextColor.RED
             );
+            this.modsEnabled.Gambler = false;
             return;
         }
         // load file

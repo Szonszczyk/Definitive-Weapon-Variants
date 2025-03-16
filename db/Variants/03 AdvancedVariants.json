@@ -113,7 +113,7 @@
 		"Weapons": [
 			"HK 416A5", "MCX", "MCX SPEAR", "SA-58", "AS VAL",
 			"UMP 45", "MP7A2", "FN 5-7", "STM-9", "VPO-101",
-			"AKS-74", "RPDN", "RPD"
+			"AKS-74", "RPDN", "RPD", "Velociraptor .300 BLK"
 		],
 		"ID": "0304",
         "rarity": "Advanced"
@@ -197,7 +197,7 @@
 		"Weapons": [
 			"MP5", "PP-19-01", "SR-2M", "UMP 45", "MP7A2",
 			"MPX", "P90", "PPSh-41", "Vector .45", "Vector 9x19",
-			"AK-102", "RPK-16", "Mk 43 Mod 1", "UZI"
+			"AK-102", "RPK-16", "Mk 43 Mod 1", "UZI", "X-17"
 		],
 		"ID": "0308",
         "rarity": "Advanced"
@@ -217,7 +217,8 @@
 			}
     	},
 		"Weapons": [
-			"T-5000M", "SV-98", "DVL-10", "M700", "VPO-215"
+			"T-5000M", "SV-98", "DVL-10", "M700", "VPO-215",
+			"TRG M10"
 		],
 		"ID": "0309",
         "rarity": "Advanced"

@@ -127,36 +127,6 @@ implements IPreSptLoadMod, IPostDBLoadMod
                 `[${this.modName}] Config updated`,
                 LogTextColor.GREEN
             );
-            const filesToDelete = [
-                "db/Items/0205 Karabin Spetsialniy Items.json",
-                "db/Items/0207 Endless Items.json",
-                "db/Items/0303 Anti-materiel Rifle Items.json",
-                "db/Items/0304 Anti-materiel Revolver Items.json",
-                "db/Items/0404 Rifle Grenade Launcher Items.json",
-                "db/Items/0502 Sniper Items.json",
-                "db/Items/0507 20 70 Items.json",
-                "db/Items/0508 Shotgun-o-Revolver Items.json",
-                "db/Variants/01 OPVariants.json",
-                "db/Variants/02 MetaVariants.json",
-                "db/Variants/03 DecentVariants.json",
-                "db/Variants/04 GimmickVariants.json",
-                "db/Variants/05 BaseVariants.json",
-                "db/Variants/06 ScavVariants.json"
-            ];
-            for (const file of filesToDelete) {
-                const filePath = path.resolve(__dirname, `../${file}`);
-                try {
-                    fs.unlinkSync(filePath);
-                    this.Instance.logger.log(
-                        `[${this.modName}] Removed '${filePath}'...`,
-                        LogTextColor.CYAN
-                    );
-                } catch (error) {}
-            }
-            this.Instance.logger.log(
-                `[${this.modName}] Upgrading old version of config has completed`,
-                LogTextColor.GREEN
-            );
             this.loadConfig();
             this.Instance.logger.log(
                 `[${this.modName}] New config version: '${this.config.version}'. Should be '2.1'`,

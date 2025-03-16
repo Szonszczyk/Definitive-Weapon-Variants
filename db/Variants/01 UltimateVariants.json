@@ -18,7 +18,7 @@
 			"9A-91", "AVT-40", "AK-12", "G36", "M4A1",
 			"MCX SPEAR", "Mk47", "SA-58", "AS VAL", "PPSh-41",
 			"PKP", "RPK-16", "M60E6", "AK-102", "HK 416A5",
-			"AKM"
+			"AKM", "Saiga-12K FA"
 		],
 		"ID": "0101",
 		"rarity": "Ultimate"
@@ -60,7 +60,7 @@
     	},
 		"Weapons": [
 			"SAG AK", "TX-15 DML", "G28", "M1A", "RSASS",
-			"AS VAL", "AK-74", "T-5000M", "VSK-94"
+			"AS VAL", "AK-74", "T-5000M", "VSK-94", "X-17"
 		],
 		"ID": "0102",
         "rarity": "Ultimate"
@@ -140,7 +140,7 @@
 		"Weapons": [
 			"Mosin Sniper", "AXMC", "M700", "OP-SKS", "SVT-40",
 			"AVT-40", "MP-43-1C", "MP-18", "MP-43 sawed-off", "Blicky",
-			"FN40GL"
+			"FN40GL", "TRG M10"
 		],
 		"ID": "0105",
         "rarity": "Ultimate"

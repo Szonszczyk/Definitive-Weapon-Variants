@@ -12,7 +12,7 @@
     	},
 		"Weapons": [
 			"FN40GL", "M32A1", "AXMC", "AKMSN", "M60E6",
-			"UMP 45"
+			"UMP 45", "Velociraptor .300 BLK"
 		],
 		"ID": "0401",
     	"rarity": "Niche"
@@ -38,7 +38,8 @@
     	},
 		"Weapons": [
 			"MP-43-1C", "MP-18", "Blicky", "AXMC", "Mk-18",
-			"OP-SKS", "SV-98", "Mosin Infantry", "SAG AK Short", "ADAR 2-15"
+			"OP-SKS", "SV-98", "Mosin Infantry", "SAG AK Short", "ADAR 2-15",
+			"TRG M10"
 		],
 		"ID": "0402",
         "rarity": "Niche"

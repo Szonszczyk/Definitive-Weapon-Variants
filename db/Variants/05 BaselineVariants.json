@@ -78,7 +78,7 @@
 		"Weapons": [
 			"SVDS", "SV-98", "DVL-10", "AKM", "AK-74N",
 			"VPO-215", "OP-SKS", "VSS", "SAG AK","AK-101",
-			"AK-104", "AVT-40"
+			"AK-104", "AVT-40", "X-17"
 		],
 		"ID": "0503",
         "rarity": "Baseline"
@@ -112,7 +112,7 @@
 		"Weapons": [
 			"KS-23M", "M3 Super 90", "590A1", "M870", "MP-43-1C",
 			"MP-133", "MP-153", "MP-155", "MP-43 sawed-off", "Saiga-12K",
-			"AA-12 Gen 2"
+			"AA-12 Gen 2", "Saiga-12K FA"
 		],
 		"ID": "0504",
         "rarity": "Baseline"

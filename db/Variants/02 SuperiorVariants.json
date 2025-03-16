@@ -77,7 +77,7 @@
 		"Weapons": [
 			"T-5000M", "Mosin Sniper", "SV-98", "DVL-10", "AXMC",
 			"SCAR-H", "M700", "Mosin Infantry", "VPO-215", "PPSh-41",
-			"Vector .45", "AK-74", "AKMSN"
+			"Vector .45", "AK-74", "AKMSN", "TRG M10"
 		],
 		"ID": "0203",
 		"rarity": "Superior"
@@ -241,7 +241,8 @@
     	},
 		"Weapons": [
 			"HK 416A5", "AUG A1", "SCAR-L", "AUG A3", "DT MDR 5.56x45",
-			"M4A1", "G36", "ADAR 2-15", "TX-15 DML", "MCX"
+			"M4A1", "G36", "ADAR 2-15", "TX-15 DML", "MCX",
+			"Velociraptor .300 BLK", "AK-101", "AK-102"
 		],
 		"ID": "0208",
 		"rarity": "Superior"

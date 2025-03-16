@@ -89,7 +89,7 @@
         },
         "Weapons": [
             "T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
-            "VPO-215", "Desert Eagle L6"
+            "VPO-215", "Desert Eagle L6", "TRG M10"
         ],
         "ID": "0603",
         "rarity": "Flawed"
@@ -159,7 +159,7 @@
 		},
 		"Weapons": [
 			"T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
-			"VPO-215"
+			"VPO-215", "TRG M10"
 		],
 		"ID": "0606",
         "rarity": "Flawed"
