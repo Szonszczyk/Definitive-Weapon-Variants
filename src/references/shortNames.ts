@@ -135,7 +135,11 @@ export const ShortNames: { [shortName: string]: string } = {
     "Desert Eagle L6": "669fa39b48fc9f8db6035a0c",
     "Desert Eagle Mk XIX": "668fe5a998b5ad715703ddd6",
     "Blicky": "66015072e9f84d5680039678",
-    "TT Gold": "5b3b713c5acfc4330140bd8d"
+    "TT Gold": "5b3b713c5acfc4330140bd8d",
+    "TRG M10": "673cab3e03c6a20581028bc1",
+    "Velociraptor .300 BLK": "674d6121c09f69dfb201a888",
+    "Saiga-12K FA": "674fe9a75e51f1c47c04ec23",
+    "X-17": "676176d362e0497044079f4c"
 };
 
 export function getShortNameById(object: { [key: string]: string }, id: string): string | undefined {
