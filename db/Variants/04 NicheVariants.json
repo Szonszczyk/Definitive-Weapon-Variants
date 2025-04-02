@@ -19,9 +19,10 @@
     },
 	"Rifle Grenade Launcher": {
 		"Description": "- It's like an underbarrel grenade launcher, but instead, it's an in-barrel grenade launcher!\n- You mean a rifle grenade…?\n- Exactly what I have in mind!",
-    	"Explanation": "Weapon variant chambered in 40mm grenades, with no magazine. Just load grenade launcher rounds directly into the chamber",
+    	"Explanation": "Weapon variant chambered in 40mm grenades, with no magazine. Just load grenade launcher rounds directly into the chamber. Now with increased grenade velocity!",
     	"ShortName": "R.Grenade",
     	"props": {
+			"Velocity": 50
     	},
     	"additionalChanges": {
 			"Chambers": {
@@ -56,10 +57,17 @@
         		"patron_in_weapon": "6275303a9f372d6ea97f9ec7"
         	},
     		"Slots": {
-			    "mod_magazine": [
-					"be284bb10ff4a4c7eb00214b",
-					"627bce33f21bc425b06ab967"
-				]
+			    "mod_magazine": [ "be284bb10ff4a4c7eb00214b" ]
+			},
+			"MTs-255-12": {
+				"Slots": {
+					"mod_magazine": [ "be284bb10ff4a4c7eb00214c" ]
+				}
+			},
+			"RSh-12": {
+				"Slots": {
+					"mod_magazine": [ "be284bb10ff4a4c7eb00214c" ]
+				}
 			}
     	},
 		"Weapons": [

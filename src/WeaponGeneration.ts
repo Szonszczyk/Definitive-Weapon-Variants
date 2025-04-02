@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import variantIds from "../db/Ids/variantIds.json";
 import { WTTInstanceManager } from "./WTTInstanceManager";
 import { ModsCompatibility } from "./modsCompatibility";
 import { HashUtil } from "@spt/utils/HashUtil";
@@ -8,7 +7,7 @@ import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import { ShortNames, getShortNameById, raritySettings } from "./references/shortNames";
 import {
     ConfigItem, VariantType, traderIDs, findPresetsWithEncyclopedia,
-    findSlotWithName, findItemWithSlotId, WeaponDescription
+    findSlotWithName, findItemWithSlotId, WeaponDescription, variantIDsInterface
 } from "./references/configConsts";
 
 
@@ -37,9 +36,9 @@ export class WeaponGeneration
         this.modsCompatibility.preSptLoad(this.Instance, config, this.loadFromCache);
     }
 
-    public generateWeapons(): { any: any }
+    public generateWeapons(): ConfigItem
     {
-        const generatedItems: any = {};
+        const generatedItems: ConfigItem = {};
         let skippedItems: number = 0;
         if (this.loadFromCache) {
             const weaponsFromCache = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/Cache/generatedWeapons.json"), "utf-8", (err) => {}));
@@ -48,7 +47,8 @@ export class WeaponGeneration
             return generatedItems;
         }
         const weaponDescriptions = this.createWeaponDescriptions();
-        let saveIds = false;
+        const variantIds = this.loadCombinedConfigIds();
+        const newIds: variantIDsInterface = {};
         
         for (const variantName in this.variantTypes) {
             const variant = this.variantTypes[variantName];
@@ -60,26 +60,24 @@ export class WeaponGeneration
             if (!variantIds[variantName]) variantIds[variantName] = {};
             const weaponsIds = variantIds[variantName];
 
-            
             for(const weaponShortname of weapons) {
                 const variantShortName = `${weaponShortname} ${variant.ShortName}`;
                 const copiedWeaponId = ShortNames[weaponShortname];
                 const copiedItem = this.Instance.database.templates.items[copiedWeaponId];
                 const copiedItemHandbook = this.Instance.database.templates.handbook.Items.filter(item => item.Id === copiedWeaponId)[0];
                 const copiedItemName = this.Instance.database.locales.global.en[`${copiedWeaponId} Name`];
-                if (!weaponsIds[weaponShortname]) {
-                    weaponsIds[weaponShortname] = [];
-                }
+                if (!weaponsIds[weaponShortname]) weaponsIds[weaponShortname] = [];
                 const ids = weaponsIds[weaponShortname];
                 if (ids.length == 0) {
                     this.Instance.logger.log(
                         `[${this.Instance.modName}] weaponGeneration.generateWeapons: Generating mongoids for '${variantShortName}'`,
                         LogTextColor.GREEN
                     );
-                    saveIds = true;
                     for(let i = 0; i < 5; i++) {
                         ids.push(this.hashUtil.generate())
                     }
+                    if (!newIds[variantName]) newIds[variantName] = {};
+                    newIds[variantName][weaponShortname] = ids;
                 }
 
                 const id = ids[0];
@@ -90,7 +88,7 @@ export class WeaponGeneration
                     overrideProperties: {
                         BackgroundColor: this.colorConverterAPILoaded ? `${rarity.color}ff` : rarity.bgColor
                     },
-                    parentId: copiedItem._parent,
+                    parentId: variant.additionalChanges?._parent ? variant.additionalChanges._parent : copiedItem._parent, 
                     handbookParentId: copiedItemHandbook.ParentId,
                     locales: {
                         en: {
@@ -158,14 +156,15 @@ export class WeaponGeneration
                 this.addPreset(newWeapon, id, weaponShortname, copiedItem, variant, ids);
                 this.changeAdditionalPropertiesSlots(newWeapon, id, weaponShortname, copiedItem, variant);
                 this.changeAdditionalPropertiesChambers(newWeapon, id, weaponShortname, copiedItem, variant);
-                this.modsCompatibility.addToAPBSBlacklist(id, variant.rarity, variantName, weaponShortname);
+                this.modsCompatibility.addToAPBSBlacklist(id, variant.rarity, variantName, variantShortName);
                 this.modsCompatibility.createPresetForGambler(newWeapon[id].weaponpresets[0], ids, variant.rarity, variantName);
                 Object.assign(generatedItems, newWeapon);
             }
         }
         this.logWeapons(generatedItems, "Generated", skippedItems);
-        if (saveIds) this.saveVariantWeapons(variantIds);
+        if (Object.keys(newIds).length > 0) this.saveVariantWeapons(newIds);
         this.modsCompatibility.saveAPBSBlacklist();
+        this.modsCompatibility.createOrUpdateAPBSPreset(generatedItems);
         this.modsCompatibility.saveGamblerPresets();
         fs.writeFileSync(path.join(__dirname, "../db/Cache/generatedWeapons.json"), JSON.stringify(generatedItems, null, 2));
         return generatedItems;
@@ -225,7 +224,7 @@ export class WeaponGeneration
         if (variant.additionalChanges && variant.additionalChanges["addtoInventorySlots"]) {
             itemConfig[id].addtoInventorySlots = variant.additionalChanges["addtoInventorySlots"];
         }
-        switch(copiedItem._parent) {
+        switch(itemConfig[id].parentId) {
             //add to inventory slots if shotgun
             case "5447b6094bdc2dc3278b4567":
             //add to inventory slots if grenade launcher
@@ -437,9 +436,10 @@ export class WeaponGeneration
         variantWeapons: any
     ): void {
         const formatted = JSON.stringify(variantWeapons, (key, value) => value, 2).replace(/\[\s*([\s\S]*?)\s*]/g, (match) => match.replace(/\s+/g, ' '));
-        fs.writeFileSync(path.join(__dirname, "../db/Ids/variantIds.json"), formatted);
+        const newName = this.hashUtil.generate();
+        fs.writeFileSync(path.join(__dirname, `../db/Ids/${newName}.json`), formatted);
         this.Instance.logger.log(
-            `[${this.Instance.modName}] weaponGeneration.saveVariantWeapons: Database 'Ids/variantIds' was saved`,
+            `[${this.Instance.modName}] weaponGeneration.saveVariantWeapons: Database 'Ids/${newName}.json' was created`,
             LogTextColor.GREEN
         );
     }
@@ -569,6 +569,31 @@ export class WeaponGeneration
                 if (combinedConfig[variant]) {
                     combinedConfig[variant].Weapons = combinedConfig[variant].Weapons.concat(config[variant].Weapons);
                     combinedConfig[variant].Weapons = [...new Set(combinedConfig[variant].Weapons)];
+                    delete config[variant];
+                }
+            }
+            Object.assign(combinedConfig, config);
+        });
+
+        return combinedConfig;
+    }
+
+    private loadCombinedConfigIds(): variantIDsInterface 
+    {
+        const configFiles = fs.readdirSync(path.join(__dirname, "../db/Ids"));
+        const combinedConfig: variantIDsInterface = {};
+
+        configFiles.forEach((file) => 
+        {
+            const configPath = path.join(__dirname, "../db/Ids", file);
+            const configFileContents = fs.readFileSync(configPath, "utf-8");
+            const config = JSON.parse(configFileContents) as variantIDsInterface;
+
+            // add new weapons to exisiting types in different file - combine Weapon property and remove duplicates
+            for (const variant in config) {
+                if (combinedConfig[variant]) {
+                    Object.assign(combinedConfig[variant], config[variant]);
+                    delete config[variant];
                 }
             }
             Object.assign(combinedConfig, config);
@@ -580,16 +605,11 @@ export class WeaponGeneration
     private colorConverterAPICheck(): boolean 
     {
         const pluginName = "rairai.colorconverterapi.dll";
-            // Fails if there's no ./BepInEx/plugins/ folder
-        try 
-        {
+        try {
             const pluginList = fs.readdirSync("./BepInEx/plugins").map(plugin => plugin.toLowerCase());
             return pluginList.includes(pluginName);
-        }
-        catch 
-        {
+        } catch {
             return false;
         }
     }
-
 }

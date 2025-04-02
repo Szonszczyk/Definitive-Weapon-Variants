@@ -102,9 +102,6 @@
 				"weapFireType": [ "semiauto" ]
 			}
     	},
-		"quests": {
-    		"id": "5e848cc2988a8701445df1e8"
-    	},
 		"Weapons": [
 			"M3 Super 90", "590A1", "M870", "MP-133", "MP-153",
 			"MP-155" 
@@ -130,9 +127,6 @@
     		"Slots": {
 			    "mod_magazine": "5447a9cd4bdc2dbd208b4567"
 			}
-    	},
-		"quests": {
-    		"id": "5447a9cd4bdc2dbd208b4567"
     	},
 		"Weapons": [
 			"PM(t)", "APB", "MP-443 Grach", "P226R", "TT Gold",
@@ -201,10 +195,10 @@
 		"ID": "0207",
         "rarity": "Superior"
 	},
-	"Blackout": {
-		"Description": "Do you find it frustrating to check every 5.56x45 magazine because there's a chance it contains .300 Blackout?\nWith this gun, you don't have to!",
+	"Black Market": {
+		"Description": "\"It's a Black Market-certified weapon because it can shoot Black-out rounds\"\n~Some mafia boss somewhere, probably",
     	"Explanation": "Weapon variant chambered in both .300 Blackout and 5.56x45mm NATO rounds, featuring reduced recoil and improved ergonomics",
-    	"ShortName": ".300",
+    	"ShortName": "B.Market",
 		"props": {
 			"RecoilForceUp": "-12%",
 			"RecoilForceBack": "-7%",

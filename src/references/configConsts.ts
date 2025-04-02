@@ -8,11 +8,7 @@ export interface ConfigItem
     [itemId: string]: {
         itemTplToClone: string;
         overrideProperties: {
-            Prefab: {
-                path: string;
-                rcid: string;
-            };
-            ReverbVolume: number;
+            BackgroundColor?: string
         };
         parentId: string;
         fleaPriceRoubles: number;
@@ -48,8 +44,8 @@ export interface ConfigItem
         Probability: number;
         masteries: boolean;
         masterySections: {
-            Name: string;
-            Templates: string[];
+            Name?: string;
+            Templates?: string[];
         };
         addweaponpreset: boolean;
         weaponpresets: Preset[];
@@ -97,7 +93,7 @@ export interface VoiceConfig
     };
 }
 
-// Added interfaces
+//#region Added
 
 export interface WeaponClones {
     [key: string]: string[];
@@ -160,6 +156,98 @@ export function findItemWithSlotId(
 ): Item {
     return items.filter(item => item.slotId === searchString)[0];
 }
+
+export interface variantIDsInterface
+{
+    [key: string]: {
+        [key: string]: string[]
+    }
+}
+
+//#region MCompatibility
+
+export interface APBSSettings
+{
+    1: string[];
+    2: string[];
+    3: string[];
+    4: string[];
+    5: string[];
+    6: string[];
+    7: string[];
+}
+
+export interface gamblerPreset
+{
+    Id: string;
+    Name: string;
+    Root: string;
+    Items: Item[];
+}
+
+export interface gamblerPresets
+{
+    Meta: gamblerPreset[];
+    Decent: gamblerPreset[];
+    Base: gamblerPreset[];
+    Scav: gamblerPreset[];
+    Meme: gamblerPreset[];
+}
+
+export enum gamblerRarity
+{
+    Ultimate = "Meta",
+    Superior = "Meta",
+    Advanced = "Decent",
+    Niche = "Decent",
+    Baseline = "Base",
+    Flawed = "Scav",
+    Meme = "Meme"
+}
+
+export const canBeUsedForBosses: Record<string, number> = {
+    "Anti-materiel rifle": 50,
+    "Point & Click": 50,
+    "Meta": 80,
+    "Lapua": 80,
+    "Overclocked & Automatic": 80,
+    "Heavy Machine Gun": 80,
+    "Automatic": 100,
+    "Marksman": 100,
+    "Handy": 100,
+    "Blackout": 100,
+    "Downgraded": 120,
+    "Shotgun": 120,
+    "Unbreakable": 120,
+    "Sniper": 120,
+    "Speedy": 150,
+    "Modified": 150,
+    "SMG": 150,
+    "Close Quarters": 150,
+    "World War II": 150,
+    "Assault Rifle": 300,
+    "Upgraded": 300,
+    "No-Scope": 300,
+    "Mid-Range": 300
+};
+
+export const bossesToChange: string[] = [
+    "bossboar",
+    "bossbully",
+    "bossgluhar",
+    "bosskilla",
+    "bossknight",
+    "bosskojaniy",
+    "bosskolontay",
+    "bosssanitar",
+    "bosstagilla",
+    "bosspartisan",
+    "bosszryachiy",
+    "followerbigpipe",
+    "followerbirdeye"
+];
+
+
 
 // Traders and Task related items
 

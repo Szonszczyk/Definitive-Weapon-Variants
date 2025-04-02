@@ -8,7 +8,8 @@
             "weapFireType": [ "fullauto" ],
             "RecoilForceBack": "+59%",
             "RecoilForceUp": "+59%",
-            "RecoilCamera": "+50%"
+            "RecoilCamera": "+50%",
+            "AllowJam": false
         },
         "additionalChanges": {
             "Chambers": {
@@ -18,12 +19,8 @@
                 "mod_magazine": [{
                     "basedOn": "ReloadMode",
                     "variants": {
-                        "ExternalMagazine": [
-                            "5cf8f3b0d7f00c00217872ef"
-                        ],
-                        "InternalMagazine": [
-                            "911e2cff5d5389b4a6fd7638"
-                        ]
+                        "ExternalMagazine": [ "5cf8f3b0d7f00c00217872ef" ],
+                        "InternalMagazine": [ "911e2cff5d5389b4a6fd7638" ]
                     }
                 }]
             },
@@ -31,7 +28,7 @@
                 "bFirerate": 250
             },
             "M3 Super 90": {
-                "weapFireType": [ "semiauto" ]
+                "weapFireType": [ "semiauto", "single" ]
             }
         },
         "Weapons": [
@@ -126,9 +123,10 @@
     },
     "No-Scope": {
     	"Description": "Do a 360 headshot with this!",
-    	"Explanation": "Weapon variant missing scope slot", 
+    	"Explanation": "Weapon variant missing scope slot but with increased ergonomics", 
     	"ShortName": "No-Scope",
     	"props": {
+            "Ergonomics": "+15"
     	},
     	"additionalChanges": {
     		"Slots": {

@@ -1,47 +1,18 @@
 import * as fs from "fs";
 import * as path from "path";
+
 import { WTTInstanceManager } from "./WTTInstanceManager";
 import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
-import { Preset, Item } from "./references/configConsts";
-
-interface APBSSettings
-{
-    1: string[];
-    2: string[];
-    3: string[];
-    4: string[];
-    5: string[];
-    6: string[];
-    7: string[];
-}
-
-interface gamblerPreset
-{
-    Id: string;
-    Name: string;
-    Root: string;
-    Items: Item[];
-}
-
-interface gamblerPresets
-{
-    Meta: gamblerPreset[];
-    Decent: gamblerPreset[];
-    Base: gamblerPreset[];
-    Scav: gamblerPreset[];
-    Meme: gamblerPreset[];
-}
-
-enum gamblerRarity
-{
-    Ultimate = "Meta",
-    Superior = "Meta",
-    Advanced = "Decent",
-    Niche = "Decent",
-    Baseline = "Base",
-    Flawed = "Scav",
-    Meme = "Meme"
-}
+import {
+    Preset,
+    APBSSettings,
+    gamblerPreset,
+    gamblerPresets,
+    gamblerRarity,
+    ConfigItem,
+    bossesToChange,
+    canBeUsedForBosses
+} from "./references/configConsts";
 
 
 export class ModsCompatibility
@@ -118,7 +89,6 @@ export class ModsCompatibility
         this.originalFile.APBS = APBSConfig;
         this.compatLayer.APBS = structuredClone(APBSConfig);
         this.compatLayer.APBS.weaponBlacklist = this.modConfig.apbs.blacklistOtherWeapons;
-        //{ "tier1Blacklist": [], "tier2Blacklist": [], "tier3Blacklist": [], "tier4Blacklist": [], "tier5Blacklist": [], "tier6Blacklist": [], "tier7Blacklist": [] };
 
         // load proper blacklist config setting
         if (this.modConfig.apbs.settingSelected.onlyBaseWeapons) this.APBSSetting = this.modConfig.apbs.settings.onlyBaseWeapons;
@@ -127,11 +97,11 @@ export class ModsCompatibility
         if (this.modConfig.apbs.settingSelected.custom) this.APBSSetting = this.modConfig.apbs.settings.custom;
     }
 
-    public addToAPBSBlacklist(id: string, rarity: string, variantName: string, weaponShortname: string): void 
+    public addToAPBSBlacklist(id: string, rarity: string, variantName: string, variantShortName: string): void 
     {
         if (!this.modsEnabled.APBS) return;
         for (let i = 1; i < 8; i++) {
-            if (this.APBSSetting[i].includes(rarity) || this.modConfig.apbs.notAddVariantTypes.includes(variantName) || this.modConfig.apbs.notAddWeapons.includes(`${weaponShortname} ${variantName}`)) {
+            if (this.APBSSetting[i].includes(rarity) || this.modConfig.apbs.notAddVariantTypes.includes(variantName) || this.modConfig.apbs.notAddWeapons.includes(variantShortName)) {
                 this.compatLayer.APBS.weaponBlacklist[`tier${i}Blacklist`].push(id);
             }
         }
@@ -140,7 +110,7 @@ export class ModsCompatibility
     public saveAPBSBlacklist(): void 
     {
         if (!this.modsEnabled.APBS) return;
-
+        this.checkAPBSConfig();
         // save file if automatic update of APBS blacklist is disabled to not do double the job
         if (!this.modConfig.apbs.automaticUpdate.enabled && (JSON.stringify(this.compatLayer.APBS) != JSON.stringify(this.originalFile.APBS))) {
             fs.writeFileSync(path.join(__dirname, "../config/blacklists.json"), JSON.stringify(this.compatLayer.APBS, null, 8).replace(/\n/g, '\r\n'), "utf-8");
@@ -164,6 +134,137 @@ export class ModsCompatibility
                 `[${this.Instance.modName}] Automatic update of APBS Blacklist was finished successfully!`,
                 LogTextColor.GREEN
             );
+        }
+    }
+
+    public createOrUpdateAPBSPreset(items: ConfigItem): void
+    {
+        if (!this.modsEnabled.APBS) return;
+        const BHVconfig = this.modConfig.apbs.bossesHaveVariants;
+        if (!BHVconfig.enabled) return;
+        
+        const targetPath = path.join(path.join(__dirname, `../../${this.modConfig.apbs.apbsName}/presets/`), BHVconfig.presetName);
+        const sourcePath = path.join(path.join(__dirname, `../../${this.modConfig.apbs.apbsName}/presets/`), "example");
+        if (!fs.existsSync(targetPath)) {
+            try {
+                this.copyFolderSync(sourcePath, targetPath);
+                this.Instance.logger.log(
+                    `[${this.Instance.modName}] APBS preset folder '${BHVconfig.presetName}' has been created`,
+                    LogTextColor.CYAN
+                );
+            } catch (error) {
+                this.Instance.logger.log(
+                    `[${this.Instance.modName}] modsCompatibility.createOrUpdateAPBSPreset: Failed to create preset folder ${BHVconfig.presetName} in location ${targetPath}`,
+                    LogTextColor.RED
+                );
+                return;
+            }
+        }
+        let fileChanged = 0;
+        for (let i = 1; i < 8; i++) {
+            const exampleFilePath = path.join(__dirname, `../../${this.modConfig.apbs.apbsName}/presets/example/Tier${i}_equipment.json`);
+            const exampleFile = JSON.parse(fs.readFileSync(exampleFilePath, "utf-8", (err) => {}));
+            const presetFilePath = path.join(__dirname, `../../${this.modConfig.apbs.apbsName}/presets/${BHVconfig.presetName}/Tier${i}_equipment.json`);
+            const presetFileOriginal = JSON.parse(fs.readFileSync(presetFilePath, "utf-8", (err) => {}));
+            const presetFile = structuredClone(presetFileOriginal);
+
+            for (const bossName of bossesToChange) {
+                const eq = exampleFile[bossName].equipment;
+                const newBossEq = presetFile[bossName].equipment;
+
+                newBossEq.FirstPrimaryWeapon.LongRange = this.bossesHaveVariantsCalculations(items, i, eq.FirstPrimaryWeapon.LongRange);
+                newBossEq.FirstPrimaryWeapon.ShortRange = this.bossesHaveVariantsCalculations(items, i, eq.FirstPrimaryWeapon.ShortRange);
+                newBossEq.SecondPrimaryWeapon.LongRange = this.bossesHaveVariantsCalculations(items, i, eq.SecondPrimaryWeapon.LongRange);
+                newBossEq.SecondPrimaryWeapon.ShortRange = this.bossesHaveVariantsCalculations(items, i, eq.SecondPrimaryWeapon.ShortRange);
+                newBossEq.Holster = this.bossesHaveVariantsCalculations(items, i, eq.Holster);
+            }
+            if (JSON.stringify(presetFileOriginal) != JSON.stringify(presetFile)) {
+                fs.writeFileSync(presetFilePath, JSON.stringify(presetFile, null, 4), "utf-8");
+                fileChanged++;
+            }
+        }
+        if (fileChanged > 0) {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] Bosses Have Variants - APBS preset creation was finished. Restart server to make changes`,
+                LogTextColor.RED
+            );
+        } else {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] Bosses Have Variants - APBS preset creation was finished successfully!`,
+                LogTextColor.GREEN
+            );
+        }
+    }
+
+    private copyFolderSync(source: string, target: string) {
+        if (!fs.existsSync(target)) {
+            fs.mkdirSync(target, { recursive: true });
+        }
+    
+        const entries = fs.readdirSync(source, { withFileTypes: true });
+    
+        for (const entry of entries) {
+            const sourcePath = path.join(source, entry.name);
+            const targetPath = path.join(target, entry.name);
+    
+            if (entry.isDirectory()) {
+                this.copyFolderSync(sourcePath, targetPath); // Recursively copy subdirectories
+            } else {
+                fs.copyFileSync(sourcePath, targetPath); // Copy files
+            }
+        }
+    }
+
+    private bossesHaveVariantsCalculations(
+        items: ConfigItem,
+        level: number,
+        baseWeapons: Record<string, number>
+    ): Record<string, number> {
+        const bossWeapons: Record<string, number> = structuredClone(baseWeapons);
+        const BHVconfig = this.modConfig.apbs.bossesHaveVariants;
+        const weightSum: number = Object.values(bossWeapons).reduce((acc: number, value: number) => acc + value, 0);
+        const variantsToAdd: Record<string, number> = {};
+        const baseWeaponsToAdd: Record<string, number> = {};
+        for (const weapon in bossWeapons) {
+            const weight = bossWeapons[weapon];
+            baseWeaponsToAdd[weapon] = Math.ceil( weight/weightSum * BHVconfig.baseWeaponWeights ); 
+            for (const itemID in items) {
+                const item = items[itemID];
+                if (item.itemTplToClone === weapon && canBeUsedForBosses[item.additionalInfo.variantType]) {
+                    variantsToAdd[itemID] = Math.ceil( canBeUsedForBosses[item.additionalInfo.variantType] * (weight/weightSum) );
+                }
+            }
+        }
+        const variantWeaponsWeightSum: number = Object.values(variantsToAdd).reduce((acc: number, value: number) => acc + value, 0);
+        for (const key in variantsToAdd) {
+            variantsToAdd[key] *= Math.ceil( (BHVconfig.variantWeaponsWeightPerLevel * level) / variantWeaponsWeightSum );
+        }
+        return Object.assign(variantsToAdd, baseWeaponsToAdd);
+    }
+
+    private checkAPBSConfig(): void
+    {
+        const filePath = path.join(__dirname, `../../${this.modConfig.apbs.apbsName}/config/config.json`);
+        const APBSConfig = JSON.parse(fs.readFileSync(filePath, "utf-8", (err) => {}));
+        if (!APBSConfig.compatibilityConfig.enableModdedWeapons) {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] APBS compatibility is enabled in DWV config, but modded weapons are disabled in APBS config. Variants won't be added to enemies. You can change it in user/mods/acidphantasm-progressivebotsystem/APBSConfig.exe`,
+                LogTextColor.RED
+            );
+        }
+        if (this.modConfig.apbs.bossesHaveVariants.enabled) {
+            if (!APBSConfig.usePreset) {
+                this.Instance.logger.log(
+                    `[${this.Instance.modName}] Bosses Have Variants in enabled in DWV config, but preset is not enabled in APBS config! Bosses Have Variants feature will not work! You can change it in user/mods/acidphantasm-progressivebotsystem/APBSConfig.exe`,
+                    LogTextColor.RED
+                );
+            }
+            if (APBSConfig.presetName != this.modConfig.apbs.bossesHaveVariants.presetName) {
+                this.Instance.logger.log(
+                    `[${this.Instance.modName}] Bosses Have Variants preset name in DWV config is different than APBS config! Bosses Have Variants feature will not work!`,
+                    LogTextColor.RED
+                );
+            }
         }
     }
 

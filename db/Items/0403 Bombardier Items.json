@@ -7,9 +7,165 @@
 		},
 		"locales": {
 			"en": {
-				"name": "<b><color=#75339c>M32A1 40mm Bombardier cylinder</color></b>",
-				"shortName": "MSGL B.",
-				"description": "<align=\"center\">A standard-issue cylinder for the Bombardier Variant revolvers</align>"
+				"name": "<b><color=#d326da>M32A1 40mm 6-round Bombardier cylinder</color></b>",
+				"shortName": "MSGL B.6",
+				"description": "<align=\"center\">A standard-issue 6-round cylinder for the Bombardier Variant revolvers</align>"
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 30000,
+		"handbookPriceRoubles": 15000,
+		"addtoTraders": false,
+		"traderId": "PEACEKEEPER",
+		"traderItems": [],
+		"barterScheme": [],
+		"loyallevelitems": 3,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [],
+		"masteries": false,
+		"masterySections": [],
+		"addweaponpreset": false,
+		"weaponpresets": []
+	},
+	"be284bb10ff4a4c7eb00214c": {
+		"itemTplToClone": "627bce33f21bc425b06ab967",
+		"parentId": "610720f290b75a49ff2e5e25",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Slots": [
+				{
+				  "_name": "camora_000",
+				  "_id": "75925001084c413e5814af80",
+				  "_parent": "be284bb10ff4a4c7eb00214c",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+						  "5ede474b0c226a66f5402622",
+						  "5ede475b549eed7c6d5c18fb",
+						  "5ede4739e0350d05467f73e8",
+						  "5f0c892565703e5c461894e9",
+						  "5ede47405b097655935d7d16",
+						  "5ede475339ee016e8c534742",
+						  "5ede47641cf3836a88318df1"
+						],
+						"MaxStackCount": 1
+					  }
+					]
+				  },
+				  "_required": false,
+				  "_mergeSlotWithChildren": false,
+				  "_proto": "55d4af244bdc2d962f8b4571"
+				},
+				{
+				  "_name": "camora_001",
+				  "_id": "75925001084c413e5814af81",
+				  "_parent": "be284bb10ff4a4c7eb00214c",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+						  "5ede474b0c226a66f5402622",
+						  "5ede475b549eed7c6d5c18fb",
+						  "5ede4739e0350d05467f73e8",
+						  "5f0c892565703e5c461894e9",
+						  "5ede47405b097655935d7d16",
+						  "5ede475339ee016e8c534742",
+						  "5ede47641cf3836a88318df1"
+						],
+						"MaxStackCount": 1
+					  }
+					]
+				  },
+				  "_required": false,
+				  "_mergeSlotWithChildren": false,
+				  "_proto": "55d4af244bdc2d962f8b4571"
+				},
+				{
+				  "_name": "camora_002",
+				  "_id": "75925001084c413e5814af82",
+				  "_parent": "be284bb10ff4a4c7eb00214c",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+						  "5ede474b0c226a66f5402622",
+						  "5ede475b549eed7c6d5c18fb",
+						  "5ede4739e0350d05467f73e8",
+						  "5f0c892565703e5c461894e9",
+						  "5ede47405b097655935d7d16",
+						  "5ede475339ee016e8c534742",
+						  "5ede47641cf3836a88318df1"
+						],
+						"MaxStackCount": 1
+					  }
+					]
+				  },
+				  "_required": false,
+				  "_mergeSlotWithChildren": false,
+				  "_proto": "55d4af244bdc2d962f8b4571"
+				},
+				{
+				  "_name": "camora_003",
+				  "_id": "75925001084c413e5814af83",
+				  "_parent": "be284bb10ff4a4c7eb00214c",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+						  "5ede474b0c226a66f5402622",
+						  "5ede475b549eed7c6d5c18fb",
+						  "5ede4739e0350d05467f73e8",
+						  "5f0c892565703e5c461894e9",
+						  "5ede47405b097655935d7d16",
+						  "5ede475339ee016e8c534742",
+						  "5ede47641cf3836a88318df1"
+						],
+						"MaxStackCount": 1
+					  }
+					]
+				  },
+				  "_required": false,
+				  "_mergeSlotWithChildren": false,
+				  "_proto": "55d4af244bdc2d962f8b4571"
+				},
+				{
+				  "_name": "camora_004",
+				  "_id": "75925001084c413e5814af84",
+				  "_parent": "be284bb10ff4a4c7eb00214c",
+				  "_props": {
+					"filters": [
+					  {
+						"Filter": [
+						  "5ede474b0c226a66f5402622",
+						  "5ede475b549eed7c6d5c18fb",
+						  "5ede4739e0350d05467f73e8",
+						  "5f0c892565703e5c461894e9",
+						  "5ede47405b097655935d7d16",
+						  "5ede475339ee016e8c534742",
+						  "5ede47641cf3836a88318df1"
+						],
+						"MaxStackCount": 1
+					  }
+					]
+				  },
+				  "_required": false,
+				  "_mergeSlotWithChildren": false,
+				  "_proto": "55d4af244bdc2d962f8b4571"
+				}
+			  ]
+		},
+		"locales": {
+			"en": {
+				"name": "<b><color=#d326da>M32A1 40mm 5-round Bombardier cylinder</color></b>",
+				"shortName": "MSGL B.5",
+				"description": "<align=\"center\">A standard-issue 5-round cylinder for the Bombardier Variant revolvers</align>"
 			}
 		},
 		"clearClonedProps": false,

@@ -75,9 +75,6 @@
         		"patron_in_weapon": "64ca3d3954fc657e230529cc"
         	}
 		},
-		"quests": {
-    		"id": "64ca3d3954fc657e230529cc"
-    	},
 		"Weapons": [
 			"HK 416A5", "M4A1", "SA-58", "RD-704", "AKM",
 			"AK-12", "MCX", "VPO-136", "RPK-16", "Blicky"
@@ -106,9 +103,6 @@
 			"minimum": {
 				"bFirerate": 450
 			}
-    	},
-    	"quests": {
-    		"id": "576165642459773c7a400233"
     	},
 		"Weapons": [
 			"HK 416A5", "MCX", "MCX SPEAR", "SA-58", "AS VAL",

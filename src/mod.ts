@@ -99,37 +99,53 @@ implements IPreSptLoadMod, IPostDBLoadMod
     {
         if (this.config.version == 2) {
             this.Instance.logger.log(
-                `[${this.modName}] Found old version of config, upgrading and removing old files`,
+                `[${this.modName}] Found too old version of config, please remove 'config.jsoc' and create new from 'defaultConfig.jsonc'`,
+                LogTextColor.RED
+            );
+            return;
+        }
+        if (this.config.version == 2.1) {
+            this.Instance.logger.log(
+                `[${this.modName}] Found old version of config, upgrading...`,
                 LogTextColor.CYAN
             );
             const configPath = path.resolve(__dirname, "../config/config.jsonc");
             let configTxt: string = fs.readFileSync(configPath, "utf-8");
             const toReplace = {
-                "\"OP\"": "\"Ultimate\"",
-                "\"Meta\"": "\"Superior\"",
-                "\"Decent\"": "\"Advanced\"",
-                "\"Gimmick\"": "\"Niche\"",
-                "\"Base\"": "\"Baseline\"",
-                "\"Scav\"": "\"Flawed\"",
-                "\"Laser\"": "\"Meta\"",
-                "\"notGenerateRarity\"": "\"notGenerateQuality\"",
-                "\"version\": 2,": "\"version\": 2.1,"
+                "\"version\": 2.1,": "\"version\": 2.2,",
+                "// change to true if you want to enable it": `// change to true if you want to enable it
+	},
+ // Can bosses spawn with variants?
+ // This uses APBS Presets to add variants to bosses loadouts
+	"bossesHaveVariants": {
+		"enabled": false, // change to true if you want to enable it
+		// If using APBS preset already and did not change any of boss weapons, change below to your preset name
+		"presetName": "BossesHaveVariants", // If not using APBS Preset - leave it as it is
+		// If not using APBS preset:
+		// Run APBSConfig.exe and change - Presets => Enable Preset => True | Preset Options => Preset Folder Name => BossesHaveVariants
+		// "[APBS] Preset name "BossesHaveVariants" is invalid." - should appear in red in console, don't worry - DWV will create this folder for you!
+
+		// Advanced configuration:
+		// Level 1 boss will have 500/(10000+500)% (~4.8%) chance to have a variant weapon in each of his slots
+		// Level 8 boss will have 4000/(10000+4000)% (~28.5%) chance to have a variant weapon in each of his slots
+		"baseWeaponWeights": 10000,
+		"variantWeaponsWeightPerLevel": 500`
             };
             for (const replace in toReplace) {
                 configTxt = configTxt.replaceAll(replace, toReplace[replace]);
-                this.Instance.logger.log(
-                    `[${this.modName}] Replacing '${replace}' with '${toReplace[replace]}' in config...`,
-                    LogTextColor.CYAN
-                );
             }
             fs.writeFileSync(configPath, configTxt);
             this.Instance.logger.log(
                 `[${this.modName}] Config updated`,
                 LogTextColor.GREEN
             );
+            this.Instance.logger.log(
+                `[${this.modName}] Upgrading old version of config has completed`,
+                LogTextColor.GREEN
+            );
             this.loadConfig();
             this.Instance.logger.log(
-                `[${this.modName}] New config version: '${this.config.version}'. Should be '2.1'`,
+                `[${this.modName}] New config version: '${this.config.version}'. Should be '2.2'`,
                 LogTextColor.CYAN
             );
         }

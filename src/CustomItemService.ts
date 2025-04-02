@@ -119,14 +119,14 @@ export class CustomItemService
         if (numItemsAdded > 0) 
         {
             this.Instance.logger.log(
-                `[${this.Instance.modName}] Database: Loaded ${numItemsAdded} custom items.`,
+                `[${this.Instance.modName}] Loaded '${numItemsAdded}' custom items`,
                 LogTextColor.GREEN
             );
         }
         else 
         {
             this.Instance.logger.log(
-                `[${this.Instance.modName}] Database: No custom items loaded.`,
+                `[${this.Instance.modName}] No custom items loaded`,
                 LogTextColor.GREEN
             );
         }

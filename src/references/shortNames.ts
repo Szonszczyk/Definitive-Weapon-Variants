@@ -139,7 +139,28 @@ export const ShortNames: { [shortName: string]: string } = {
     "TRG M10": "673cab3e03c6a20581028bc1",
     "Velociraptor .300 BLK": "674d6121c09f69dfb201a888",
     "Saiga-12K FA": "674fe9a75e51f1c47c04ec23",
-    "X-17": "676176d362e0497044079f4c"
+    "X-17": "676176d362e0497044079f4c", 
+    
+    // Below I added a few weapon IDs from mods that I am using in 3.10:
+    "M249": "66e718dc498d978477e0ba75", // WTT - M249
+    "SVD": "6657bc8faeddd6b0a9b40224", // WTT - SVD
+    "M700 .277": "0af5f6a5aa9712e11c733fb9", // EpicRangeTime - Weapons // preset not exist :<
+    "SPEAR .308": "8d59d8b10a4c2e85b871c317", // EpicRangeTime - Weapons
+    "Mk47 9x39": "96f5c38a676e11e13544dfba", // EpicRangeTime - Weapons
+    "Mk47 5.45": "52ce1b65b13e1035808c4fd2", // EpicRangeTime - Weapons
+    "M4 .300": "4b81488c78c8a8ac7d37f9b9", // EpicRangeTime - Weapons //similar variant exists: M4A1 Black Market
+    "Draco M": "52500592c7109667abb6cbeb", // EpicRangeTime - Weapons // AKS-74UB 7.62x39 Auto - no variants to add
+    "AK-15": "3dc691f607ffed3228bf6ca2", // EpicRangeTime - Weapons // AK-12 7.62x39 - no variants to add
+    "Saiga MK 545": "e895575bcd1fa1de36d301b6", // EpicRangeTime - Weapons // worse AK-74M - no variants to add
+    "Saiga 545": "57f28a7ffb22e277b0234219", // EpicRangeTime - Weapons // worse AK-74N - no variants to add
+    "Draco": "93bcdfda236122e67c098847", // EpicRangeTime - Weapons // AKS-74U 7.62x39 Single - no variants to add
+    "AK-102 .300": "ffc95b9d143f52202a311820", // EpicRangeTime - Weapons // similar variant exists: AK-102 Black Market
+    "AKS-74U .300": "ed05294ed53c0400ae0e8a55", // EpicRangeTime - Weapons // add Black Market Variant in 3.11
+    "AKS-74UN .300": "627c4fe34b0a558e8a3642a1", // EpicRangeTime - Weapons // add Black Market Variant in 3.11
+    "AKS-74UB .300": "939c742f7dad852286188029", // EpicRangeTime - Weapons // add Black Market Variant in 3.11
+    "AK-101 .300": "d672109946fe88b803449054", // EpicRangeTime - Weapons // similar variant exists: AK-101 Black Market
+    "MCX 5.56": "72bbf927bf5b1d4a0837485b", // EpicRangeTime - Weapons // similar variant exists: MCX Black Market
+    "Tochnost": "67b66878b32c5563e5089961" // FancyDream-T5000
 };
 
 export function getShortNameById(object: { [key: string]: string }, id: string): string | undefined {

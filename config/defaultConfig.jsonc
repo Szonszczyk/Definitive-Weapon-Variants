@@ -99,7 +99,22 @@
 	"automaticUpdate": {
 		"enabled": false // change to true if you want to enable it
 	},
-	
+ // Can bosses spawn with variants?
+ // This uses APBS Presets to add variants to bosses loadouts
+	"bossesHaveVariants": {
+		"enabled": false, // change to true if you want to enable it
+		// If using APBS preset already and did not change any of boss weapons, change below to your preset name
+		"presetName": "BossesHaveVariants", // If not using APBS Preset - leave it as it is
+		// If not using APBS preset:
+		// Run APBSConfig.exe and change - Presets => Enable Preset => True | Preset Options => Preset Folder Name => BossesHaveVariants
+		// "[APBS] Preset name "BossesHaveVariants" is invalid." - should appear in red in console, don't worry - DWV will create this folder for you!
+
+		// Advanced configuration:
+		// Level 1 boss will have 500/(10000+500)% (~4.8%) chance to have a variant weapon in each of his slots
+		// Level 8 boss will have 4000/(10000+4000)% (~28.5%) chance to have a variant weapon in each of his slots
+		"baseWeaponWeights": 10000,
+		"variantWeaponsWeightPerLevel": 500
+	},
  // Settings of blacklist generation, please make only changes to custom one
 	"settings": {
 		"custom": {
@@ -153,7 +168,7 @@
  // Enable mod compatibility
  	"enabled": false,
  // Make sure that this is correct folder name for The Gambler
-	"gamblerName": "GamblerTrader",
+	"gamblerName": "zzzGamblerTrader",
  // Add name of variant type ("Meta"/"SMG" etc.) to below array to exclude it from being added to The Gambler presets
 	"notAddVariantTypes": [],
  // Run the server once, then copy the generated Weapons.ts from this mod's config folder to TheGambler/src/containers, replacing the existing file
@@ -168,7 +183,7 @@
  // #### OTHER ####
 
  // This is just the config version-nothing fancy
- "version": 2.1,
+ "version": 2.2,
 
  // Set this to false if you don't want to use caching and are making changes to variants each time the server starts
  "useCache": true
