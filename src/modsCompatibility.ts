@@ -36,7 +36,7 @@ export class ModsCompatibility
         this.checkAndLoadGamblerPresets();
         if ((this.modsDetected.APBS && !this.modsEnabled.APBS) || (this.modsDetected.Gambler && !this.modsEnabled.Gambler) ) {
             this.Instance.logger.log(
-                `[${this.Instance.modName}] ${this.modsDetected.APBS ? `APBS detected, additional compatibility can be set is config!` : ""} | ${this.modsDetected.Gambler ? `The Gambler detected, additional compatibility can be set is config!` : ""}`,
+                `[${this.Instance.modName}] ${this.modsDetected.APBS ? `APBS detected, additional compatibility can be set in config file!` : ""}${this.modsDetected.Gambler ? ` | The Gambler detected, additional compatibility can be set in config file!` : ""}`,
                 LogTextColor.CYAN
             );
         }
