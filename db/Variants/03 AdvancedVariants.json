@@ -12,36 +12,33 @@
 			"Weight": "+20%"
 		},
 		"Weapons": [
-			"AK-12", "AK-104", "AUG A1", "HK 416A5", "MCX",
-			"MCX SPEAR", "SA-58", "AS VAL", "MP7A2", "MPX",
-			"P90", "PPSh-41", "Vector .45", "PKM", "RPD",
+			"AK-12", "AK-104", "AUG A1", "HK 416A5", "MCX .300 BLK",
+			"SPEAR 6.8", "SA-58", "AS VAL", "MP7A2", "MPX",
+			"P90", "PPSh-41", "Vector .45ACP", "PKM", "RPD",
 			"RPDN", "UZI PRO Pistol"
 		],
 		"ID": "0301",
 		"rarity": "Advanced"
 	},
-	"Downgraded": {
-		"Description": "Modified to be a slightly worse weapon—but when you lower every statistic, there's always a chance you accidentally make it better",
-		"Explanation": "Weapon variant with most statistics reduced, including decreased burst count (for weapons with burst fire), recoil, ergonomics, fire rate, velocity and heat buildup",
-		"ShortName": "Downgraded",
+	"Upgraded": {
+		"Description": "We took the original, cleaned it, tightened a few screws, and voilà - it's officially 'Upgraded' now!",
+		"Explanation": "Weapon variant with improved recoil, accuracy, ergonomics, fire rate, and heat buildup",
+		"ShortName": "Upgraded",
 		"props": {
-			"RecoilForceUp": "-30%",
+			"RecoilForceUp": "-15%",
 			"RecoilForceBack": "-15%",
-			"RecoilReturnSpeedHandRotation": "-7%",
-			"RecoilCamera": "-25%",
+			"RecoilReturnSpeedHandRotation": "+7%",
+			"RecoilCamera": "-15%",
 			"RecoilDampingHandRotation": "-7%",
-			"BurstShotsCount": "-1",
 			"AimPlane": "-20%",
-			"RecoilStableIndexShot": "-50%",
 			"RecolDispersion": "-50%",
-			"Ergonomics": "-35",
-			"SingleFireRate": "-35%",
-			"bFirerate": "-35%",
-			"Velocity": -50,
+			"Ergonomics": "+15",
+			"SingleFireRate": "+10%",
+			"bFirerate": "+10%",
 			"HeatFactorByShot": "-30%"
 		},
 		"Weapons": [
-			"Mk47", "SCAR-L", "MCX SPEAR", "AK-74N", "AK-103",
+			"Mk47", "Mk 16", "SPEAR 6.8", "AK-74N", "AK-103",
 			"AKS-74U", "AKS-74N", "PM", "PB", "APS",
 			"PP-91-01 Kedr-B", "PP-91 Kedr", "Glock 17", "MP5K-N", "Saiga-9",
 			"MP7A1", "SR-3M"
@@ -68,16 +65,30 @@
 			"ammoCaliber": "Caliber762x54R"
 		},
 		"additionalChanges": {
-			"Slots": {
-			    "mod_magazine": "64ca3d3954fc657e230529cc"
-			},
 			"Chambers": {
-        		"patron_in_weapon": "64ca3d3954fc657e230529cc"
-        	}
+				"fromWeapons": [
+					"PKP"
+				]
+			},
+			"Slots": {
+			    "mod_magazine": {
+					"fromWeapons": [
+						"PKP"
+					]
+				}
+			},
+			"Blicky": {
+				"Slots": {
+					"mod_magazine": [ "Blicky Special Magical Unbelievable Magazine" ]
+				}
+			},
+			"minimum":{
+				"bFirerate": 450
+			}
 		},
 		"Weapons": [
 			"HK 416A5", "M4A1", "SA-58", "RD-704", "AKM",
-			"AK-12", "MCX", "VPO-136", "RPK-16", "Blicky"
+			"AK-12", "MCX .300 BLK", "VPO-136 Vepr-KM", "RPK-16", "Blicky"
 		],
 		"ID": "0303",
         "rarity": "Advanced"
@@ -94,19 +105,25 @@
 			"ammoCaliber": "Caliber12g"
     	},
     	"additionalChanges": {
-    		"Chambers": {
-        		"patron_in_weapon": "576165642459773c7a400233"
-        	},
+			"Chambers": {
+				"fromWeapons": [
+					"Saiga-12K"
+				]
+			},
         	"Slots": {
-			    "mod_magazine": "576165642459773c7a400233"
+			    "mod_magazine": {
+					"fromWeapons": [
+						"Saiga-12K"
+					]
+				}
 			},
 			"minimum": {
 				"bFirerate": 450
 			}
     	},
 		"Weapons": [
-			"HK 416A5", "MCX", "MCX SPEAR", "SA-58", "AS VAL",
-			"UMP 45", "MP7A2", "FN 5-7", "STM-9", "VPO-101",
+			"HK 416A5", "MCX .300 BLK", "SPEAR 6.8", "SA-58", "AS VAL",
+			"UMP 45", "MP7A2", "FN 5-7", "STM-9", "VPO-101 Vepr-Hunter",
 			"AKS-74", "RPDN", "RPD", "Velociraptor .300 BLK"
 		],
 		"ID": "0304",
@@ -125,32 +142,24 @@
 			"AllowSlide": false
 		},
 		"Weapons": [
-			"AS VAL", "VSS", "AVT-40", "M4A1", "PKP",
-			"MP5", "VPO-101"
+			"AS VAL", "VSS Vintorez", "AVT-40", "M4A1", "PKP",
+			"MP5", "VPO-101 Vepr-Hunter"
 		],
 		"ID": "0305",
 		"rarity": "Advanced"
 	},
 	"Hypersonic": {
     	"Description": "The technology used to modify this weapon shouldn't even work in theory. Decades of research have only managed to reduce the bullet's sensitivity to gravity and even that remains far from perfect",
-    	"Explanation": "Weapon variant with exceptionally high velocity and accuracy, but limited to a single-fire mode",
+    	"Explanation": "Weapon variant with exceptionally high velocity and accuracy",
     	"ShortName": "Hypersonic",
     	"props": {
-			"weapFireType": [ "single" ],
-			"Velocity": 300,
+			"Velocity": 350,
 			"CenterOfImpact": 0.01
 		},
-		"additionalChanges": {
-			"ASh-12": {
-				"Velocity": 950
-			},
-			"RSh-12": {
-				"Velocity": 950
-			}
-		},
 		"Weapons": [
-			"Mk-18", "ASh-12", "RD-704", "G28", "M1A",
-			"RSASS", "MP-18", "RSh-12"
+			"Mk-18 Mjölnir", "ASh-12", "RD-704", "G28", "M1A",
+			"RSASS", "MP-18", "RSh-12", "AK-12", "AK-105",
+			"MCX .300 BLK", "Mk 17", "G36"
 		],
 		"ID": "0306",
 		"rarity": "Advanced"
@@ -167,7 +176,7 @@
         "additionalChanges": {
         	"Slots": {
         		"mod_barrel": [
-        			"5c6f323a656ca1ff0977e17c"
+        			"Sniper Variant 28 inch barrel"
                 ]
         	}
         },
@@ -190,7 +199,7 @@
     	},
 		"Weapons": [
 			"MP5", "PP-19-01", "SR-2M", "UMP 45", "MP7A2",
-			"MPX", "P90", "PPSh-41", "Vector .45", "Vector 9x19",
+			"MPX", "P90", "PPSh-41", "Vector .45ACP", "Vector 9x19",
 			"AK-102", "RPK-16", "Mk 43 Mod 1", "UZI", "X-17"
 		],
 		"ID": "0308",

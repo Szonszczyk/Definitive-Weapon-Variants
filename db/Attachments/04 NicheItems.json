@@ -1,0 +1,48 @@
+{
+    "40mm Rifle Grenade single round magazine": {
+        "Description": "1-round magazine for Rifle Grenade Launcher Variant weapons\nIt's not needed and can even disable reload of your weapon\nExperts says that it needs to be either sold or destroyed",
+        "ShortName": "R.Gre mag",
+        "itemTplToClone": "5ce69cbad7f00c00b61c5098",
+        "props": {},
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 1,
+                "Filter": {
+                    "fromWeapons": [
+                        "5e81ebcd8e146c7080625e15"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 69,
+        "variant": "Rifle Grenade Launcher",
+        "rarity": "Niche"
+    },
+    "M32A1 40mm 6-round Bombardier cylinder": {
+        "Description": "A standard-issue 6-round cylinder for the Bombardier Variant revolvers",
+        "ShortName": "MSGL B.6",
+        "itemTplToClone": "627bce33f21bc425b06ab967",
+        "props": {},
+        "additionalChanges": {
+            "_parent": "610720f290b75a49ff2e5e25"
+        },
+        "handbookPriceRoubles": 15000,
+        "variant": "Bombardier",
+        "rarity": "Niche"
+    },
+    "M32A1 40mm 5-round Bombardier cylinder": {
+        "Description": "A standard-issue 5-round cylinder for the Bombardier Variant revolvers",
+        "ShortName": "MSGL B.5",
+        "itemTplToClone": "627bce33f21bc425b06ab967",
+        "props": {},
+        "additionalChanges": {
+            "_parent": "610720f290b75a49ff2e5e25",
+            "Slots": {
+                "camora_004": []
+            }
+        },
+        "handbookPriceRoubles": 15000,
+        "variant": "Bombardier",
+        "rarity": "Niche"
+    }
+}

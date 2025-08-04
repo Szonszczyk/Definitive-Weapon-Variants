@@ -2,42 +2,43 @@ import * as fs from "fs";
 import * as path from "path";
 import { WTTInstanceManager } from "./WTTInstanceManager";
 import { ModsCompatibility } from "./modsCompatibility";
-import { HashUtil } from "@spt/utils/HashUtil";
 import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
-import { ShortNames, getShortNameById, raritySettings } from "./references/shortNames";
+import { MarkedRooms } from "./MarkedRooms";
 import {
-    ConfigItem, VariantType, traderIDs, findPresetsWithEncyclopedia,
-    findSlotWithName, findItemWithSlotId, WeaponDescription, variantIDsInterface
+    getShortNameById, raritySettings,
+    ConfigItem, traderIDs, findPresetsWithEncyclopedia,
+    findSlotWithName, findItemWithSlotId, variantIDsInterface,
+    mapNames
 } from "./references/configConsts";
 
+import {
+    VariantConfiguration,
+    VariantConfigurationKeyed
+} from "./references/generationConsts";
 
 export class WeaponGeneration
 {
     private Instance: WTTInstanceManager;
     private modConfig: any;
-    private variantTypes: any;
-    protected hashUtil: HashUtil;
     private modsCompatibility: ModsCompatibility = new ModsCompatibility();
     private loadFromCache: boolean;
-    private colorConverterAPILoaded: boolean;
+    private ShortNames: { [shortName: string]: string };
+    private markedRooms: MarkedRooms = new MarkedRooms();
 
-    constructor() 
-    {
-        this.variantTypes = this.loadCombinedConfig();
-        this.colorConverterAPILoaded = this.colorConverterAPICheck();
-    }
-
-    public preSptLoad(Instance: WTTInstanceManager, config: any, hashutil: HashUtil): void
+    public preSptLoad(Instance: WTTInstanceManager, config: any): void
     {
         this.Instance = Instance;
         this.modConfig = config;
-        this.hashUtil = hashutil;
-        this.loadFromCache = this.modConfig.useCache ? this.checkFiles() : false;
+        this.loadFromCache = this.modConfig.useCache ? this.Instance.helpers.fileWasChanged : false;
+        this.ShortNames = this.Instance.helpers.dbShortnames;
         this.modsCompatibility.preSptLoad(this.Instance, config, this.loadFromCache);
+        this.markedRooms.preSptLoad(this.Instance, config);
     }
 
     public generateWeapons(): ConfigItem
     {
+        this.markedRooms.postDBLoad();
+
         const generatedItems: ConfigItem = {};
         let skippedItems: number = 0;
         if (this.loadFromCache) {
@@ -46,12 +47,18 @@ export class WeaponGeneration
             this.logWeapons(generatedItems, "Loaded from cache", 0);
             return generatedItems;
         }
-        const weaponDescriptions = this.createWeaponDescriptions();
-        const variantIds = this.loadCombinedConfigIds();
+        const variantTypes = this.Instance.helpers.dbVariants;
+        const weaponDescriptions = this.createWeaponDescriptions(variantTypes).descriptions;
+        const variantIds = this.Instance.helpers.dbIds;
+
+        // save combined variantIds
+        //const formatted = JSON.stringify(variantIds, (key, value) => value, 2).replace(/\[\s*([\s\S]*?)\s*]/g, (match) => match.replace(/\s+/g, ' '));
+        //fs.writeFileSync(path.join(__dirname, "../db/Cache/variantIds.json"), formatted);
+
         const newIds: variantIDsInterface = {};
         
-        for (const variantName in this.variantTypes) {
-            const variant = this.variantTypes[variantName];
+        for (const variantName in variantTypes) {
+            const variant = variantTypes[variantName];
             const rarity = raritySettings[variant.rarity];
             const weapons = this.checkWeaponsInVariant(variant.Weapons, variantName, variant);
             skippedItems += variant.Weapons.length - weapons.length;
@@ -60,9 +67,9 @@ export class WeaponGeneration
             if (!variantIds[variantName]) variantIds[variantName] = {};
             const weaponsIds = variantIds[variantName];
 
-            for(const weaponShortname of weapons) {
+            for (const weaponShortname of weapons) {
                 const variantShortName = `${weaponShortname} ${variant.ShortName}`;
-                const copiedWeaponId = ShortNames[weaponShortname];
+                const copiedWeaponId = this.ShortNames[weaponShortname];
                 const copiedItem = this.Instance.database.templates.items[copiedWeaponId];
                 const copiedItemHandbook = this.Instance.database.templates.handbook.Items.filter(item => item.Id === copiedWeaponId)[0];
                 const copiedItemName = this.Instance.database.locales.global.en[`${copiedWeaponId} Name`];
@@ -74,7 +81,7 @@ export class WeaponGeneration
                         LogTextColor.GREEN
                     );
                     for(let i = 0; i < 5; i++) {
-                        ids.push(this.hashUtil.generate())
+                        ids.push(this.Instance.hashUtil.generate());
                     }
                     if (!newIds[variantName]) newIds[variantName] = {};
                     newIds[variantName][weaponShortname] = ids;
@@ -86,7 +93,7 @@ export class WeaponGeneration
                 newWeapon[id] = {
                     itemTplToClone: copiedWeaponId,
                     overrideProperties: {
-                        BackgroundColor: this.colorConverterAPILoaded ? `${rarity.color}ff` : rarity.bgColor
+                        BackgroundColor: this.Instance.helpers.colorConverterAPILoaded ? `${rarity.color}ff` : rarity.bgColor
                     },
                     parentId: variant.additionalChanges?._parent ? variant.additionalChanges._parent : copiedItem._parent, 
                     handbookParentId: copiedItemHandbook.ParentId,
@@ -104,8 +111,8 @@ export class WeaponGeneration
                                 `<color=${rarity.color}><b>${rarity.starRating} ${variant.rarity} Quality ${rarity.starRating}</b></color>`,
                                 `<i>${rarity.flavour}</i>`,
                                 `<color=${rarity.color}>${rarity.description}`,
-                                `${weaponDescriptions[variant.rarity]}</color>`,
-                                `This weapon counts toward ${getShortNameById(ShortNames, variant.quests?.id) || "original"} weapon kills for quest completion</align>`
+                                `${weaponDescriptions[variantName]}</color>`,
+                                `This weapon counts toward ${getShortNameById(this.ShortNames, variant.quests?.id) || "original"} weapon kills for quest completion</align>`
                             ].join('\n')
                         }
                     },
@@ -156,13 +163,15 @@ export class WeaponGeneration
                 this.addPreset(newWeapon, id, weaponShortname, copiedItem, variant, ids);
                 this.changeAdditionalPropertiesSlots(newWeapon, id, weaponShortname, copiedItem, variant);
                 this.changeAdditionalPropertiesChambers(newWeapon, id, weaponShortname, copiedItem, variant);
+                this.markedRooms.addWeaponToMarkedRoom(newWeapon[id]);
                 this.modsCompatibility.addToAPBSBlacklist(id, variant.rarity, variantName, variantShortName);
                 this.modsCompatibility.createPresetForGambler(newWeapon[id].weaponpresets[0], ids, variant.rarity, variantName);
                 Object.assign(generatedItems, newWeapon);
             }
         }
         this.logWeapons(generatedItems, "Generated", skippedItems);
-        if (Object.keys(newIds).length > 0) this.saveVariantWeapons(newIds);
+        if (Object.keys(newIds).length > 0) this.Instance.helpers.saveJsonToFile(newIds, "Ids");
+        this.markedRooms.processMarkedRooms();
         this.modsCompatibility.saveAPBSBlacklist();
         this.modsCompatibility.createOrUpdateAPBSPreset(generatedItems);
         this.modsCompatibility.saveGamblerPresets();
@@ -170,7 +179,7 @@ export class WeaponGeneration
         return generatedItems;
     }
 
-    private checkWeaponsInVariant(weapons: string[], variantName: string, variant: VariantType): string[] {
+    private checkWeaponsInVariant(weapons: string[], variantName: string, variant: VariantConfiguration): string[] {
         if (this.modConfig.notGenerateVariantTypes.includes(variantName) || this.modConfig.notGenerateQuality.includes(variant.rarity)) return [];
         if (!weapons || weapons.length == 0) {
             // check for missing weapons property or blank array
@@ -189,13 +198,13 @@ export class WeaponGeneration
             return [];
         }
         const newWeapons: string[] = [];
-        for(const weaponShortname of weapons) {
-            const copiedWeaponId = ShortNames[weaponShortname];
+        for (const weaponShortname of weapons) {
+            const copiedWeaponId = this.ShortNames[weaponShortname];
             const variantShortName = `${weaponShortname} ${variant.ShortName}`;
             // check if base weapon is in the game
             if (!copiedWeaponId) {
                 this.Instance.logger.log(
-                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Shortname '${weaponShortname}' missing in 'references/shortNames.ts' file. Skipping '${variantShortName}'`,
+                    `[${this.Instance.modName}] weaponGeneration.generateWeapons: Shortname '${weaponShortname}' missing in 'id/Shortnames' file. Skipping '${variantShortName}'`,
                     LogTextColor.RED
                 );
             } else 
@@ -217,7 +226,7 @@ export class WeaponGeneration
         id: string,
         weaponShortname: string,
         copiedItem: any,
-        variant: VariantType
+        variant: VariantConfiguration
     ): void {
 
         //replace if additionalChanges
@@ -238,7 +247,7 @@ export class WeaponGeneration
                 break;
         }
         //add to inventory slots if sawed-off
-        if (weaponShortname.includes("MP-43 sawed-off")) {
+        if (weaponShortname.includes("Sawed-off")) {
             itemConfig[id].addtoInventorySlots.push("Holster");
         }
     }
@@ -247,7 +256,7 @@ export class WeaponGeneration
         id: string,
         weaponShortname: string,
         copiedItem: any,
-        variant: VariantType
+        variant: VariantConfiguration
     ): void {
 
         const integerProps = [
@@ -258,31 +267,217 @@ export class WeaponGeneration
             "Ergonomics",
             "RecoilStableIndexShot"
         ];
-        for (const prop in variant.props) {
-            let oldWeaponPropValue = copiedItem._props[prop];
-            //add check type of prop
-            //check minimum values
-            if (variant.additionalChanges?.minimum?.[prop]) {
-                if (oldWeaponPropValue < variant.additionalChanges["minimum"][prop]) {
-                    oldWeaponPropValue = variant.additionalChanges["minimum"][prop];
+
+        const props = structuredClone(variant.props);
+
+        if (variant?.additionalChanges?.[weaponShortname]) {
+            // add additional changes to props changes
+            Object.assign(props, variant?.additionalChanges?.[weaponShortname])
+        }
+
+        for (const propName in props) {
+            // can't change prop that does not exist
+            if (!copiedItem._props[propName]) continue;
+
+            let oldWeaponPropValue = copiedItem._props[propName];
+            // check and replace minimum values if present
+            if (variant.additionalChanges?.minimum?.[propName]) {
+                if (oldWeaponPropValue < variant.additionalChanges.minimum[propName]) {
+                    oldWeaponPropValue = variant.additionalChanges.minimum[propName];
                 }
             }
+            
+            const propValue = props[propName];
             //fix for firemode and other props that are objects/arrays
             let newValue: any;
-            if (typeof variant.props[prop] === 'string' && /^[+-]\d+%?$/.test(variant.props[prop])) {
-                newValue = this.calculateValue(oldWeaponPropValue, variant.props[prop]);
+            if (typeof propValue === 'string' && /^[+-]\d+%?$/.test(propValue)) {
+                newValue = this.calculateValue(oldWeaponPropValue, propValue);
             } else {
-                newValue = variant.props[prop];
+                newValue = propValue;
             }
-            //made additional changes according to variant
-            if (variant.additionalChanges && variant.additionalChanges[weaponShortname] && variant.additionalChanges[weaponShortname][prop]) {
-                if (this.Instance.debug) {
-                    console.log(`Changing property of ${weaponShortname} ${variant.ShortName} / ${variant.additionalChanges[weaponShortname][prop]}`);
-                }
-                newValue = variant.additionalChanges[weaponShortname][prop];
-            }
-            itemConfig[id].overrideProperties[prop] = integerProps.includes(prop) ? Math.ceil(newValue) : newValue;
+            itemConfig[id].overrideProperties[propName] = integerProps.includes(propName) ? Math.ceil(newValue) : newValue;
         }
+    }
+
+    private addPreset(
+        itemConfig: ConfigItem,
+        id: string,
+        weaponShortname: string,
+        copiedItem: any,
+        variant: VariantConfiguration,
+        ids: string[]
+    ): void {
+        const variantName = `${weaponShortname} ${variant.ShortName}`;
+        const basePreset = this.Instance.helpers.dbPresets[weaponShortname] ?? findPresetsWithEncyclopedia(this.Instance.database.globals.ItemPresets, copiedItem._id)[0];
+        const preset = this.Instance.helpers.dbPresets[variantName] ?? basePreset;
+        if (!preset) {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] WeaponGeneration.addPreset: Preset not found for '${copiedItem._id}'. Skipping...`,
+                LogTextColor.YELLOW
+            );
+            itemConfig[id].addweaponpreset = false;
+            return;
+        }
+        const defaultPreset = structuredClone(preset);
+        defaultPreset._encyclopedia = id;
+        const replaceIds: {[key: string]: string} = {};
+        replaceIds[defaultPreset._items[0]._id] = ids[2];
+
+        defaultPreset._id = ids[1];
+        defaultPreset._parent = ids[2];
+        defaultPreset._items[0] = {
+            _id: ids[2],
+            _tpl: id,
+            upd: {
+                "Repairable": { "MaxDurability": 100, "Durability": 100},
+                "FireMode": { "FireMode": "single" }
+            }
+        };
+        
+        for (let i = 1; i < defaultPreset._items.length; i++) {
+            const item = defaultPreset._items[i];
+            if (!replaceIds[item._id]) {
+                replaceIds[item._id] = this.Instance.hashUtil.generate();
+            }
+            item._id = replaceIds[item._id];
+            item.parentId = replaceIds[item!.parentId];
+        }
+        defaultPreset._changeWeaponName = false;
+        defaultPreset._name = `${variantName} Variant Default Preset`;
+
+        if (variant.props["weapFireType"]) {
+            defaultPreset._items[0].upd.FireMode.FireMode = variant.props["weapFireType"][0];
+        }
+        itemConfig[id].weaponpresets.push(defaultPreset);
+    }
+
+    private changeAdditionalPropertiesSlots(
+        itemConfig: ConfigItem,
+        id: string,
+        weaponShortname: string,
+        copiedItem: any,
+        variant: VariantConfiguration
+    ): void {
+        if (!variant.additionalChanges?.Slots && !variant.additionalChanges?.[weaponShortname]?.Slots) return;
+        //made additional changes based on "additionalChanges" property from variant object
+        //this is after creating preset because we need to change some preset parts according to variant
+        
+        let slotsOriginal = structuredClone(copiedItem._props.Slots);
+        let slots = structuredClone(variant.additionalChanges?.Slots ? variant.additionalChanges.Slots : variant.additionalChanges?.[weaponShortname]?.Slots);
+        if (variant.additionalChanges?.Slots && variant.additionalChanges?.[weaponShortname]?.Slots) {
+            Object.assign(slots, variant.additionalChanges?.[weaponShortname]?.Slots);
+        }
+        for(const slot in slots) {
+            const slotOriginal = findSlotWithName(slotsOriginal, slot);
+
+            // can't change slot that does not exist
+            if (!slotOriginal) continue;
+
+            const newFilter = slots[slot];
+            if (typeof newFilter === 'object' && newFilter.length == 0) {
+                // remove if no filter
+                slotsOriginal = slotsOriginal.filter(element => element._name != slot);
+                itemConfig[id].weaponpresets[0]._items = itemConfig[id].weaponpresets[0]._items.filter(presetItem => {
+                    return !(presetItem.slotId && presetItem.slotId === slot);
+                });
+            } else {
+                // allow choosing eg. different magazines if external/internal magazine
+                let choosenFilter = newFilter.basedOn ? newFilter.variants[copiedItem._props[newFilter.basedOn]] : newFilter;
+                // allow using multiple filters from different weapons
+                if (choosenFilter?.fromWeapons) {
+                    let filterFromWeapons: string[] = [];
+                    for (const fromWeapon of choosenFilter.fromWeapons) {
+                        // allow using shortname or weapon ID
+                        const fromWeaponID = this.ShortNames[fromWeapon] ? this.ShortNames[fromWeapon] : fromWeapon;
+                        const filterFromWeapon = findSlotWithName(this.Instance.database.templates.items[fromWeaponID]._props.Slots, slot)._props.filters[0].Filter;
+                        if (filterFromWeapon) {
+                            filterFromWeapons = filterFromWeapons.concat(filterFromWeapon);
+                        }
+                    }
+                    // allow adding different filters - not from weapons
+                    if (choosenFilter.add) filterFromWeapons = filterFromWeapons.concat(choosenFilter.add);
+                    choosenFilter = filterFromWeapons;
+                }
+                // change internal names of created items to proper mongoIds
+                const itemsIds = this.Instance.helpers.dbItemsIds;
+                for (let i = 0; i < choosenFilter.length; i++) {
+                    if (itemsIds[choosenFilter[i]]) choosenFilter[i] = itemsIds[choosenFilter[i]]
+                }
+                slotOriginal._props.filters[0].Filter = choosenFilter;
+                //add defMagType property if magazine is changed
+                if (slot == "mod_magazine") {
+                    itemConfig[id].overrideProperties.defMagType = choosenFilter[0];
+                }
+                //make changes to preset
+                const slotToChange = findItemWithSlotId(itemConfig[id].weaponpresets[0]._items, slot);
+
+                if (slotToChange) {
+                    slotToChange._tpl = choosenFilter[0];
+                }
+            }
+        }
+        // Change id of changed slots to new weapon
+        slotsOriginal.forEach(e => e._parent = id);
+        itemConfig[id].overrideProperties.Slots = slotsOriginal;
+    }
+
+    private changeAdditionalPropertiesChambers(
+        itemConfig: ConfigItem,
+        id: string,
+        weaponShortname: string,
+        copiedItem: any,
+        variant: VariantConfiguration
+    ): void {
+
+        // copied item does not have chambers
+        if (copiedItem._props.Chambers.length === 0) return;
+
+        // nothing to change
+        if (!variant?.additionalChanges?.Chambers && !variant.additionalChanges?.[weaponShortname]?.Chambers) return;
+
+        const changeChamber = variant?.additionalChanges?.Chambers ?? variant.additionalChanges?.[weaponShortname]?.Chambers;
+        let newFilter = [];
+
+        if (changeChamber?.fromWeapons) {
+            for (const fromWeapon of changeChamber.fromWeapons) {
+                // allow using shortname or weapon ID
+                const fromWeaponID = this.ShortNames[fromWeapon] ? this.ShortNames[fromWeapon] : fromWeapon;
+                const filterFromWeapon = this.Instance.database.templates.items[fromWeaponID]._props.Chambers[0]._props.filters[0].Filter;
+                if (filterFromWeapon) {
+                    newFilter = newFilter.concat(filterFromWeapon);
+                }
+            }
+            if (changeChamber?.add) {
+                newFilter = newFilter.concat(changeChamber.add);
+            }
+        } else {
+            newFilter = changeChamber;
+        }
+        
+        if (newFilter.length === 0) {
+            this.Instance.logger.log(
+                `[${this.Instance.modName}] weaponGeneration.changeAdditionalPropertiesChambers: ${variant.ShortName} Variant: You are trying to copy Chambers of weapon that does not have any: ${changeChamber}. Skipping`,
+                LogTextColor.RED
+            );
+            return;
+        }
+
+        for (let i = 0; i < copiedItem._props.Chambers.length; i++) {
+            const chambersOriginal = structuredClone(copiedItem._props.Chambers[i]);
+            chambersOriginal._id = this.Instance.hashUtil.generate();
+            chambersOriginal._parent = id;
+            chambersOriginal._props.filters[0].Filter = newFilter;
+            if (!itemConfig[id].overrideProperties.Chambers) {
+                itemConfig[id].overrideProperties.Chambers = [];
+            }
+            //add defAmmo property if chamber is changed
+            if (i == 0) {
+                itemConfig[id].overrideProperties.defAmmo = chambersOriginal._props.filters[0].Filter[0];
+                itemConfig[id].overrideProperties.ammoCaliber = this.Instance.database.templates.items[chambersOriginal._props.filters[0].Filter[0]]._props.Caliber;
+            }
+            itemConfig[id].overrideProperties.Chambers.push(chambersOriginal);
+        }
+
     }
 
     private calculateValue(first: number, second: string | number): number {
@@ -298,159 +493,19 @@ export class WeaponGeneration
         } else if (typeof second === 'number') {
             return second;
         } else {
-            // If invalid string, return first as default or handle differently
+            // If invalid string, return first as default
             return first;
         }
     }
 
-    private addPreset(
-        itemConfig: ConfigItem,
-        id: string,
-        weaponShortname: string,
-        copiedItem: any,
-        variant: VariantType,
-        ids: string[]
-    ): void {
-        const preset = findPresetsWithEncyclopedia(this.Instance.database.globals.ItemPresets, copiedItem._id)[0];
-        if (!preset) {
-            this.Instance.logger.log(
-                `[${this.Instance.modName}] WeaponGeneration.addPreset: Preset not found for '${copiedItem._id}'. Skipping...`,
-                LogTextColor.YELLOW
-            );
-            itemConfig[id].addweaponpreset = false;
-            return;
-        }
-        const defaultPreset = structuredClone(preset);
-        defaultPreset._encyclopedia = id;
-        const oldId = defaultPreset._items[0]._id;
-        defaultPreset._id = ids[1];
-        defaultPreset._parent = ids[2];
-        defaultPreset._items[0] = {
-            _id: ids[2],
-            _tpl: id,
-            upd: {
-                "Repairable": { "MaxDurability": 100, "Durability": 100},
-                "FireMode": { "FireMode": "single" }
-            }
-        };
-        for (const partOfPreset of defaultPreset._items) {
-            if (partOfPreset.parentId == oldId) partOfPreset.parentId = ids[2];
-        }
-        defaultPreset._changeWeaponName = false;
-        defaultPreset._name = `${weaponShortname} ${variant.ShortName} Variant Default Preset`;
+    private createWeaponDescriptions(variantTypes: VariantConfigurationKeyed): { descriptions: Record<string, string> } {
 
-        if (variant.props["weapFireType"]) {
-            defaultPreset._items[0].upd.FireMode.FireMode = variant.props["weapFireType"][0];
-        }
-        itemConfig[id].weaponpresets.push(defaultPreset);
-    }
+        const descriptions: Record<string, string> = {};
 
-    private changeAdditionalPropertiesSlots(
-        itemConfig: ConfigItem,
-        id: string,
-        weaponShortname: string,
-        copiedItem: any,
-        variant: VariantType
-    ): void {
-        //made additional changes based on "additionalChanges" property from variant object
-        //this is after creating preset because we need to change some preset parts according to variant
-        if (variant.additionalChanges?.Slots || variant.additionalChanges?.[weaponShortname]?.Slots) {
-            let slotsOriginal = structuredClone(copiedItem._props.Slots);
-            let slots = structuredClone(variant.additionalChanges?.Slots ? variant.additionalChanges.Slots : variant.additionalChanges?.[weaponShortname]?.Slots);
-            if (variant.additionalChanges?.Slots && variant.additionalChanges?.[weaponShortname]?.Slots) {
-                Object.assign(slots, variant.additionalChanges?.[weaponShortname]?.Slots);
-            }
-            for(const slot in slots) {
-                const slotOriginal = findSlotWithName(slotsOriginal, slot);
-                const newFilter: string[] = slots[slot];
-                if (slotOriginal) {
-                    if (typeof newFilter === 'object' && newFilter.length == 0) {
-                        // remove if no filter
-                        slotsOriginal = slotsOriginal.filter(element => element._name != slot);
-                        itemConfig[id].weaponpresets[0]._items = itemConfig[id].weaponpresets[0]._items.filter(presetItem => {
-                            return !(presetItem.slotId && presetItem.slotId === slot);
-                        });
-                    } else {
-                        //allow choosing eg. different magazines if external/internal magazine
-                        let choosenFilter = newFilter[0].basedOn ? newFilter[0].variants[copiedItem._props[newFilter[0].basedOn]] : newFilter;
-                        //if filter is text => replace it with filter from slot of item that text is representing
-                        choosenFilter = typeof choosenFilter === 'string' ? findSlotWithName(this.Instance.database.templates.items[choosenFilter]._props.Slots, slot)._props.filters[0].Filter : choosenFilter;
-                        slotOriginal._props.filters[0].Filter = choosenFilter;
-                        //add defMagType property if magazine is changed
-                        if (slot == "mod_magazine") {
-                            itemConfig[id].overrideProperties.defMagType = choosenFilter[0];
-                        }
-                        //make changes to preset
-                        const slotToChange = findItemWithSlotId(itemConfig[id].weaponpresets[0]._items, slot);
-
-                        if (slotToChange) {
-                            slotToChange._tpl = choosenFilter[0];
-                        }
-                    }
-                }
-            }
-            itemConfig[id].overrideProperties.Slots = slotsOriginal;
-        }
-    }
-
-    private changeAdditionalPropertiesChambers(
-        itemConfig: ConfigItem,
-        id: string,
-        weaponShortname: string,
-        copiedItem: any,
-        variant: VariantType
-    ): void {
-        if ((variant?.additionalChanges?.Chambers || variant.additionalChanges?.[weaponShortname]?.Chambers) && copiedItem._props.Chambers.length > 0) {
-            const changeChamber = variant?.additionalChanges?.Chambers ? variant.additionalChanges.Chambers.patron_in_weapon : variant.additionalChanges[weaponShortname].Chambers.patron_in_weapon;
-            if (typeof changeChamber === 'string' && this.Instance.database.templates.items[changeChamber]._props.Chambers.length === 0) {
-                this.Instance.logger.log(
-                    `[${this.Instance.modName}] weaponGeneration.changeAdditionalPropertiesChambers: ${variant.ShortName} Variant: You are trying to copy Chambers of weapon that does not have any: ${changeChamber}. Skipping`,
-                    LogTextColor.RED
-                );
-                return;
-            }
-            //if filter is text => replace it with filter from slot of item that text is representing
-            const chambers = typeof changeChamber === 'string' ? this.Instance.database.templates.items[changeChamber]._props.Chambers[0]._props.filters[0].Filter : changeChamber;
-            if (chambers) {
-                //chambersOriginal is copy of original property that we want to change
-                for (let i = 0; i < copiedItem._props.Chambers.length; i++) {
-                    const chambersOriginal = structuredClone(copiedItem._props.Chambers[i]);
-                    chambersOriginal._id = this.hashUtil.generate();
-                    chambersOriginal._parent = id;
-                    chambersOriginal._props.filters[0].Filter = chambers;
-                    if (!itemConfig[id].overrideProperties.Chambers) {
-                        itemConfig[id].overrideProperties.Chambers = [];
-                    }
-                    //add defAmmo property if chamber is changed
-                    if (i == 0) {
-                        itemConfig[id].overrideProperties.defAmmo = chambersOriginal._props.filters[0].Filter[0];
-                        itemConfig[id].overrideProperties.ammoCaliber = this.Instance.database.templates.items[chambersOriginal._props.filters[0].Filter[0]]._props.Caliber;
-                    }
-                    itemConfig[id].overrideProperties.Chambers.push(chambersOriginal);
-                }
-            }
-        }
-    }
-
-    private saveVariantWeapons(
-        variantWeapons: any
-    ): void {
-        const formatted = JSON.stringify(variantWeapons, (key, value) => value, 2).replace(/\[\s*([\s\S]*?)\s*]/g, (match) => match.replace(/\s+/g, ' '));
-        const newName = this.hashUtil.generate();
-        fs.writeFileSync(path.join(__dirname, `../db/Ids/${newName}.json`), formatted);
-        this.Instance.logger.log(
-            `[${this.Instance.modName}] weaponGeneration.saveVariantWeapons: Database 'Ids/${newName}.json' was created`,
-            LogTextColor.GREEN
-        );
-    }
-
-    private createWeaponDescriptions(): WeaponDescription {
-
-        const weaponRarity: string[] = Object.keys(raritySettings);
-        const descriptions: WeaponDescription = {};
-        for (const rarity of weaponRarity) {
+        for(const variantTypeName in variantTypes) {
+            const variantType = variantTypes[variantTypeName];
+            const rarity = variantType.rarity;
             const textArray: string[] = [];
-            //if (modConfig.containers.probability.overall > 0 && modConfig.containers.probability[`${quality}Weapons`] > 0) { textArray.push("in containers"); };
             if (!this.modConfig.airdrop.blacklist.includes(rarity)) { textArray.push("in airdrop"); };
             if (!this.modConfig.fence.blacklist.includes(rarity)) { textArray.push("on Fence"); };
             if (!this.modConfig.flea.blacklist.includes(rarity)) { textArray.push("on flea market"); };
@@ -464,9 +519,21 @@ export class WeaponGeneration
                     textArray.push(`on enemies of level: ${this.groupConsecutiveNumbers(apbsLvls).join(", ")}`);
                 }
             }
-            descriptions[rarity] = `Weapons of this quality can be found: ${textArray.join(", ")}`;
+
+            if (this.markedRooms.moduleEnabled) {
+                const foundMaps = Object.entries(this.markedRooms.variantTypesMarkedRooms)
+                    .filter(([_, arr]) => arr.includes(variantTypeName))
+                    .map(([key]) => key);
+                if (foundMaps.length === 1) {
+                    textArray.push(`in marked room(s) on ${mapNames[foundMaps[0]]} map`);
+                }
+                if (foundMaps.length >= 2) {
+                    textArray.push(`in marked room(s) on maps: ${foundMaps.forEach(e => mapNames[e])}`);
+                }
+            }
+            descriptions[variantTypeName] = `Weapons of this quality can be found: ${textArray.join(", ")}`;
         }
-        return descriptions;
+        return { descriptions };
     }
 
     private groupConsecutiveNumbers(arr: number[]): (string | number)[] {
@@ -506,110 +573,5 @@ export class WeaponGeneration
             ].join('\n'),
             LogTextColor.GREEN
         );
-    }
-
-    private getFileStatus(filePath: string): 'OK' | 'MODIFIED' | 'MISSING' {
-        try {
-            const stats = fs.statSync(path.resolve(__dirname, filePath));
-            const modifiedTime = stats.mtime.getTime();
-            const currentTime = Date.now();
-            const oneHourInMs = 60 * 60 * 1000;
-    
-            return (currentTime - modifiedTime <= oneHourInMs) ? 'MODIFIED' : 'OK';
-        } catch (err: any) {
-            if (err.code === 'ENOENT') {
-                return 'MISSING';
-            } else {
-                return 'MISSING';
-            }
-        }
-    }
-
-    private checkFiles(): boolean {
-
-        const variantFilePath = path.join(__dirname, "../db/Variants");
-        const variantFilePaths = fs.readdirSync(variantFilePath).filter(file => path.extname(file).toLowerCase() === '.json');
-        for (const file of variantFilePaths) {
-            if (this.getFileStatus(variantFilePath + "/" + file) == "MODIFIED") return false;
-        }
-
-        const itemsFilePath = path.join(__dirname, "../db/Items");
-        const itemsFilePaths = fs.readdirSync(itemsFilePath).filter(file => path.extname(file).toLowerCase() === '.json');
-        for (const file of itemsFilePaths) {
-            if (this.getFileStatus(itemsFilePath + "/" + file) == "MODIFIED") return false;
-        }
-
-        const cacheFiles = [
-            "../db/Cache/generatedWeapons.json"
-        ];
-        for (const file of cacheFiles) {
-            if (this.getFileStatus(file) == "MISSING") return false;
-        }
-        if (this.getFileStatus("../config/config.jsonc") == "MISSING") {
-            if (this.getFileStatus("../config/defaultConfig.jsonc") == "MODIFIED") return false;
-        } else {
-            if (this.getFileStatus("../config/config.jsonc") == "MODIFIED") return false;
-        }
-        return true;
-    }
-
-    private loadCombinedConfig(): any 
-    {
-        const configFiles = fs.readdirSync(path.join(__dirname, "../db/Variants"));
-        const combinedConfig: any = {};
-
-        configFiles.forEach((file) => 
-        {
-            const configPath = path.join(__dirname, "../db/Variants", file);
-            const configFileContents = fs.readFileSync(configPath, "utf-8");
-            const config = JSON.parse(configFileContents) as VariantType;
-
-            // add new weapons to exisiting types in different file - combine Weapon property and remove duplicates
-            for (const variant in config) {
-                if (combinedConfig[variant]) {
-                    combinedConfig[variant].Weapons = combinedConfig[variant].Weapons.concat(config[variant].Weapons);
-                    combinedConfig[variant].Weapons = [...new Set(combinedConfig[variant].Weapons)];
-                    delete config[variant];
-                }
-            }
-            Object.assign(combinedConfig, config);
-        });
-
-        return combinedConfig;
-    }
-
-    private loadCombinedConfigIds(): variantIDsInterface 
-    {
-        const configFiles = fs.readdirSync(path.join(__dirname, "../db/Ids"));
-        const combinedConfig: variantIDsInterface = {};
-
-        configFiles.forEach((file) => 
-        {
-            const configPath = path.join(__dirname, "../db/Ids", file);
-            const configFileContents = fs.readFileSync(configPath, "utf-8");
-            const config = JSON.parse(configFileContents) as variantIDsInterface;
-
-            // add new weapons to exisiting types in different file - combine Weapon property and remove duplicates
-            for (const variant in config) {
-                if (combinedConfig[variant]) {
-                    Object.assign(combinedConfig[variant], config[variant]);
-                    delete config[variant];
-                }
-            }
-            Object.assign(combinedConfig, config);
-        });
-
-        return combinedConfig;
-    }
-
-    private colorConverterAPICheck(): boolean 
-    {
-        const pluginName = "rairai.colorconverterapi.dll";
-        try {
-            const pluginList = fs.readdirSync("./BepInEx/plugins").map(plugin => plugin.toLowerCase());
-            return pluginList.includes(pluginName);
-        } catch {
-            return false;
-        }
     }
 }

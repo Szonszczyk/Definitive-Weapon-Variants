@@ -1,0 +1,11 @@
+{
+    "Sniper Variant 28 inch barrel": {
+        "Description": "Special 28 inch barrel for Sniper Variant Weapons",
+        "ShortName": "Sniper 28\"",
+        "itemTplToClone": "628121434fa03b6b6c35dc6a",
+        "props": {},
+        "handbookPriceRoubles": 39876,
+        "variant": "Sniper",
+        "rarity": "Advanced"
+    }
+}

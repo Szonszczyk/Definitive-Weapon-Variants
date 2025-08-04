@@ -8,12 +8,12 @@
 				"burst"
 			],
 			"bFirerate": 450,
-			"RecoilForceUp": "-40%",
+			"RecoilForceUp": "-50%",
 			"RecoilForceBack": "-30%",
 			"RecoilDampingHandRotation": "-95%",
 		    "RecoilReturnSpeedHandRotation": "+95%",
 			"BurstShotsCount": 100,
-			"HeatFactorByShot": "+100%",
+			"HeatFactorByShot": "+50%",
 			"CoolFactorGun": "+50%"
 		},
 		"Weapons": [
@@ -29,37 +29,44 @@
     	"Explanation": "Weapon variant that suffers massive durability damage with each shot and has a very high chance of mechanical malfunction",
     	"ShortName": "Broken",
     	"props": {
-    		"BaseMalfunctionChance": "+5000%",
-    		"DurabilityBurnRatio": "+5000%",
+    		"BaseMalfunctionChance": "+1000%",
+    		"DurabilityBurnRatio": "+1000%",
+			"HeatFactorByShot": "-60%",
     		"AllowMisfire": false
     	},
 		"Weapons": [
 			"M4A1", "SA-58", "AK-74M", "SKS", "VSK-94",
-			"AK-103", "DT MDR 5.56x45", "MCX SPEAR", "MP9", "MP9-N",
+			"AK-103", "MDR 5.56x45", "SPEAR 6.8", "MP9", "MP9-N",
 			"PP-9 Klin", "AKS-74UB", "AKS-74UN", "AKMN", "AKMS",
-			"AA-12 Gen 1", "MP-43 sawed-off"
+			"AA-12 Gen 1", "Sawed-off"
 		],
 		"ID": "0702",
         "rarity": "Meme"
     },
-	"Tornado": {
-		"Description": "Objective: Spin in a specific motion to try to kill enemies",
+	"Wild": {
+		"Description": "This weapon handles like a wild beast! Completely unpredictable!",
     	"Explanation": "Weapon variant with full-auto fire only, insane vertical recoil, and no stabilization point",
-    	"ShortName": "T0RN2D0",
+    	"ShortName": "W1LD",
 		"props": {
 			"weapFireType": [ "fullauto" ],
-			"bFirerate": "+200%",
-			"RecoilForceUp": "+1500%",
+			"bFirerate": "+100%",
+			"RecoilForceUp": "+200%",
 			"RecoilStableIndexShot": 100,
 			"HeatFactorByShot": 0,
 			"RecolDispersion": 60
     	},
 		"additionalChanges": {
 			"Chambers": {
-        		"patron_in_weapon": "59d6088586f774275f37482f"
-        	},
+				"fromWeapons": [
+					"AKM"
+				]
+			},
     		"Slots": {
-			    "mod_magazine": "6513ef33e06849f06c0957ca"
+			    "mod_magazine": {
+					"fromWeapons": [
+						"RPD"
+					]
+				}
 			},
 			"minimum": {
 				"bFirerate": 450
@@ -67,7 +74,7 @@
     	},
 		"Weapons": [
 			"SA-58", "Saiga-12K", "AK-74M", "RSASS", "Mk47",
-			"VPO-136", "AK-101", "MP9", "DT MDR 5.56x45", "AK-105",
+			"VPO-136 Vepr-KM", "AK-101", "MP9", "MDR 5.56x45", "AK-105",
 			"AK-74"
 		],
 		"ID": "0703",
@@ -80,9 +87,9 @@
         "props": {
 			"weapFireType": [ "fullauto" ],
             "RecolDispersion": 1000,
-            "RecoilForceBack": "+300%",
-            "RecoilForceUp": "+300%",
-            "AimPlane": "+1000%"
+            "RecoilForceBack": "+200%",
+            "AimPlane": "+1000%",
+			"bFirerate": "+50%"
         },
 		"additionalChanges": {
 			"minimum": {
@@ -90,11 +97,52 @@
 			}
     	},
         "Weapons": [
-            "M4A1", "SA-58", "MCX", "Mk47", "AUG A3",
-			"Glock 18C", "UZI PRO SMG", "MP9-N", "MCX SPEAR", "AK-102",
+            "M4A1", "SA-58", "MCX .300 BLK", "Mk47", "AUG A3",
+			"Glock 18C", "UZI PRO SMG", "MP9-N", "SPEAR 6.8", "AK-102",
 			"AKS-74"
         ],
         "ID": "0704",
+        "rarity": "Meme"
+    },
+	"Pistol": {
+        "Description": "A weapon variant designed specifically for pistol quests, tailored for those who dislike using actual pistols",
+        "Explanation": "Bolt-action rifles with significantly improved accuracy and handling, but chambered in the 9x18 pistol caliber",
+        "ShortName": "9x18PM",
+        "props": {
+            "ammoCaliber": "Caliber9x18PM",
+            "DropSoundType": "Pistol",
+            "weapUseType": "secondary",
+            "CenterOfImpact": 0.01,
+            "Ergonomics": "+50",
+            "Velocity": "+20",
+            "Weight": "-90%"
+        },
+        "additionalChanges": {
+            "Chambers": {
+				"fromWeapons": [
+					"PM"
+				]
+			},
+            "Slots": {
+                "mod_magazine": {
+                    "fromWeapons": [
+                        "PM"
+                    ]
+                }
+            },
+            "addtoInventorySlots": ["Holster"],
+            "minimum": {
+                "bFirerate": 450
+            }
+        },
+        "quests": {
+            "id": "5448bd6b4bdc2dfc2f8b4569"
+        },
+        "Weapons": [
+            "T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
+            "VPO-215", "Desert Eagle L6", "TRG M10"
+        ],
+        "ID": "0705",
         "rarity": "Meme"
     }
 }

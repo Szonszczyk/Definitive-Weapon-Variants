@@ -13,16 +13,18 @@
         },
         "additionalChanges": {
             "Chambers": {
-                "patron_in_weapon": "576165642459773c7a400233"
-            },
+				"fromWeapons": [
+					"Saiga-12K"
+				]
+			},
             "Slots": {
-                "mod_magazine": [{
+                "mod_magazine": {
                     "basedOn": "ReloadMode",
                     "variants": {
                         "ExternalMagazine": [ "5cf8f3b0d7f00c00217872ef" ],
-                        "InternalMagazine": [ "911e2cff5d5389b4a6fd7638" ]
+                        "InternalMagazine": [ "SOK-12 12ga MD Arms Internal 20-round magazine" ]
                     }
-                }]
+                }
             },
             "minimum": {
                 "bFirerate": 250
@@ -49,76 +51,38 @@
             "RecoilForceBack": "+100%"
         },
         "Weapons": [
-            "TX-15 DML", "G28", "M1A", "Mk-18", "RSASS",
-            "SR-25", "SVDS", "OP-SKS", "RFB", "SAG AK",
-            "VPO-101"
+            "TX-15 DML", "G28", "M1A", "Mk-18 Mjölnir", "RSASS",
+            "SR-25", "SVDS", "OP-SKS", "RFB", "AK-545",
+            "VPO-101 Vepr-Hunter"
         ],
         "ID": "0602",
         "rarity": "Flawed"
     },
-    "Pistol": {
-        "Description": "A weapon variant designed specifically for pistol quests, tailored for those who dislike using actual pistols",
-        "Explanation": "Bolt-action rifles with significantly improved accuracy and handling, but chambered in the 9x18 pistol caliber",
-        "ShortName": "9x18PM",
+    "Slowed": {
+        "Description": "A gun once tossed into a swamp... now fished out, but not without consequences. Its action speed has suffered a serious debuff",
+        "Explanation": "Weapon variant with extremely low ergonomics, fire rate, and velocity. Full-auto only, but with reduced recoil when sustained",
+        "ShortName": "Slowed",
         "props": {
-            "ammoCaliber": "Caliber9x18PM",
-            "DropSoundType": "Pistol",
-            "weapUseType": "secondary",
-            "CenterOfImpact": 0.01,
-            "Ergonomics": "+50",
-            "Velocity": "+20",
-            "Weight": "-90%"
+            "weapFireType": [ "fullauto" ],
+            "Ergonomics": "-200",
+            "SingleFireRate": "-30%",
+            "bFirerate": "-30%",
+            "Velocity": "-50",
+            "RecoilStableIndexShot": 2,
+            "HeatFactorByShot": 0
         },
         "additionalChanges": {
-            "Slots": {
-                "mod_magazine": "5448bd6b4bdc2dfc2f8b4569"
-            },
-            "Chambers": {
-                "patron_in_weapon": "5448bd6b4bdc2dfc2f8b4569"
-            },
-            "addtoInventorySlots": ["Holster"],
-            "minimum": {
-                "bFirerate": 450
-            }
-        },
-        "quests": {
-            "id": "5448bd6b4bdc2dfc2f8b4569"
-        },
+    		"minimum": {
+    			"bFirerate": 450
+    		}
+    	},
         "Weapons": [
-            "T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
-            "VPO-215", "Desert Eagle L6", "TRG M10"
-        ],
-        "ID": "0603",
-        "rarity": "Flawed"
-    },
-    "Upgraded": {
-        "Description": "Modified to be a slightly better weapon—but when you tweak every statistic without understanding them, you're just as likely to make it worse",
-        "Explanation": "Weapon variant with most statistics enhanced, including increased burst count (for weapons with burst fire), recoil, ergonomics, fire rate, velocity, heat buildup, and weight",
-        "ShortName": "Upgraded",
-        "props": {
-            "BurstShotsCount": "+2",
-            "RecoilForceUp": "+20%",
-            "RecoilForceBack": "+40%",
-            "RecoilCamera": "+15%",
-            "AimPlane": "+10%",
-            "RecoilStableIndexShot": "+2",
-            "RecoilDampingHandRotation": "+7%",
-            "RecoilReturnSpeedHandRotation": "+7%",
-            "RecolDispersion": "+50%",
-            "Ergonomics": "+35",
-            "SingleFireRate": "+35%",
-            "bFirerate": "+35%",
-            "Velocity": "+36",
-            "HeatFactorByShot": "+30%",
-            "Weight": "+50%"
-        },
-        "Weapons": [
-            "Mk47", "SCAR-L", "MCX SPEAR", "AK-74N", "AK-103",
+            "Mk47", "Mk 16", "SPEAR 6.8", "AK-74N", "AK-103",
             "AKS-74U", "AKS-74N", "PM", "PB", "APS",
             "PP-91-01 Kedr-B", "PP-91 Kedr", "Glock 17", "MP5K-N", "Saiga-9",
             "MP7A1", "SR-3M"
         ],
-        "ID": "0604",
+        "ID": "0603",
         "rarity": "Flawed"
     },
     "No-Scope": {
@@ -134,10 +98,10 @@
     		}
     	},
 		"Weapons": [
-			"G36", "ASh-12", "DT MDR 5.56x45", "DT MDR 7.62x51", "Vector 9x19",
-			"Vector .45", "RSASS"
+			"G36", "ASh-12", "MDR 5.56x45", "MDR 7.62x51", "Vector 9x19",
+			"Vector .45ACP", "RSASS"
 		],
-		"ID": "0605",
+		"ID": "0604",
         "rarity": "Flawed"
     },
     "Mid-Range": {
@@ -148,18 +112,54 @@
 			"ammoCaliber": "Caliber9x39"
     	},
     	"additionalChanges": {
-			"Chambers": {
-        		"patron_in_weapon": "57838ad32459774a17445cd2"
-        	},
+            "Chambers": {
+				"fromWeapons": [
+					"VSS Vintorez"
+				]
+			},
         	"Slots": {
-			    "mod_magazine": "57838ad32459774a17445cd2"
+			    "mod_magazine": {
+                    "fromWeapons": [
+                        "VSS Vintorez"
+                    ]
+                }
 			}
 		},
 		"Weapons": [
 			"T-5000M", "SV-98", "DVL-10", "M700", "AXMC",
 			"VPO-215", "TRG M10"
 		],
-		"ID": "0606",
+		"ID": "0605",
         "rarity": "Flawed"
-    }
+    },
+    "Quick-scope": {
+		"Description": "Quick! Use this bolt-action as a close-quarters weapon, we don't have time!\nDon't ask any questions",
+		"Explanation": "Weapon variant with maximum ergonomics and extremely high velocity, restricted to one special reflex sight",
+		"ShortName": "Quick",
+		"props": {
+			"Ergonomics": "+0",
+            "Velocity": 250
+		},
+		"additionalChanges": {
+            "Slots": {
+    			"mod_scope": [ "Quick-scope special \"reflex\" sight" ]
+    		},
+			"minimum": {
+				"Ergonomics": 200
+			},
+            "T-5000M": { "Slots": { "mod_mount": [ "ORSIS T-5000M Quick-scope mount" ] } },
+            "M700": { "Slots": { "mod_mount": [ "M700 AB Arms MOD*X rail Quick-scope mount" ] } },
+            "AXMC": { "Slots": { "mod_pistol_grip": [ "AI AXMC pistol grip Q" ] } },
+            "TOZ-106": { "Slots": { "mod_mount_000": [ "TOZ-106 dovetail mount Q" ] } },
+            "Mosin Infantry": { "Slots": { "mod_barrel": [ "Mosin Rifle 7.62x54R 730mm regular barrel Infantry Q" ] } },
+            "Mosin Sniper": { "Slots": { "mod_barrel": [ "Mosin Rifle 7.62x54R 730mm regular barrel Sniper Q" ] } }
+            
+		},
+		"Weapons": [
+			 "Mosin Sniper", "SV-98", "DVL-10", "Mosin Infantry", "M700",
+             "T-5000M", "AXMC", "TOZ-106"
+		],
+		"ID": "0606",
+		"rarity": "Flawed"
+	}
 }

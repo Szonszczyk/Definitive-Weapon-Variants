@@ -1,0 +1,61 @@
+{
+    "Mosin Sniper Quick": {
+        "_changeWeaponName": false,
+        "_encyclopedia": "6828a3cf3c599b2cd4000104",
+        "_id": "6828a3cf3c599b2cd4000105",
+        "_items": [
+          {
+            "_id": "6828a3cf3c599b2cd4000106",
+            "_tpl": "6828a3cf3c599b2cd4000104",
+            "upd": {
+              "Repairable": {
+                "MaxDurability": 100,
+                "Durability": 100
+              },
+              "FireMode": {
+                "FireMode": "single"
+              }
+            }
+          },
+          {
+            "_id": "6888a84b0612580568000efe",
+            "_tpl": "5ae0973a5acfc4001562206c",
+            "parentId": "6828a3cf3c599b2cd4000106",
+            "slotId": "mod_magazine"
+          },
+          {
+            "_id": "6888a84b0612580568000eff",
+            "_tpl": "5ae096d95acfc400185c2c81",
+            "parentId": "6828a3cf3c599b2cd4000106",
+            "slotId": "mod_stock"
+          },
+          {
+            "_id": "6888a84b0612580568000f00",
+            "_tpl": "6888a84b061258056800112a",
+            "parentId": "6828a3cf3c599b2cd4000106",
+            "slotId": "mod_barrel"
+          },
+          {
+            "_id": "6888a84b0612580568000f01",
+            "_tpl": "6888a84b061258056800112e",
+            "parentId": "6888a84b0612580568000f00",
+            "slotId": "mod_sight_front"
+          },
+          {
+            "_id": "979dc36c8f325edc3eac22e4",
+            "_tpl": "688503e1872439568c001100",
+            "parentId": "6888a84b0612580568000f01",
+            "slotId": "mod_scope"
+          },
+          {
+            "_id": "6888a84b0612580568000f02",
+            "_tpl": "5ae099925acfc4001a5fc7b3",
+            "parentId": "6888a84b0612580568000f00",
+            "slotId": "mod_sight_rear"
+          }
+        ],
+        "_name": "Mosin Sniper Quick Variant Default Preset",
+        "_parent": "6828a3cf3c599b2cd4000106",
+        "_type": "Preset"
+      }
+}

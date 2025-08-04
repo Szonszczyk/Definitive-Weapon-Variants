@@ -1,0 +1,126 @@
+{
+    "AXMC Quick": {
+        "_changeWeaponName": false,
+        "_encyclopedia": "68875f304e084d6804000f1b",
+        "_id": "68875f304e084d6804000f1c",
+        "_items": [
+          {
+            "_id": "68875f304e084d6804000f1d",
+            "_tpl": "68875f304e084d6804000f1b",
+            "upd": {
+              "Repairable": {
+                "MaxDurability": 100,
+                "Durability": 100
+              },
+              "FireMode": {
+                "FireMode": "single"
+              }
+            }
+          },
+          {
+            "_id": "6888a84b0612580568000f25",
+            "_tpl": "628120fd5631d45211793c9f",
+            "parentId": "68875f304e084d6804000f1d",
+            "slotId": "mod_magazine"
+          },
+          {
+            "_id": "6888a84b0612580568000f26",
+            "_tpl": "68875f304e084d6804001115",
+            "parentId": "68875f304e084d6804000f1d",
+            "slotId": "mod_pistol_grip",
+            "upd": {
+              "Foldable": {
+                "Folded": false
+              }
+            }
+          },
+          {
+            "_id": "6888a84b0612580568000f27",
+            "_tpl": "62811f828193841aca4a45c3",
+            "parentId": "6888a84b0612580568000f26",
+            "slotId": "mod_stock"
+          },
+          {
+            "_id": "6888a84b0612580568000f28",
+            "_tpl": "68875f304e084d6804001118",
+            "parentId": "6888a84b0612580568000f26",
+            "slotId": "mod_reciever"
+          },
+          {
+            "_id": "6888a84b0612580568000f29",
+            "_tpl": "6281209662cba23f6c4d7a19",
+            "parentId": "6888a84b0612580568000f28",
+            "slotId": "mod_handguard"
+          },
+          {
+            "_id": "6888a84b0612580568000f2a",
+            "_tpl": "628120c21d5df4475f46a337",
+            "parentId": "6888a84b0612580568000f29",
+            "slotId": "mod_mount_000"
+          },
+          {
+            "_id": "6888a84b0612580568000f2b",
+            "_tpl": "628120d309427b40ab14e76d",
+            "parentId": "6888a84b0612580568000f29",
+            "slotId": "mod_mount_001"
+          },
+          {
+            "_id": "6888a84b0612580568000f2c",
+            "_tpl": "628120d309427b40ab14e76d",
+            "parentId": "6888a84b0612580568000f29",
+            "slotId": "mod_mount_002"
+          },
+          {
+            "_id": "6888a84b0612580568000f2d",
+            "_tpl": "628120dd308cb521f87a8fa1",
+            "parentId": "6888a84b0612580568000f29",
+            "slotId": "mod_mount_003"
+          },
+          {
+            "_id": "6888a84b0612580568000f2e",
+            "_tpl": "6281212a09427b40ab14e770",
+            "parentId": "6888a84b0612580568000f28",
+            "slotId": "mod_foregrip"
+          },
+          {
+            "_id": "6888a84b0612580568000f2f",
+            "_tpl": "68875f304e084d680400111c",
+            "parentId": "6888a84b0612580568000f28",
+            "slotId": "mod_reciever"
+          },
+          {
+            "_id": "6888a84b0612580568000f30",
+            "_tpl": "628121434fa03b6b6c35dc6a",
+            "parentId": "6888a84b0612580568000f2f",
+            "slotId": "mod_barrel"
+          },
+          {
+            "_id": "6888a84b0612580568000f31",
+            "_tpl": "62812081d23f207deb0ab216",
+            "parentId": "6888a84b0612580568000f30",
+            "slotId": "mod_muzzle"
+          },
+          {
+            "_id": "6888a84b0612580568000f32",
+            "_tpl": "628120621d5df4475f46a335",
+            "parentId": "6888a84b0612580568000f31",
+            "slotId": "mod_muzzle"
+          },
+          {
+            "_id": "6888a84b0612580568000f33",
+            "_tpl": "62811cd7308cb521f87a8f99",
+            "parentId": "68875f304e084d6804000f1d",
+            "slotId": "mod_charge"
+          },
+          {
+            "_id": "b964fb09aafd0914fa17e1ca",
+            "_tpl": "688503e1872439568c001100",
+            "parentId": "6888a84b0612580568000f2f",
+            "slotId": "mod_scope"
+          }
+        ],
+        "_name": "AXMC Quick Variant Default Preset",
+        "_parent": "68875f304e084d6804000f1d",
+        "_type": "Preset"
+    }
+}

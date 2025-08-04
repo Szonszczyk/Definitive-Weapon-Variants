@@ -2,15 +2,15 @@
  // Config of Szonszczyk - Definitive Weapon Variants (DWV)
 
  // In here you can adjust how you want to get weapon variants in game
- // Make a copy, and save it as "config.jsonc" after changing anything to not lose your config after update!
+ // Make a copy of this file, rename it to "config.jsonc", before changing anything, to not lose your changes after update!
 
  // ### 1.1. Airdrop
  // You can choose which quality of weapon variants you can find in airdrop
 
  "airdrop": {
 	// Example: Move "Advanced" from "enable" to "blacklist" to remove "Advanced" variant quality
-	"enable": [ "Advanced", "Niche", "Baseline", "Flawed", "Meme" ],
-	"blacklist": [ "Ultimate", "Superior" ]
+	"enable": [ "Advanced", "Niche", "Baseline", "Flawed" ],
+	"blacklist": [ "Ultimate", "Superior", "Meme" ]
  },
 
  // ### 1.2. Fence
@@ -19,8 +19,8 @@
  // For this to work correctly, mod "ServerValueModifier"(SVM) should be loaded BEFORE Weapon Variants (Note: SVM is replacing whole Fence blacklist when corresponding setting is enabled)
 
  "fence": {
-	"enable": [ "Flawed", "Meme" ],
-	"blacklist": [ "Ultimate", "Superior", "Advanced", "Niche", "Baseline" ]
+	"enable": [ "Baseline", "Flawed", "Meme" ],
+	"blacklist": [ "Ultimate", "Superior", "Advanced", "Niche" ]
  },
 
  // ### 1.3. Flea Market
@@ -28,23 +28,61 @@
  // If "enable" is empty, no weapon variants will appear on the Flea Market
 
  "flea": {
-	"enable": [  ],
-	"blacklist": [ "Ultimate", "Superior", "Advanced", "Niche", "Baseline", "Flawed", "Meme" ]
+	"enable": [ "Baseline", "Flawed", "Meme" ],
+	"blacklist": [ "Ultimate", "Superior", "Advanced", "Niche" ]
  },
 
- // ### 1.4. Remove variant types from generation
+ // ### 1.4. Marked Rooms
+ // You can choose which variant types will be added to marked rooms loot
+
+ "marked": {
+	"enabled": true,
+	"maps": {
+		// Variants quality ("Ultimate" etc.) are only for representative purpose only
+		"bigmap": { // Customs
+			"Ultimate": ["Meta", "Lapua", "Anti-materiel rifle"],
+			"Superior": ["Automatic", "Marksman", "Handy"],
+			"Advanced": ["Overclocked", "Light Machine Gun", "Shotgun"],
+			"Niche": ["Rifle Grenade Launcher"],
+			"Other": []
+		},
+		"rezervbase": { // Reserve
+			"Ultimate": ["Buckshot Launcher", "Pay to Win", "The Unheard Edition"],
+			"Superior": ["Endless", "Anti-materiel revolver", "Black Market"],
+			"Advanced": ["Unbreakable",  "Speedy", "No-Bolt"],
+			"Niche": ["Bombardier"],
+			"Other": []
+		},
+		"tarkovstreets": { // Streets of Tarkov
+			"Ultimate": ["Overclocked & Automatic", "Heavy Machine Gun", "Point & Click"],
+			"Superior": ["Karabin Spetsialniy", "Assault Rifle"],
+			"Advanced": ["Hypersonic", "Sniper", "Upgraded"],
+			"Niche": ["Pocket-size"],
+			"Other": []
+		}
+	},
+	// What is the probability (in %) of finding variant weapons per spawn point
+	// Keep in mind that this is still a probability and other marked room loot changing mods can make some changes to these odds
+ 	"probability": {
+		"bigmap": 25,
+		"rezervbase": 35,
+		"tarkovstreets": 40
+	}
+ },
+
+ // ### 1.5. Remove variant types from generation
  // Add name of variant type ("Meta"/"SMG" etc.) to below array to exclude it from generation
  // This may cause issues with your profile if you already have a weapon of this variant type in your inventory
  
  "notGenerateVariantTypes": [],
 
- // ### 1.5. Remove specific weapons from generation
+ // ### 1.6. Remove specific weapons from generation
  // Add short name with variant name (from db/Variants, e.g. "AKM Meta") to exclude it from generation
  // This may cause issues with your profile if this weapon is already in your inventory
  
  "notGenerateWeapons": [],
 
- // ### 1.6. Remove specific quality from generation
+ // ### 1.7. Remove specific quality from generation
  // Add quality name (e.g. "Meme") to exclude it from generation
  // This may cause issues with your profile if weapon from this quality is already in your inventory
 
@@ -90,7 +128,7 @@
  // To exclude specific weapon variant types (e.g., "Meta", "SMG") from being added to APBS bots, list them below. This will blacklist them regardless of other settings
 	"notAddVariantTypes": [],
  // You can exclude weapons too
-	"notAddWeapons": ["Blicky AMR", "Blicky R.Grenade"],
+	"notAddWeapons": [],
  // Run the server once, then copy the generated blacklists.json from this mod's config folder to acidphantasm-progressivebotsystem/config, replacing the existing file
  // or...
  // Enable DWV to apply changes to APBS blacklist automatically
@@ -110,6 +148,15 @@
 		// "[APBS] Preset name "BossesHaveVariants" is invalid." - should appear in red in console, don't worry - DWV will create this folder for you!
 
 		// Advanced configuration:
+		"typesProbability": {
+			"Ultimate": 100,
+			"Superior": 100,
+			"Advanced": 200,
+			"Niche": 0,
+			"Baseline": 200,
+			"Flawed": 0, 
+			"Meme": 0
+		},
 		// Level 1 boss will have 500/(10000+500)% (~4.8%) chance to have a variant weapon in each of his slots
 		// Level 8 boss will have 4000/(10000+4000)% (~28.5%) chance to have a variant weapon in each of his slots
 		"baseWeaponWeights": 10000,
@@ -168,7 +215,7 @@
  // Enable mod compatibility
  	"enabled": false,
  // Make sure that this is correct folder name for The Gambler
-	"gamblerName": "zzzGamblerTrader",
+	"gamblerName": "GamblerTrader",
  // Add name of variant type ("Meta"/"SMG" etc.) to below array to exclude it from being added to The Gambler presets
 	"notAddVariantTypes": [],
  // Run the server once, then copy the generated Weapons.ts from this mod's config folder to TheGambler/src/containers, replacing the existing file
@@ -183,7 +230,7 @@
  // #### OTHER ####
 
  // This is just the config version-nothing fancy
- "version": 2.2,
+ "version": 3,
 
  // Set this to false if you don't want to use caching and are making changes to variants each time the server starts
  "useCache": true
@@ -192,7 +239,9 @@
 
  // If you make changes to files located in:
  // - db/Variants
- // - db/Items
+ // - db/Attachments
+ // - db/Presets
+ // - db/Shortnames
  // Or to the config file:
  // - config/config.jsonc
  
@@ -201,6 +250,6 @@
  // If you have enabled automatic updates, you will receive info in red-restart server one more time or if you see info in cyan (light blue),
  //   you need to move file stated in console message to location stated in console message and replace file
 
- // ... or if you removed db/Cache/generatedWeapons.json
+ // ... or if you remove any file in db/Cache
  // DWV will generate this file again
 }

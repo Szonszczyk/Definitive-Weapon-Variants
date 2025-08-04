@@ -10,8 +10,7 @@ import {
     gamblerPresets,
     gamblerRarity,
     ConfigItem,
-    bossesToChange,
-    canBeUsedForBosses
+    bossesToChange
 } from "./references/configConsts";
 
 
@@ -230,8 +229,8 @@ export class ModsCompatibility
             baseWeaponsToAdd[weapon] = Math.ceil( weight/weightSum * BHVconfig.baseWeaponWeights ); 
             for (const itemID in items) {
                 const item = items[itemID];
-                if (item.itemTplToClone === weapon && canBeUsedForBosses[item.additionalInfo.variantType]) {
-                    variantsToAdd[itemID] = Math.ceil( canBeUsedForBosses[item.additionalInfo.variantType] * (weight/weightSum) );
+                if (item.itemTplToClone === weapon && BHVconfig.typesProbability[item.additionalInfo.rarity] > 0) {
+                    variantsToAdd[itemID] = Math.ceil( BHVconfig.typesProbability[item.additionalInfo.rarity] * (weight/weightSum) );
                 }
             }
         }
@@ -379,7 +378,7 @@ constructor() {
 
         // automatic update of Gambler Presets here
         if (!this.modConfig.theGambler.automaticUpdate.enabled) return;
-        if ((this.originalFile.Gambler != gamblerPresetsNew) && !this.loadFromCache) {
+        if ((this.originalFile.Gambler.length != gamblerPresetsNew.length) && !this.loadFromCache) {
             const filePath = path.join(__dirname, `../../${this.modConfig.theGambler.gamblerName}/src/containers/Weapons.ts`);
             fs.writeFileSync(filePath, gamblerPresetsNew);
             this.Instance.logger.log(

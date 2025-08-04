@@ -1,0 +1,62 @@
+{
+    "M700 Quick": {
+        "_changeWeaponName": false,
+        "_encyclopedia": "6828a3cf3c599b2cd4000118",
+        "_id": "6828a3cf3c599b2cd4000119",
+        "_items": [
+          {
+            "_id": "6828a3cf3c599b2cd400011a",
+            "_tpl": "6828a3cf3c599b2cd4000118",
+            "upd": {
+              "Repairable": {
+                "MaxDurability": 100,
+                "Durability": 100
+              },
+              "FireMode": {
+                "FireMode": "single"
+              }
+            }
+          },
+          {
+            "_id": "688a12a17da401616c000f16",
+            "_tpl": "5bfea7ad0db834001c38f1ee",
+            "parentId": "6828a3cf3c599b2cd400011a",
+            "slotId": "mod_magazine"
+          },
+          {
+            "_id": "688a12a17da401616c000f17",
+            "_tpl": "5bfeb32b0db834001a6694d9",
+            "parentId": "6828a3cf3c599b2cd400011a",
+            "slotId": "mod_stock"
+          },
+          {
+            "_id": "688a12a17da401616c000f18",
+            "_tpl": "5bfebc320db8340019668d79",
+            "parentId": "6828a3cf3c599b2cd400011a",
+            "slotId": "mod_barrel"
+          },
+          {
+            "_id": "688a12a17da401616c000f19",
+            "_tpl": "5d270b3c8abbc3105335cfb8",
+            "parentId": "688a12a17da401616c000f18",
+            "slotId": "mod_muzzle"
+          },
+          {
+            "_id": "74811b67305292557b86199c",
+            "_tpl": "b836b7e203aecb0d89e3e23e",
+            "parentId": "688a12a17da401616c000f18",
+            "slotId": "mod_mount"
+          },
+          {
+            "_id": "85f698cf151d1ce3a3a25c1b",
+            "_tpl": "688503e1872439568c001100",
+            "parentId": "74811b67305292557b86199c",
+            "slotId": "mod_scope"
+          }
+        ],
+        "_name": "M700 Quick Variant Default Preset",
+        "_parent": "6828a3cf3c599b2cd400011a",
+        "_type": "Preset"
+      }
+
+}

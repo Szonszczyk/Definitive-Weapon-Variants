@@ -16,7 +16,7 @@
 		},
 		"Weapons": [
 			"9A-91", "AVT-40", "AK-12", "G36", "M4A1",
-			"MCX SPEAR", "Mk47", "SA-58", "AS VAL", "PPSh-41",
+			"SPEAR 6.8", "Mk47", "SA-58", "AS VAL", "PPSh-41",
 			"PKP", "RPK-16", "M60E6", "AK-102", "HK 416A5",
 			"AKM", "Saiga-12K FA"
 		],
@@ -40,23 +40,21 @@
         },
         "additionalChanges": {
         	"Slots": {
-        		"mod_magazine": [
-                    "5fc23426900b1d5091531e15",
-                    "628120f210e26c1f344e6558",
-                    "628120fd5631d45211793c9f"
-                ]
+        		"mod_magazine": {
+					"fromWeapons": [
+						"Mk-18 Mjölnir",
+						"AXMC"
+					]
+				}
         	},
             "Chambers": {
-        		"patron_in_weapon": [
-					"5fc382a9d724d907e2077dab",
-					"5fc275cf85fd526b824a571a",
-					"5fc382c1016cce60e8341b20",
-					"5fc382b6d6fa9c00c571bbc3"
+        		"fromWeapons": [
+					"Mk-18 Mjölnir"
 				]
         	}
         },
 		"Weapons": [
-			"SAG AK", "TX-15 DML", "G28", "M1A", "RSASS",
+			"AK-545", "TX-15 DML", "G28", "M1A", "RSASS",
 			"AS VAL", "AK-74", "T-5000M", "VSK-94", "X-17"
 		],
 		"ID": "0102",
@@ -91,7 +89,7 @@
     	"Explanation": "A weapon variant with full-auto fire mode only, featuring lower vertical recoil, significantly higher horizontal recoil, and an increased fire rate",
     	"ShortName": "HMG",
     	"props": {
-    		"RecoilForceBack": "+300%",
+    		"RecoilForceBack": "+150%",
     		"RecoilForceUp": "-60%",
 			"weapFireType": [ "fullauto" ],
 			"bFirerate": "+20%"
@@ -105,7 +103,7 @@
     },
 	"Anti-materiel rifle": {
 		"Description": "Using quantum physics—and perhaps a touch of black magic—this weapon variant fires rounds typically reserved for combating lightly armored vehicles",
-		"Explanation": "A weapon variant chambered in the 12.7x108mm caliber with a single small magazine, increased horizontal recoil, and only capable of Misfire malfunctions. Uses normal and special 'one-shot' ammo, available from Skier LL1",
+		"Explanation": "A weapon variant chambered in the 12.7x108mm caliber with a single small magazine, increased horizontal recoil, and only capable of Misfire malfunctions. Uses 12.7x108mm ammo, available from Skier LL1",
 		"ShortName": "AMR",
 		"props": {
 			"RecoilForceBack": "+300%",
@@ -117,26 +115,21 @@
         },
         "additionalChanges": {
         	"Slots": {
-        		"mod_magazine": [
-        			"fb59fed5184cee6ea75a0f25"
-                ]
+        		"mod_magazine": [ "12.7x108 Anti-materiel rifle Variant 2-round magazine" ]
         	},
-            "Chambers": {
-        		"patron_in_weapon": [
-                    "5cde8864d7f00c0010373be1",
-                	"5d2f2ab648f03550091993ca",
-                	"97a569501e6c61cba462184e"
-                ]
-        	},
+            "Chambers": [
+				"5cde8864d7f00c0010373be1",
+				"5d2f2ab648f03550091993ca"
+			],
 			"Blicky": {
 				"Slots": {
-					"mod_magazine": []
+					"mod_magazine": [ "Blicky Special Magical Unbelievable Magazine" ]
 				}
 			}
         },
 		"Weapons": [
 			"Mosin Sniper", "AXMC", "M700", "OP-SKS", "SVT-40",
-			"AVT-40", "MP-43-1C", "MP-18", "MP-43 sawed-off", "Blicky",
+			"AVT-40", "MP-43-1C", "MP-18", "Sawed-off", "Blicky",
 			"FN40GL", "TRG M10"
 		],
 		"ID": "0105",
@@ -175,10 +168,102 @@
 			}
 		},
 		"Weapons": [
-			"STM-9", "SAG AK", "SVT-40", "TX-15 DML", "VSS",
+			"STM-9", "AK-545", "SVT-40", "TX-15 DML", "VSS Vintorez",
 			"Vector 9x19", "ASh-12"
 		],
 		"ID": "0106",
 		"rarity": "Ultimate"
-	}
+	},
+	"Buckshot Launcher": {
+		"Description": "\"Point and Click Shotgun Adventure\"\nA cousin of the Fullburst variant - unleashing full power with a single pull of the trigger!",
+		"Explanation": "Shotgun variant with a full-magazine-per-click fire mode and significantly reduced recoil",
+		"ShortName": "Buckshot L.",
+		"props": {
+			"bFirerate": "+0%",
+			"weapFireType": [ "burst" ],
+			"BurstShotsCount": 100,
+			"RecoilForceBack": "-90%",
+			"RecoilForceUp": "-90%",
+			"RecoilCamera": "-90%"
+		},
+		"additionalChanges": {
+			"minimum": {
+				"bFirerate": 7200
+			},
+			"AA-12 Gen 1": {
+				"weapFireType": [ "fullauto" ]
+			},
+			"AA-12 Gen 2": {
+				"weapFireType": [ "fullauto" ]
+			}
+		},
+		"Weapons": [
+			"KS-23M", "590A1", "M870", "MP-133", "MP-153",
+			"MP-155", "TOZ-106", "AA-12 Gen 1", "AA-12 Gen 2", "Saiga-12K"
+		],
+		"ID": "0107",
+		"rarity": "Ultimate"
+	},
+	"Pay to Win": {
+        "Description": "Only for Tarkov whales! These guns literally shoot money!",
+        "Explanation": "Weapon variant chambered in .338 Lapua Magnum rounds, with increased visible recoil and reduced fire rate. Features incredibly expensive magazines",
+        "ShortName": "P2W",
+        "props": {
+			"RecoilForceUp": "+35%",
+			"RecoilCamera": "+15%",
+			"bFirerate": "-20%"
+        },
+        "additionalChanges": {
+        	"Slots": {
+        		"mod_magazine": [
+                    "Pay to Win Variant 5-round magazine",
+                    "Pay to Win Variant 20-round magazine",
+                    "Pay to Win Variant 30-round magazine",
+                    "Pay to Win Variant 50-round magazine"
+                ]
+        	},
+            "Chambers": {
+        		"fromWeapons": [
+					"Mk-18 Mjölnir"
+				]
+        	}
+        },
+        "Weapons": [
+            "AK-74M", "AK-102", "AKM", "VSS Vintorez", "M4A1",
+            "Mk47", "HK 416A5", "SPEAR 6.8"
+        ],
+        "ID": "0108",
+        "rarity": "Ultimate"
+    },
+	"The Unheard Edition": {
+        "Description": "Some internet portal claimed these weapons were made by Nikita and placed in special paid crates shortly after the EFT 1.0 release\nOr… it was just a bad dream?",
+        "Explanation": "Weapon variant chambered in 12.7x108mm rounds, with increased visible recoil. Features incredibly expensive magazines",
+        "ShortName": "Unheard",
+        "props": {
+            "weapFireType": [ "single" ],
+            "ammoCaliber": "Caliber127x108",
+			"RecoilForceUp": "+35%",
+			"RecoilCamera": "+15%"
+        },
+        "additionalChanges": {
+        	"Slots": {
+        		"mod_magazine": [
+                    "The Unheard Edition Variant 5-round magazine",
+                    "The Unheard Edition Variant 10-round magazine",
+                    "The Unheard Edition Variant 20-round magazine",
+                    "The Unheard Edition Variant 30-round magazine"
+                ]
+        	},
+            "Chambers": [
+				"5cde8864d7f00c0010373be1",
+				"5d2f2ab648f03550091993ca"
+			]
+        },
+        "Weapons": [
+            "G28", "M1A", "Mk-18 Mjölnir", "RSASS", "SR-25",
+            "SVDS", "VSS Vintorez"
+        ],
+        "ID": "0109",
+        "rarity": "Ultimate"
+    }
 }

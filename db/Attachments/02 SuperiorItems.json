@@ -1,0 +1,109 @@
+{
+    "KS-23M 23x75 12-shell magazine cap": {
+        "Description": "Special KS-23M 23x75 12-shell magazine for \"Karabin Spetsialniy\" Variant weapons",
+        "ShortName": "KS-23Mx12",
+        "itemTplToClone": "5f647d9f8499b57dc40ddb93",
+        "props": {},
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 12,
+                "Filter": {
+                    "fromWeapons": [
+                        "KS-23M"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 521,
+        "variant": "Karabin Spetsialniy",
+        "rarity": "Superior"
+    },
+    "M60 500-round \"Endless\" ammo box": {
+        "Description": "Special 500-round \"Endless\" ammo box magazine for \"Endless\" Variant weapons\nFits 7.62x51mm NATO, 7.62x39mm and 5.56x45mm NATO ammunition",
+        "ShortName": "End.500",
+        "itemTplToClone": "660ea4453786cc0af808a1be",
+        "props": {
+            "Height": 5,
+            "Width": 5
+        },
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 500,
+                "Filter": {
+                    "fromWeapons": [
+                        "SA-58",
+                        "AKM",
+                        "M4A1"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 24000,
+        "variant": "Endless",
+        "rarity": "Superior"
+    },
+    "M60 800-round \"Endless\" ammo box": {
+        "Description": "Special 800-round \"Endless\" ammo box magazine for \"Endless\" Variant weapons\nFits .45 ACP, 9x19mm, 4.6x30mm HK and 5.7x28mm FN ammunition",
+        "ShortName": "End.400",
+        "itemTplToClone": "660ea4453786cc0af808a1be",
+        "props": {
+            "Height": 5,
+            "Width": 5
+        },
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 800,
+                "Filter": {
+                    "fromWeapons": [
+                        "Vector 9x19",
+                        "Vector .45ACP",
+                        "MP7A2",
+                        "P90"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 24000,
+        "variant": "Endless",
+        "rarity": "Superior"
+    },
+    "M60 100-round \"Endless\" ammo box": {
+        "Description": "Special 100-round \"Endless\" ammo box magazine for \"Endless\" Variant weapons\nFits 12/70 and 23x75mmR ammunition",
+        "ShortName": "End.100",
+        "itemTplToClone": "660ea4453786cc0af808a1be",
+        "props": {},
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 100,
+                "Filter": {
+                    "fromWeapons": [
+                        "MP-155",
+                        "KS-23M"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 24000,
+        "variant": "Endless",
+        "rarity": "Superior"
+    },
+    "Anti-materiel revolver 12.7x108 5-round cylinder": {
+        "Description": "A 5-round 12.7x108 cylinder for Anti-materiel revolver Variant weapons. Now with 50% more wormholes!",
+        "ShortName": "AMR R cyl.",
+        "itemTplToClone": "633ec6ee025b096d320a3b15",
+        "props": {},
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 5,
+                "Filter": {
+                    "fromMagazines": [
+                        "5cffa483d7ad1a049e54ef1c"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 12000,
+        "variant": "Anti-materiel revolver",
+        "rarity": "Superior"
+    }
+}

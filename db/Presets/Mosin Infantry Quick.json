@@ -1,0 +1,56 @@
+{
+  "Mosin Infantry Quick": {
+      "_changeWeaponName": false,
+      "_encyclopedia": "6828a3cf3c599b2cd4000113",
+      "_id": "6828a3cf3c599b2cd4000114",
+      "_items": [
+        {
+          "_id": "6828a3cf3c599b2cd4000115",
+          "_tpl": "6828a3cf3c599b2cd4000113",
+          "upd": {
+            "Repairable": {
+              "MaxDurability": 100,
+              "Durability": 100
+            },
+            "FireMode": {
+              "FireMode": "single"
+            }
+          }
+        },
+        {
+          "_id": "6888a84b0612580568000f0f",
+          "_tpl": "5ae0973a5acfc4001562206c",
+          "parentId": "6828a3cf3c599b2cd4000115",
+          "slotId": "mod_magazine"
+        },
+        {
+          "_id": "6888a84b0612580568000f10",
+          "_tpl": "5bfd35380db83400232fe5cc",
+          "parentId": "6828a3cf3c599b2cd4000115",
+          "slotId": "mod_stock"
+        },
+        {
+          "_id": "6888a84b0612580568000f11",
+          "_tpl": "6888a84b0612580568001126",
+          "parentId": "6828a3cf3c599b2cd4000115",
+          "slotId": "mod_barrel"
+        },
+        {
+          "_id": "6888a84b0612580568000f12",
+          "_tpl": "5ae099875acfc4001714e593",
+          "parentId": "6888a84b0612580568000f11",
+          "slotId": "mod_sight_front"
+        },
+        {
+          "_id": "6888a84b0612580568000f13",
+          "_tpl": "5ae099925acfc4001a5fc7b3",
+          "parentId": "6888a84b0612580568000f11",
+          "slotId": "mod_sight_rear"
+        }
+      ],
+      "_name": "Mosin Infantry Quick Variant Default Preset",
+      "_parent": "6828a3cf3c599b2cd4000115",
+      "_type": "Preset"
+    }
+
+}

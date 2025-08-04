@@ -21,6 +21,9 @@ import { ImporterUtil } from "@spt/utils/ImporterUtil";
 import { SaveServer } from "@spt/servers/SaveServer";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { ApplicationContext } from "@spt/context/ApplicationContext";
+import { HashUtil } from "@spt/utils/HashUtil";
+
+import { Helpers } from "./Helpers";
 
 export class WTTInstanceManager 
 {
@@ -43,6 +46,7 @@ export class WTTInstanceManager
     public dynamicRouter: DynamicRouterModService;
     public profileController: ProfileController;
     public profileCallbacks: ProfileCallbacks;
+    public hashUtil: HashUtil;
     //#endregion
 
     //#region Acceessible in or after postDBLoad
@@ -57,6 +61,8 @@ export class WTTInstanceManager
     public traderAssortService: TraderAssortService;
     public applicationContext: ApplicationContext;
     //#endregion
+
+    public helpers: Helpers;
 
     // Call at the start of the mods postDBLoad method
     public preSptLoad(container: DependencyContainer, mod: string): void
@@ -76,6 +82,8 @@ export class WTTInstanceManager
         this.staticRouter = container.resolve<StaticRouterModService>("StaticRouterModService");
         this.dynamicRouter = container.resolve<DynamicRouterModService>("DynamicRouterModService");
         this.traderAssortService = container.resolve<TraderAssortService>("TraderAssortService");
+        this.hashUtil = container.resolve<HashUtil>("HashUtil");
+        this.helpers = new Helpers(this);
     }
 
     public postDBLoad(container: DependencyContainer): void

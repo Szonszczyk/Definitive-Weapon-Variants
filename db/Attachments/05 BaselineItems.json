@@ -1,0 +1,71 @@
+{
+    "TOZ-106 20ga MTs 20-01 Sb.3 Internal 5-shot magazine": {
+        "Description": "Special TOZ-106 20ga MTs 20-01 Sb.3 5-shot magazine for 20/70 Variant weapons with internal magazine",
+        "ShortName": "Sb.3x5 Internal",
+        "itemTplToClone": "5c6161fb2e221600113fbde5",
+        "props": {
+            "ReloadMagType": "InternalMagazine",
+			"RaidModdable": false
+        },
+        "handbookPriceRoubles": 1410,
+        "variant": "20/70",
+        "rarity": "Baseline"
+    },
+    "Chiappa Rhino 12/70 6-round cylinder": {
+        "Description": "A 6-round cylinder 12/70 cylinder for Chiappa Rhino 200DS Shotgun-o-Revolver Variant",
+        "ShortName": "CR 12/70",
+        "itemTplToClone": "624c3074dbbd335e8e6becf3",
+        "props": {},
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 5,
+                "Filter": {
+                    "fromWeapons": [
+                        "MP-155"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 1600,
+        "variant": "Shotgun-o-Revolver",
+        "rarity": "Baseline"
+    },
+    "Chiappa Rhino 20/70 6-round cylinder": {
+        "Description": "A 6-round 20/70 cylinder for Chiappa Rhino 50DS Shotgun-o-Revolver Variant",
+        "ShortName": "CR 20/70",
+        "itemTplToClone": "619f54a1d25cbd424731fb99",
+        "props": {},
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 6,
+                "Filter": {
+                    "fromWeapons": [
+                        "TOZ-106"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 1600,
+        "variant": "Shotgun-o-Revolver",
+        "rarity": "Baseline"
+    },
+    "RSh-12 23x75mm 5-round cylinder": {
+        "Description": "A 5-round 23x75mm cylinder for RSh-12 Shotgun-o-Revolver Variant",
+        "ShortName": "RSh 23x75",
+        "itemTplToClone": "633ec6ee025b096d320a3b15",
+        "props": {},
+        "additionalChanges": {
+            "Cartridges": {
+                "_max_count": 5,
+                "Filter": {
+                    "fromWeapons": [
+                        "KS-23M"
+                    ]
+                }
+            }
+        },
+        "handbookPriceRoubles": 12000,
+        "variant": "Shotgun-o-Revolver",
+        "rarity": "Baseline"
+    }
+}

@@ -8,11 +8,9 @@ import { WTTInstanceManager } from "./WTTInstanceManager";
 export class TraderChanges
 {
     private Instance: WTTInstanceManager;
-    protected hashUtil: HashUtil;
 
-    public preSptLoad(Instance: WTTInstanceManager, hashutil: HashUtil): void 
+    public preSptLoad(Instance: WTTInstanceManager): void 
     {
-    	this.hashUtil = hashutil;
         this.Instance = Instance;
     }
 
@@ -40,7 +38,7 @@ export class TraderChanges
         for (const item of items) {
             const traderId = item.traderId;
         	const newItemToAdd: Item = {
-	            _id: this.hashUtil.generate(),
+	            _id: this.Instance.hashUtil.generate(),
 	            _tpl: item.id,
 	            parentId: "hideout", // Should always be "hideout"
 	            slotId: "hideout", // Should always be "hideout"

@@ -8,7 +8,7 @@ export interface ConfigItem
     [itemId: string]: {
         itemTplToClone: string;
         overrideProperties: {
-            BackgroundColor?: string
+            [prop: string]: (string | number | string[])
         };
         parentId: string;
         fleaPriceRoubles: number;
@@ -51,7 +51,7 @@ export interface ConfigItem
         weaponpresets: Preset[];
         addtoHallOfFame: boolean;
         addtoSpecialSlots: boolean;
-        additionalInfo: {
+        additionalInfo?: {
             rarity: string;
             variantType: string;
             contributesToQuestsAsWeapon: string;
@@ -99,28 +99,6 @@ export interface WeaponClones {
     [key: string]: string[];
 }
 
-export interface WeaponDescription {
-    [key: string]: string;
-}
-
-export interface VariantType
-{
-    [variantName: string]: {
-        Description: string,
-        Explanation: string,
-        ShortName: string,
-        props: any,
-        additionalChanges: any,
-        quests: {
-            id: string,
-            description: string
-        },
-        Weapons: string[],
-        ID: string,
-        rarity: string
-    };
-}
-
 export function findPresetsWithEncyclopedia(
     obj: Record<string, Preset>,
     searchString: string
@@ -164,6 +142,139 @@ export interface variantIDsInterface
     }
 }
 
+export function getShortNameById(object: { [key: string]: string }, id: string): string | undefined {
+    for (const [key, value] of Object.entries(object)) {
+        if (value === id) {
+            return key;
+        }
+    }
+    return undefined;
+};
+
+export interface markedRoomsLoot
+{
+    [map: string]: {
+        [id: string]: {
+            keys: number[],
+            maxProbability: number,
+            map: string
+        }
+    }
+}
+
+export const markedRoomsNames = {
+    bigmap: [
+        "Loot 135 (8)",
+        "Loot 135 (9)",
+        "Loot 135 (10)",
+        "Loot 135 (11)",
+        "Loot 135 (12)"
+    ],
+    rezervbase: [
+        "cult_Loot 135 (11)",
+        "cult_Loot 135 (12)",
+        "cult_Loot 135 (13)",
+        "Loot 135 (9)",
+        "Loot 135 (10) [3",
+        "Loot 135 (10) [c",
+        "Loot 135 (11) [4",
+        "Loot 135 (11) [5",
+        "Loot 135 (12) [4b",
+        "Loot 135 (12) [73",
+        "Loot 135 (13) [7",
+        "Loot 135 (13) [a",
+        "Loot 135 (14)"
+    ],
+    tarkovstreets: [
+        "Loot 135_Leo_Rare (8)",
+        "Loot 135_Leo_Rare (9)",
+        "Loot 135_Leo_Rare (10)",
+        "Loot 135_Leo_Rare (13)",
+        "Loot 135_Leo_Rare (15)",
+        "Loot 135_Leo_Rare (29)",
+        "Loot 135_Leo_Rare (30)",
+        "Loot 135_Leo_Rare (31)",
+        "Loot 135_Leo_Rare (40)",
+        "Loot 135_Leo_Rare (41)",
+        "Loot 135_Leo_Rare (43)",
+    ]
+}
+
+export const mapNames = {
+    bigmap: "Customs",
+    rezervbase: "Reserve",
+    tarkovstreets: "Streets of Tarkov"
+}
+
+
+export const raritySettings: {
+    [rarityName: string]: {
+        color: string,
+        bgColor: string,
+        description: string,
+        flavour: string,
+        starRating: string,
+        priceMultiplier: number
+    }
+} = {
+    "Ultimate": {
+        "color": "#ca1f2b",
+        "bgColor": "red",
+        "description": "This Ultimate-quality variant is capable of outperforming even the best modified weapons",
+        "flavour": "You earned it, now use it to your advantage. Kick some scav ass or something!",
+        "starRating": "★★★★",
+        "priceMultiplier": 1.8
+    },
+    "Superior": {
+        "color": "#ca741f",
+        "bgColor": "orange",
+        "description": "This Superior-quality variant offers outstanding performance",
+        "flavour": "With some training and good attachments, this weapon can turn you into a machine of destruction!",
+        "starRating": "★★★",
+        "priceMultiplier": 1.4
+    },
+    "Advanced": {
+        "color": "#f6f15d",
+        "bgColor": "yellow",
+        "description": "This Advanced-quality variant offers better performance than standard weapons",
+        "flavour": "This is a very good weapon, but don't rely only on its power. Weapons don't play, users do!",
+        "starRating": "★★",
+        "priceMultiplier": 1.2
+    },
+    "Niche": {
+        "color": "#75339c",
+        "bgColor": "violet",
+        "description": "This Niche-quality variant is best used in very specific circumstances and situations",
+        "flavour": "Maybe you don't know when you'll need the help of a 'Blicky Rifle Grenade Launcher' right now, but you will when the time comes...",
+        "starRating": "★",
+        "priceMultiplier": 1.2
+    },
+    "Baseline": {
+        "color": "#2694da",
+        "bgColor": "blue",
+        "description": "This Baseline-quality variant performs on par with the original weapon",
+        "flavour": "Shiny weapon, but not that original. The stats are changed, but not by much. It's mid, I would say",
+        "starRating": "✧✧✧",
+        "priceMultiplier": 1
+    },
+    "Flawed": {
+        "color": "#157230",
+        "bgColor": "green",
+        "description": "This Flawed-quality variant delivers worse performance than the original weapon",
+        "flavour": "Despite being flawed, this weapon is still desired and used mostly by scavs, but only because of the low price and frequent sales",
+        "starRating": "✧✧",
+        "priceMultiplier": 0.7
+    },
+    "Meme": {
+        "color": "#808080",
+        "bgColor": "tracerGreen",
+        "description": "This Meme-quality variant may be unusable in most situations",
+        "flavour": "A clown weapon for clown users, but remember to have fun before you die trying to kill someone with this god-forgotten thing",
+        "starRating": "✧",
+        "priceMultiplier": 0.7
+    }
+};
+
 //#region MCompatibility
 
 export interface APBSSettings
@@ -204,32 +315,6 @@ export enum gamblerRarity
     Flawed = "Scav",
     Meme = "Meme"
 }
-
-export const canBeUsedForBosses: Record<string, number> = {
-    "Anti-materiel rifle": 50,
-    "Point & Click": 50,
-    "Meta": 80,
-    "Lapua": 80,
-    "Overclocked & Automatic": 80,
-    "Heavy Machine Gun": 80,
-    "Automatic": 100,
-    "Marksman": 100,
-    "Handy": 100,
-    "Blackout": 100,
-    "Downgraded": 120,
-    "Shotgun": 120,
-    "Unbreakable": 120,
-    "Sniper": 120,
-    "Speedy": 150,
-    "Modified": 150,
-    "SMG": 150,
-    "Close Quarters": 150,
-    "World War II": 150,
-    "Assault Rifle": 300,
-    "Upgraded": 300,
-    "No-Scope": 300,
-    "Mid-Range": 300
-};
 
 export const bossesToChange: string[] = [
     "bossboar",

@@ -4,12 +4,10 @@ import * as path from "path";
 import { NewItemFromCloneDetails } from "@spt/models/spt/mod/NewItemDetails";
 import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import { ILocation } from "@spt/models/eft/common/ILocation";
-import { HashUtil } from "@spt/utils/HashUtil";
 import { WTTInstanceManager } from "./WTTInstanceManager";
 import { WeaponGeneration } from "./WeaponGeneration";
-import { ItemMap } from "./references/items";
-import { ItemBaseClassMap } from "./references/itemBaseClasses";
-import { ItemHandbookCategoryMap } from "./references/itemHandbookCategories";
+import { ItemGeneration } from "./ItemGeneration";
+
 import {
     Preset, Item, ConfigItem, traderIDs, currencyIDs,
     allBotTypes, inventorySlots, WeaponClones
@@ -21,21 +19,21 @@ export class CustomItemService
     private Instance: WTTInstanceManager;
     private modConfig: any;
     private weaponGeneration: WeaponGeneration = new WeaponGeneration();
+    private itemGeneration: ItemGeneration = new ItemGeneration();
 
-    constructor() 
-    {
-        this.configs = this.loadCombinedConfig();
-    }
-
-    public preSptLoad(Instance: WTTInstanceManager, config: any, hashutil: HashUtil): void 
+    public preSptLoad(Instance: WTTInstanceManager, config: any): void 
     {
         this.Instance = Instance;
         this.modConfig = config;
-        this.weaponGeneration.preSptLoad(this.Instance, config, hashutil);
+        this.weaponGeneration.preSptLoad(this.Instance, config);
+        this.itemGeneration.preSptLoad(this.Instance, config);
     }
 
     public postDBLoad(): void 
     {
+        const newItems = this.itemGeneration.generateItems();
+        this.configs = newItems;
+
         const newWeapons = this.weaponGeneration.generateWeapons();
         Object.assign(this.configs, newWeapons);
 
@@ -71,16 +69,14 @@ export class CustomItemService
                 this.processInventorySlots(itemConfig, itemId); // Pass itemId and inventorySlots in the correct order
                 this.processMasterySections(itemConfig, itemId);
                 this.processWeaponPresets(itemConfig, itemId);
-                this.processBotInventories(
-                    itemConfig,
-                    finalItemTplToClone,
-                    itemId
-                );
+                this.processBotInventories(itemConfig, finalItemTplToClone, itemId);
                 this.processTraders(itemConfig, itemId);
 
                 //special area only for weapons
                 if (itemConfig?.additionalInfo) {
+
                     const variantRarity = itemConfig.additionalInfo.rarity;
+
                     //for weapons that were changed caliber, add them to different weapon for kill quests
                     let weaponToUseForKillQuests = finalItemTplToClone;
                     if (itemConfig.additionalInfo.contributesToQuestsAsWeapon != "") {
@@ -109,11 +105,16 @@ export class CustomItemService
                             airdropLoot[loot].itemBlacklist.push(itemId);
                         }
                     }
+                } else {
+                    blacklist.push(itemId);
+                    flea.push(itemId);
+                    for(const loot in airdropLoot) {
+                        airdropLoot[loot].itemBlacklist.push(itemId);
+                    }
                 }
                 numItemsAdded++;
             }
         }
-
         this.processWeaponKillsQuests(weaponClones);
 
         if (numItemsAdded > 0) 
@@ -149,13 +150,13 @@ export class CustomItemService
             finalItemTplToClone: string;
         } 
     {
-        const itemTplToCloneFromMap = ItemMap[itemConfig.itemTplToClone] || itemConfig.itemTplToClone;
+        const itemTplToCloneFromMap = itemConfig.itemTplToClone;
         const finalItemTplToClone = itemTplToCloneFromMap;
 
-        const parentIdFromMap = ItemBaseClassMap[itemConfig.parentId] || itemConfig.parentId;
+        const parentIdFromMap = itemConfig.parentId;
         const finalParentId = parentIdFromMap;
 
-        const handbookParentIdFromMap = ItemHandbookCategoryMap[itemConfig.handbookParentId] || itemConfig.handbookParentId;
+        const handbookParentIdFromMap = itemConfig.handbookParentId;
         const finalHandbookParentId = handbookParentIdFromMap;
 
         const exampleCloneItem: NewItemFromCloneDetails = {
@@ -203,8 +204,7 @@ export class CustomItemService
 
                         if (lootContainer) {
                             const lootDistribution = lootContainer.itemDistribution;
-                            const templateFromMap = ItemMap[itemToAdd];
-                            const finalTemplate = templateFromMap || itemToAdd;
+                            const finalTemplate = itemToAdd;
 
                             const newLoot = [
                                 {
@@ -254,8 +254,7 @@ export class CustomItemService
                     console.log("Adding item to multiple static loot containers:");
                 }
                 itemConfig.StaticLootContainers.forEach((container) => {
-                    const staticLootContainer =
-                        ItemMap[container.ContainerName] || container.ContainerName;
+                    const staticLootContainer = container.ContainerName;
                     this.addToStaticLoot(
                         staticLootContainer,
                         itemId,
@@ -267,9 +266,7 @@ export class CustomItemService
                 });
             }
             else {
-                const staticLootContainer =
-                    ItemMap[itemConfig.StaticLootContainers] ||
-                    itemConfig.StaticLootContainers;
+                const staticLootContainer = itemConfig.StaticLootContainers;
                 this.addToStaticLoot(
                     staticLootContainer,
                     itemId,
@@ -298,21 +295,8 @@ export class CustomItemService
     {
         const tables = this.Instance.database;
 
-        const moddableItemWhitelistIds = Array.isArray(
-            itemConfig.ModdableItemWhitelist
-        )
-            ? itemConfig.ModdableItemWhitelist.map((shortname) => ItemMap[shortname])
-            : itemConfig.ModdableItemWhitelist
-                ? [ItemMap[itemConfig.ModdableItemWhitelist]]
-                : [];
-
-        const moddableItemBlacklistIds = Array.isArray(
-            itemConfig.ModdableItemBlacklist
-        )
-            ? itemConfig.ModdableItemBlacklist.map((shortname) => ItemMap[shortname])
-            : itemConfig.ModdableItemBlacklist
-                ? [ItemMap[itemConfig.ModdableItemBlacklist]]
-                : [];
+        const moddableItemWhitelistIds = [].concat(itemConfig.ModdableItemWhitelist ?? []);
+        const moddableItemBlacklistIds = [].concat(itemConfig.ModdableItemBlacklist ?? []);
 
         const modSlots = Array.isArray(itemConfig.modSlot)
             ? itemConfig.modSlot
@@ -623,7 +607,7 @@ export class CustomItemService
                 console.log("Processing trader barter scheme for item:", itemId);
             }
             const count = scheme.count;
-            const tpl = currencyIDs[scheme._tpl] || ItemMap[scheme._tpl];
+            const tpl = currencyIDs[scheme._tpl] || scheme._tpl;
 
             if (!tpl) 
             {
@@ -692,6 +676,7 @@ export class CustomItemService
             }
         }
     }
+
     /**
    * Processes the kill quests AvailableForFinish Conditions Weapons and adds new weapons if copy was found
    *
@@ -729,30 +714,4 @@ export class CustomItemService
       }
       return cloneIDs;
     }
-    
-    /**
-   * Loads and combines multiple configuration files into a single ConfigItem object.
-   *
-   * @return {any} The combined configuration object.
-   */
-    private loadCombinedConfig(): any 
-    {
-        const configFiles = fs
-            .readdirSync(path.join(__dirname, "../db/Items"))
-            .filter((file) => !file.includes("BaseItemReplacement"));
-
-        const combinedConfig: any = {};
-
-        configFiles.forEach((file) => 
-        {
-            const configPath = path.join(__dirname, "../db/Items", file);
-            const configFileContents = fs.readFileSync(configPath, "utf-8");
-            const config = JSON.parse(configFileContents) as ConfigItem;
-
-            Object.assign(combinedConfig, config);
-        });
-
-        return combinedConfig;
-    }
-
 }

@@ -11,7 +11,7 @@
     		"addtoInventorySlots": ["Holster"]
     	},
 		"Weapons": [
-			"FN40GL", "M32A1", "AXMC", "AKMSN", "M60E6",
+			"FN40GL", "MSGL", "AXMC", "AKMSN", "M60E6",
 			"UMP 45", "Velociraptor .300 BLK"
 		],
 		"ID": "0401",
@@ -26,20 +26,22 @@
     	},
     	"additionalChanges": {
 			"Chambers": {
-        		"patron_in_weapon": "5e81ebcd8e146c7080625e15"
-        	},
+				"fromWeapons": [
+					"FN40GL"
+				]
+			},
     		"Slots": {
-			    "mod_magazine": [ "49273d316bf67aec1ea84f5a" ]
+			    "mod_magazine": [ "40mm Rifle Grenade single round magazine" ]
 			},
 			"Blicky": {
 				"Slots": {
-					"mod_magazine": []
+					"mod_magazine": [ "Blicky Special Magical Unbelievable Magazine" ]
 				}
 			}
     	},
 		"Weapons": [
-			"MP-43-1C", "MP-18", "Blicky", "AXMC", "Mk-18",
-			"OP-SKS", "SV-98", "Mosin Infantry", "SAG AK Short", "ADAR 2-15",
+			"MP-43-1C", "MP-18", "Blicky", "AXMC", "Mk-18 Mjölnir",
+			"OP-SKS", "SV-98", "Mosin Infantry", "AK-545 Short", "ADAR 2-15",
 			"TRG M10"
 		],
 		"ID": "0402",
@@ -54,19 +56,21 @@
     	},
 		"additionalChanges": {
 			"Chambers": {
-        		"patron_in_weapon": "6275303a9f372d6ea97f9ec7"
-        	},
+				"fromWeapons": [
+					"FN40GL"
+				]
+			},
     		"Slots": {
-			    "mod_magazine": [ "be284bb10ff4a4c7eb00214b" ]
+			    "mod_magazine": [ "M32A1 40mm 6-round Bombardier cylinder" ]
 			},
 			"MTs-255-12": {
 				"Slots": {
-					"mod_magazine": [ "be284bb10ff4a4c7eb00214c" ]
+					"mod_magazine": [ "M32A1 40mm 5-round Bombardier cylinder" ]
 				}
 			},
 			"RSh-12": {
 				"Slots": {
-					"mod_magazine": [ "be284bb10ff4a4c7eb00214c" ]
+					"mod_magazine": [ "M32A1 40mm 5-round Bombardier cylinder" ]
 				}
 			}
     	},

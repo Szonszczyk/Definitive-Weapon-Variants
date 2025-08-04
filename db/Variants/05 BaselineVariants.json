@@ -40,17 +40,23 @@
 		},
 		"additionalChanges": {
 			"Chambers": {
-        		"patron_in_weapon": "5bd70322209c4d00d7167b8f"
-        	},
+				"fromWeapons": [
+					"MP7A2"
+				]
+			},
         	"Slots": {
-			    "mod_magazine": "5bd70322209c4d00d7167b8f"
+			    "mod_magazine": {
+					"fromWeapons": [
+						"MP7A2"
+					]
+				}
 			},
 			"minimum": {
 				"SingleFireRate": 450
 			}
 		},
 		"Weapons": [
-			"TX-15 DML", "G28", "M1A", "Mk-18", "RSASS",
+			"TX-15 DML", "G28", "M1A", "Mk-18 Mjölnir", "RSASS",
 			"SR-25", "SVDS", "AK-105", "AUG A1", "AKS-74",
 			"VPO-209", "G36"
 		],
@@ -66,15 +72,21 @@
     	},
     	"additionalChanges": {
 			"Chambers": {
-        		"patron_in_weapon": "5cadfbf7ae92152ac412eeef"
-        	},
+				"fromWeapons": [
+					"ASh-12"
+				]
+			},
         	"Slots": {
-			    "mod_magazine": "5cadfbf7ae92152ac412eeef"
+			    "mod_magazine": {
+					"fromWeapons": [
+						"ASh-12"
+					]
+				}
 			}
 		},
 		"Weapons": [
 			"SVDS", "SV-98", "DVL-10", "AKM", "AK-74N",
-			"VPO-215", "OP-SKS", "VSS", "SAG AK","AK-101",
+			"VPO-215", "OP-SKS", "VSS Vintorez", "AK-545","AK-101",
 			"AK-104", "AVT-40", "X-17"
 		],
 		"ID": "0503",
@@ -88,24 +100,30 @@
     		"ammoCaliber": "Caliber20g"
     	},
     	"additionalChanges": {
-    		"Chambers": {
-        		"patron_in_weapon": "5a38e6bac4a2826c6e06d79b"
-        	},
+			"Chambers": {
+				"fromWeapons": [
+					"TOZ-106"
+				]
+			},
         	"Slots": {
-        		"mod_magazine": [{
+        		"mod_magazine": {
 			    	"basedOn": "ReloadMode",
 			    	"variants": {
-			    		"ExternalMagazine": "5a38e6bac4a2826c6e06d79b",
+			    		"ExternalMagazine": {
+							"fromWeapons": [
+								"TOZ-106"
+							]
+						},
 						"InternalMagazine": [
-							"cc3f46f481a96779f53a3725"
+							"TOZ-106 20ga MTs 20-01 Sb.3 Internal 5-shot magazine"
 						]
 			    	}
-			    }]
+			    }
 			}
 		},
 		"Weapons": [
 			"KS-23M", "M3 Super 90", "590A1", "M870", "MP-43-1C",
-			"MP-133", "MP-153", "MP-155", "MP-43 sawed-off", "Saiga-12K",
+			"MP-133", "MP-153", "MP-155", "Sawed-off", "Saiga-12K",
 			"AA-12 Gen 2", "Saiga-12K FA"
 		],
 		"ID": "0504",
@@ -124,20 +142,20 @@
 		},
 		"additionalChanges": {
     		"Slots": {
-			    "mod_magazine": [{
+			    "mod_magazine": {
 			    	"basedOn": "ammoCaliber",
 			    	"variants": {
 			    		"Caliber127x55": [
-							"8ca579021a498134d7c4d595"
+							"RSh-12 23x75mm 5-round cylinder"
 						],
 						"Caliber9x33R": [
-							"9cf1bf1bb0ea0be41ef4dc9d"
+							"Chiappa Rhino 20/70 6-round cylinder"
 						],
 						"Caliber9x19PARA": [
-							"5ad70825cbf24d7866f75a64"
+							"Chiappa Rhino 12/70 6-round cylinder"
 						]
 			    	}
-			    }]
+			    }
 			},
 			"CR 200DS": {
 				"ammoCaliber": "Caliber12g",
@@ -179,17 +197,58 @@
     	},
     	"additionalChanges": {
 			"Chambers": {
-        		"patron_in_weapon": "571a12c42459771f627b58a0"
-        	},
+				"fromWeapons": [
+					"TT"
+				]
+			},
         	"Slots": {
-			    "mod_magazine": "5ea03f7400685063ec28bfa8"
+			    "mod_magazine": {
+					"fromWeapons": [
+						"PPSh-41"
+					]
+				}
+			},
+			"Blicky": {
+				"Slots": {
+					"mod_magazine": [ "Blicky Special Magical Unbelievable Magazine" ]
+				}
 			}
 		},
 		"Weapons": [
-			"MCX", "TX-15 DML", "VSK-94", "Vector 9x19", "MCX SPEAR",
-			"Mk-18", "ASh-12", "RSASS", "AK-74N", "AK-101"
+			"MCX .300 BLK", "TX-15 DML", "VSK-94", "Vector 9x19", "SPEAR 6.8",
+			"Mk-18 Mjölnir", "ASh-12", "RSASS", "AK-74N", "AK-101",
+			"Blicky"
 		],
 		"ID": "0506",
         "rarity": "Baseline"
-    }
+    },
+	"FURY": {
+		"Description": "UNLEASH THE FURY OF TRASHY SMGs. THEY ARE NOW FURIOUS",
+    	"Explanation": "SMG variant chambered in .277 FURY (6.8x51mm), limited to a 2-shot burst fire mode",
+    	"ShortName": ".277",
+    	"props": {
+			"weapFireType": [ "burst" ],
+			"BurstShotsCount": 2
+		},
+		"additionalChanges": {
+			"Chambers": {
+				"fromWeapons": [
+					"SPEAR 6.8"
+				]
+			},
+        	"Slots": {
+			    "mod_magazine": {
+					"fromWeapons": [
+						"SPEAR 6.8"
+					]
+				}
+			}
+		},
+		"Weapons": [
+			"PP-91-01 Kedr-B", "PP-91 Kedr", "PP-9 Klin", "MP9", "MP5K-N",
+			"PP-19-01", "MP9-N", "MP5", "Vector 9x19"
+		],
+		"ID": "0507",
+        "rarity": "Baseline"
+	}
 }

@@ -1,0 +1,49 @@
+{
+    "M700 .277": {
+        "_changeWeaponName": false,
+        "_encyclopedia": "0af5f6a5aa9712e11c733fb9",
+        "_id": "6828a3cf3c599b2cd4000119",
+        "_items": [
+          {
+            "_id": "6828a3cf3c599b2cd400011a",
+            "_tpl": "0af5f6a5aa9712e11c733fb9",
+            "upd": {
+              "Repairable": {
+                "MaxDurability": 100,
+                "Durability": 100
+              },
+              "FireMode": {
+                "FireMode": "single"
+              }
+            }
+          },
+          {
+            "_id": "688a12a17da401616c000f16",
+            "_tpl": "5bfea7ad0db834001c38f1ee",
+            "parentId": "6828a3cf3c599b2cd400011a",
+            "slotId": "mod_magazine"
+          },
+          {
+            "_id": "688a12a17da401616c000f17",
+            "_tpl": "5bfeb32b0db834001a6694d9",
+            "parentId": "6828a3cf3c599b2cd400011a",
+            "slotId": "mod_stock"
+          },
+          {
+            "_id": "688a12a17da401616c000f18",
+            "_tpl": "5c0ee3f1dd704f16c12da7fb",
+            "parentId": "6828a3cf3c599b2cd400011a",
+            "slotId": "mod_barrel"
+          },
+          {
+            "_id": "688a12a17da401616c000f19",
+            "_tpl": "5d270b3c8abbc3105335cfb8",
+            "parentId": "688a12a17da401616c000f18",
+            "slotId": "mod_muzzle"
+          }
+        ],
+        "_name": "M700 .277 Default Preset",
+        "_parent": "6828a3cf3c599b2cd400011a",
+        "_type": "Preset"
+      }
+}

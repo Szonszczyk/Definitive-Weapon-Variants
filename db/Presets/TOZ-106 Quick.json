@@ -1,0 +1,61 @@
+{
+    "TOZ-106 Quick": {
+        "_changeWeaponName": false,
+        "_encyclopedia": "6887608e62561c5b44000f2a",
+        "_id": "6887608e62561c5b44000f2b",
+        "_items": [
+          {
+            "_id": "6887608e62561c5b44000f2c",
+            "_tpl": "6887608e62561c5b44000f2a",
+            "upd": {
+              "Repairable": {
+                "MaxDurability": 100,
+                "Durability": 100
+              },
+              "FireMode": {
+                "FireMode": "single"
+              }
+            }
+          },
+          {
+            "_id": "688bac46fb1f8a67e4000fcd",
+            "_tpl": "5a38ee51c4a282000c5a955c",
+            "parentId": "6887608e62561c5b44000f2c",
+            "slotId": "mod_magazine"
+          },
+          {
+            "_id": "688bac46fb1f8a67e4000fce",
+            "_tpl": "5a38ef1fc4a282000b1521f6",
+            "parentId": "6887608e62561c5b44000f2c",
+            "slotId": "mod_stock"
+          },
+          {
+            "_id": "688bac46fb1f8a67e4000fcf",
+            "_tpl": "5a38eecdc4a282329a73b512",
+            "parentId": "688bac46fb1f8a67e4000fce",
+            "slotId": "mod_pistol_grip"
+          },
+          {
+            "_id": "4bcd47fe8365b1311f17eb46",
+            "_tpl": "6887608e62561c5b44001120",
+            "parentId": "688bac46fb1f8a67e4000fce",
+            "slotId": "mod_mount_000"
+          },
+          {
+            "_id": "c7c34b353989d2571fbefa8c",
+            "_tpl": "6887608e62561c5b44001122",
+            "parentId": "4bcd47fe8365b1311f17eb46",
+            "slotId": "mod_mount_000"
+          },
+          {
+            "_id": "c417856bcc9aa36ccadbda3f",
+            "_tpl": "688503e1872439568c001100",
+            "parentId": "c7c34b353989d2571fbefa8c",
+            "slotId": "mod_scope"
+          }
+        ],
+        "_name": "TOZ-106 Quick Variant Default Preset",
+        "_parent": "6887608e62561c5b44000f2c",
+        "_type": "Preset"
+    }
+}

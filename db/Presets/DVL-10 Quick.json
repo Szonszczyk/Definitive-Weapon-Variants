@@ -1,0 +1,67 @@
+{
+    "DVL-10 Quick": {
+        "_changeWeaponName": false,
+        "_encyclopedia": "6828a3cf3c599b2cd400010e",
+        "_id": "6828a3cf3c599b2cd400010f",
+        "_items": [
+          {
+            "_id": "6828a3cf3c599b2cd4000110",
+            "_tpl": "6828a3cf3c599b2cd400010e",
+            "upd": {
+              "Repairable": {
+                "MaxDurability": 100,
+                "Durability": 100
+              },
+              "FireMode": {
+                "FireMode": "single"
+              }
+            }
+          },
+          {
+            "_id": "6888a84b0612580568000f09",
+            "_tpl": "5888988e24597752fe43a6fa",
+            "parentId": "6828a3cf3c599b2cd4000110",
+            "slotId": "mod_magazine"
+          },
+          {
+            "_id": "6888a84b0612580568000f0a",
+            "_tpl": "5888956924597752983e182d",
+            "parentId": "6828a3cf3c599b2cd4000110",
+            "slotId": "mod_barrel"
+          },
+          {
+            "_id": "6888a84b0612580568000f0b",
+            "_tpl": "5888996c24597754281f9419",
+            "parentId": "6888a84b0612580568000f0a",
+            "slotId": "mod_muzzle"
+          },
+          {
+            "_id": "6888a84b0612580568000f0c",
+            "_tpl": "5888976c24597754281f93f5",
+            "parentId": "6888a84b0612580568000f0a",
+            "slotId": "mod_handguard"
+          },
+          {
+            "_id": "6888a84b0612580568000f0d",
+            "_tpl": "57c55f172459772d27602381",
+            "parentId": "6828a3cf3c599b2cd4000110",
+            "slotId": "mod_pistol_grip"
+          },
+          {
+            "_id": "6888a84b0612580568000f0e",
+            "_tpl": "58889d0c2459775bc215d981",
+            "parentId": "6828a3cf3c599b2cd4000110",
+            "slotId": "mod_stock"
+          },
+          {
+            "_id": "597927394ac0f9f79b018293",
+            "_tpl": "688503e1872439568c001100",
+            "parentId": "6828a3cf3c599b2cd4000110",
+            "slotId": "mod_scope"
+          }
+        ],
+        "_name": "DVL-10 Quick Variant Default Preset",
+        "_parent": "6828a3cf3c599b2cd4000110",
+        "_type": "Preset"
+    }
+}
