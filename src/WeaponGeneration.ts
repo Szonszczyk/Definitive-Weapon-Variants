@@ -45,6 +45,10 @@ export class WeaponGeneration
             const weaponsFromCache = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/Cache/generatedWeapons.json"), "utf-8", (err) => {}));
             Object.assign(generatedItems, weaponsFromCache);
             this.logWeapons(generatedItems, "Loaded from cache", 0);
+            for (const weapon in generatedItems) {
+                this.markedRooms.addWeaponToMarkedRoom(generatedItems[weapon]);
+            }
+            this.markedRooms.processMarkedRooms();
             return generatedItems;
         }
         const variantTypes = this.Instance.helpers.dbVariants;

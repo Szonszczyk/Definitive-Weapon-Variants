@@ -113,6 +113,7 @@ export class MarkedRooms
     public processMarkedRooms(): void
     {
         if (!this.moduleEnabled) return;
+        const weaponCount: string[] = [];
 
         for (const mapName in this.weaponsToAdd) {
             const map = this.Instance.database?.locations?.[mapName]?.looseLoot?.spawnpoints;
@@ -130,10 +131,14 @@ export class MarkedRooms
                     });
                 }
             }
-            this.Instance.logger.log(
-                `[${this.Instance.modName}] Added ${this.weaponsToAdd[mapName].keys.length} weapons to ${mapName} marked rooms lootpool`,
-                LogTextColor.GREEN
-            );
+            const weaponsAdded = this.weaponsToAdd[mapName].keys.length;
+            if (weaponsAdded > 0) {
+                weaponCount.push(`${weaponsAdded} weapons to ${mapName}`);
+            }
         }
+        this.Instance.logger.log(
+            `[${this.Instance.modName}] Added to marked rooms lootpool: ${weaponCount.join(", ")}`,
+            LogTextColor.GREEN
+        );
     }
 }
